@@ -1,2 +1,2 @@
-# fw_experiance_board_usb_f1
+# fw_exp_board_usb_f1
 این مخزن شامل پروژه بورد تجربه با ارتباط یو اس بی است
