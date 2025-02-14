@@ -38,7 +38,7 @@ extern "C" {
   * @note In cases that user wants to generate the tick and reading its value is not possible by dereferencing the tick address,
   *       value of current tick can be read via calling a function.
   */
-#define CHRONO_TICK_TYPE  TICK_TYPE_VARIABLE
+#define CHRONO_TICK_TYPE  TICK_TYPE_FUNCTION
 
 /**
  * @brief Set the top value that the tick generator can count.
