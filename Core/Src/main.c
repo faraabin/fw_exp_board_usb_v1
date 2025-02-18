@@ -343,7 +343,10 @@ void SystemClock_Config(void)
   */
 static uint32_t GetTickValue(void) {
   
-  return (htim1.Instance->CNT << 16) + (htim2.Instance->CNT);
+  uint16_t high = htim1.Instance->CNT;
+  uint16_t low = htim2.Instance->CNT;
+  
+  return (high << 16) + low;
 }
 
 /**

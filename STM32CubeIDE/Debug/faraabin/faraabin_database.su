@@ -1,0 +1,8 @@
+C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/faraabin/faraabin_database.c:68:9:fFaraabinDatabase_Init	0	static
+C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/faraabin/faraabin_database.c:169:10:fFaraabinDatabase_GetNumberOfAddedDicts	0	static
+C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/faraabin/faraabin_database.c:179:6:fFaraabinDatabase_IsDictExist	0	static
+C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/faraabin/faraabin_database.c:119:9:fFaraabinDatabase_AddDict	8	static
+C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/faraabin/faraabin_database.c:197:10:fFaraabinDatabase_GetFobjectPointerFromDict	0	static
+C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/faraabin/faraabin_database.c:214:10:fFaraabinDatabase_GetAllFeatureFlags	0	static
+C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/faraabin/faraabin_database.c:225:10:fFaraabinDatabase_GetAllStatusFlags	0	static
+C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/faraabin/faraabin_database.c:234:10:fFaraabinDatabase_GetRamUsage	0	static

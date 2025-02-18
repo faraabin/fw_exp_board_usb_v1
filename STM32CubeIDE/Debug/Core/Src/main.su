@@ -1,0 +1,6 @@
+C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/Core/Src/main.c:344:17:GetTickValue	0	static
+C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/Core/Src/main.c:372:1:__FARAABIN_CONTAINER_FUNC_ExpBoardContainer	48	static
+C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/Core/Src/main.c:356:1:__faraabin_vartype_member_func_eWaveType	16	static
+C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/Core/Src/main.c:297:6:SystemClock_Config	88	static,ignoring_inline_asm
+C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/Core/Src/main.c:111:5:main	72	static,ignoring_inline_asm
+C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/Core/Src/main.c:394:6:Error_Handler	0	static,ignoring_inline_asm

@@ -1,0 +1,10 @@
+C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/faraabin/faraabin_function_engine.c:317:38:fFindFunction	5
+C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/faraabin/faraabin_function_engine.c:81:9:fFaraabinFunctionEngine_Init	1
+C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/faraabin/faraabin_function_engine.c:108:6:fFaraabinFunctionEngine_Run	6
+C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/faraabin/faraabin_function_engine.c:158:9:fFaraabinFunctionEngine_Start	11
+C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/faraabin/faraabin_function_engine.c:195:9:fFaraabinFunctionEngine_Stop	2
+C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/faraabin/faraabin_function_engine.c:216:9:fFaraabinFunctionEngine_Pause	2
+C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/faraabin/faraabin_function_engine.c:237:9:fFaraabinFunctionEngine_Resume	2
+C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/faraabin/faraabin_function_engine.c:256:10:fFaraabinFunctionEngine_GetQtyOfRunningFunctions	2
+C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/faraabin/faraabin_function_engine.c:279:9:fFaraabinFunctionEngine_GetPtrsOfRunningFunction	6
+C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/faraabin/faraabin_function_engine.c:373:10:fFaraabinFunctionEngine_GetRamUsage	1

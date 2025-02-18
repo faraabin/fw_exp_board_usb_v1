@@ -1,0 +1,7 @@
+C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/faraabin/faraabin_fobject_mcu.c:56:9:fFaraabinFobjectMcu_Init	2
+C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/faraabin/faraabin_fobject_mcu.c:96:6:fFaraabinFobjectMcu_Run	4
+C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/faraabin/faraabin_fobject_mcu.c:124:6:fFaraabinFobjectMcu_SendEventSystem	1
+C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/faraabin/faraabin_fobject_mcu.c:135:6:fFaraabinFobjectMcu_SendEventSystemException	1
+C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/faraabin/faraabin_fobject_mcu.c:147:6:fFaraabinFobjectMcu_SendEventSystemResponse	1
+C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/faraabin/faraabin_fobject_mcu.c:159:6:fFaraabinFobjectMcu_SendEventSystemExceptionResponse	1
+C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/faraabin/faraabin_fobject_mcu.c:170:22:fFaraabinFobjectMcu_GetFobject	1

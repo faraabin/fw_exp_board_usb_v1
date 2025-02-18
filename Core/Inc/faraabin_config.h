@@ -151,8 +151,48 @@ extern "C" {
  *       to disable all interrupts and reenable them after generating the frame.
  * 
  */
+#if   defined ( __CC_ARM )
+
 #define FB_PORT_DISABLE_IRQ		__disable_irq()   /*!< Disables all interrupts in embedded software. */
 #define FB_PORT_ENABLE_IRQ		__enable_irq()    /*!< Eanbles configured interrupts in embedded software. */
+
+#elif defined ( __ARMCC_VERSION ) && ( __ARMCC_VERSION >= 6010050 )
+
+#define FB_PORT_DISABLE_IRQ
+#define FB_PORT_ENABLE_IRQ
+
+#elif defined ( __GNUC__ )
+
+#include "stm32f1xx.h"
+
+#define FB_PORT_DISABLE_IRQ		__disable_irq()   /*!< Disables all interrupts in embedded software. */
+#define FB_PORT_ENABLE_IRQ		__enable_irq()    /*!< Eanbles configured interrupts in embedded software. */
+
+#elif defined ( __ICCARM__ )
+
+#include "intrinsics.h"
+
+#define FB_PORT_DISABLE_IRQ		__disable_interrupt()   /*!< Disables all interrupts in embedded software. */
+#define FB_PORT_ENABLE_IRQ		__enable_interrupt()    /*!< Eanbles configured interrupts in embedded software. */
+
+#elif defined ( __TI_ARM__ )
+
+#define FB_PORT_DISABLE_IRQ
+#define FB_PORT_ENABLE_IRQ
+
+#elif defined ( __CSMC__ )
+
+#define FB_PORT_DISABLE_IRQ
+#define FB_PORT_ENABLE_IRQ
+
+#elif defined ( __TASKING__ )
+
+#define FB_PORT_DISABLE_IRQ
+#define FB_PORT_ENABLE_IRQ
+
+#else
+  #error Unknown compiler
+#endif
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
