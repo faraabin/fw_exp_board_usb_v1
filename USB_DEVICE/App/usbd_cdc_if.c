@@ -127,7 +127,7 @@ static int8_t CDC_Control_FS(uint8_t cmd, uint8_t* pbuf, uint16_t length);
 static int8_t CDC_Receive_FS(uint8_t* pbuf, uint32_t *Len);
 
 /* USER CODE BEGIN PRIVATE_FUNCTIONS_DECLARATION */
-
+static void(*CDC_ReceiveCallback_FS)(uint8_t* Buf, uint16_t Len) = NULL;
 /* USER CODE END PRIVATE_FUNCTIONS_DECLARATION */
 
 /**
@@ -261,6 +261,13 @@ static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t *Len)
   /* USER CODE BEGIN 6 */
   USBD_CDC_SetRxBuffer(&hUsbDeviceFS, &Buf[0]);
   USBD_CDC_ReceivePacket(&hUsbDeviceFS);
+  
+  if(CDC_ReceiveCallback_FS != NULL) {
+    
+    CDC_ReceiveCallback_FS(Buf, *Len);
+    
+  }
+  
   return (USBD_OK);
   /* USER CODE END 6 */
 }
@@ -291,6 +298,25 @@ uint8_t CDC_Transmit_FS(uint8_t* Buf, uint16_t Len)
 }
 
 /* USER CODE BEGIN PRIVATE_FUNCTIONS_IMPLEMENTATION */
+/**
+  * @brief  CDC_RegisterReceiveCallback_FS
+  *         Registers a function to be called whenever data is received.
+  *         @note
+  *
+  *
+  * @param  fptr: Pointer to the function to be called whenever data is received
+  * @retval USBD_OK if all operations are OK else USBD_FAIL or USBD_BUSY
+  */
+uint8_t CDC_RegisterReceiveCallback_FS(void(*fptr)(uint8_t* Buf, uint16_t Len)) {
+  
+  if(fptr == NULL) {
+    return USBD_FAIL;
+  }
+  
+  CDC_ReceiveCallback_FS = fptr;
+  
+  return USBD_OK;
+}
 
 /* USER CODE END PRIVATE_FUNCTIONS_IMPLEMENTATION */
 

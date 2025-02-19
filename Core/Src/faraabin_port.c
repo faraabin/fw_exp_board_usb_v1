@@ -22,6 +22,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "faraabin_port.h"
 
+#include "usbd_cdc_if.h"
+
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private typedef -----------------------------------------------------------*/
@@ -56,7 +58,7 @@ char* fFaraabin_GetFirmwareInfo(void) {
   //User can send custom text as info.
   //User can also send any information data in JSON format.
   //Faraabin setect & parse JSON and show key-value pair in pc application.
-	return "{\"Clock\":\"100MHz\"}";
+	return "{\"Clock\":\"48MHz\"}";
 }
 
 /**
@@ -106,8 +108,7 @@ uint32_t fFaraabin_GetRxBufferSize(void) {
  */
 uint8_t fFaraabin_Send(uint8_t *data, uint16_t size) {
 
-  //User should write code here to send <size> byte of data from buffer <data>
-  return 1;
+  return CDC_Transmit_FS(data, size);
 }
 
 /**

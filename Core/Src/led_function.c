@@ -1,6 +1,6 @@
 /**
 ******************************************************************************
-* @file           : exp_board_fn.c
+* @file           : led_function.c
 * @brief          :
 * @note           :
 * @copyright      : COPYRIGHT© 2025 FaraabinCo
@@ -20,13 +20,22 @@
 */
 
 /* Includes ------------------------------------------------------------------*/
-#include "exp_board_fn.h"
+#include "led_function.h"
 #include "chrono.h"
+
+#include "stm32f1xx_hal.h"
 
 #if defined(FB_FEATURE_FLAG_MCU_CLI) && defined(FARAABIN_ENABLE)
 
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
+/**
+ * @brief These macroes are written to control the state of the on-board LED.
+ * 
+ */
+#define LED_ON_()   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, GPIO_PIN_RESET);
+#define LED_OFF_()  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, GPIO_PIN_SET);
+
 /* Private typedef -----------------------------------------------------------*/
 FARAABIN_FUNCTION_GROUP_TYPE_DEF_(void*);
 
@@ -41,20 +50,23 @@ FARAABIN_FUNCTION_GROUP_TYPE_DEF_(void*);
 */
 
 /**
- * @brief 
+ * @brief Faraabin function that can be called from Faraabin UI.
  * 
  */
-FARAABIN_FUNCTION_LOOP_(ExpBoardFn, TransmitMessage, "help") {
+FARAABIN_FUNCTION_(LedFunction, TurnOn, "Turns on-board LED on.") {
+
+  LED_ON_();
   
-  static int cnt = 0;
-  
-  FARAABIN_Function_LoopStartMs_(1000) {
-    
-    cnt++;
-    FARAABIN_PrintfToFunction_("\r\nTestWhile: %u", cnt);
-    
-    FARAABIN_Function_LoopEnd_();
-  }
+  FARAABIN_FUNCTION_END_();
+}
+
+/**
+ * @brief Faraabin function that can be called from Faraabin UI.
+ * 
+ */
+FARAABIN_FUNCTION_(LedFunction, TurnOff, "Turns on-board LED off.") {
+
+  LED_OFF_();
   
   FARAABIN_FUNCTION_END_();
 }
@@ -68,9 +80,10 @@ FARAABIN_FUNCTION_LOOP_(ExpBoardFn, TransmitMessage, "help") {
  * @brief 
  * 
  */
-FARAABIN_FUNCTION_GROUP_(ExpBoardFn, "help") {
+FARAABIN_FUNCTION_GROUP_(LedFunction, "help") {
   
-  FARAABIN_FUNCTION_GROUP_ADD_(ExpBoardFn, TransmitMessage);
+  FARAABIN_FUNCTION_GROUP_ADD_(LedFunction, TurnOn);
+  FARAABIN_FUNCTION_GROUP_ADD_(LedFunction, TurnOff);
 
 }
 

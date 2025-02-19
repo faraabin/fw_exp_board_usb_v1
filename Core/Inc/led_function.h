@@ -1,6 +1,6 @@
 /**
 ******************************************************************************
-* @file           : exp_board_fn.h
+* @file           : led_function.h
 * @brief          :
 * @note           :
 * @copyright      : COPYRIGHT© 2025 FaraabinCo
@@ -20,8 +20,8 @@
 */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef exp_board_fn_H
-#define exp_board_fn_H
+#ifndef led_function_H
+#define led_function_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -35,7 +35,7 @@ extern "C" {
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 /* Exported functions prototypes ---------------------------------------------*/
-FARAABIN_FUNCTION_GROUP_PROTOTYPE_(ExpBoardFn);
+FARAABIN_FUNCTION_GROUP_PROTOTYPE_(LedFunction);
 
 /* Exported variables --------------------------------------------------------*/
 
@@ -43,6 +43,6 @@ FARAABIN_FUNCTION_GROUP_PROTOTYPE_(ExpBoardFn);
 }
 #endif
 
-#endif /* EXP_BOARD_FN_H */
+#endif /* LED_FUNCTION_H */
 
 /************************ © COPYRIGHT FaraabinCo *****END OF FILE****/

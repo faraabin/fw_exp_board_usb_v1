@@ -46,7 +46,7 @@ extern "C" {
  * @note For example, if you have a timer that counts upto 0xFFFFFFFFU, CHRONO_TICK_TOP_VALUE should be this value.
  * 
  */
-#define CHRONO_TICK_TOP_VALUE   (0xFFFFFFFFU)
+#define CHRONO_TICK_TOP_VALUE   (0xFFFFFFU)
 
 /**
  * @brief Set the coefficient for converting one tick of the tick generator to nanoseconds.
