@@ -1477,31 +1477,22 @@
             <group>
                 <name>Core</name>
                 <file>
-                    <name>$PROJ_DIR$\..\Core\Src\dma.c</name>
+                    <name>$PROJ_DIR$\..\src\Core\Src\gpio.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\Core\Src\exp_board_fn.c</name>
+                    <name>$PROJ_DIR$\..\src\Drivers\CMSIS\Lib\IAR\iar_cortexM3l_math.a</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\Core\Src\gpio.c</name>
+                    <name>$PROJ_DIR$\..\src\Core\Src\led_function.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\Drivers\CMSIS\Lib\IAR\iar_cortexM3l_math.a</name>
+                    <name>$PROJ_DIR$\..\src\Core\Src\main.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\Core\Src\main.c</name>
+                    <name>$PROJ_DIR$\..\src\Core\Src\stm32f1xx_hal_msp.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\Core\Src\stm32f1xx_hal_msp.c</name>
-                </file>
-                <file>
-                    <name>$PROJ_DIR$\..\Core\Src\stm32f1xx_it.c</name>
-                </file>
-                <file>
-                    <name>$PROJ_DIR$\..\Core\Src\tim.c</name>
-                </file>
-                <file>
-                    <name>$PROJ_DIR$\..\Core\Src\usart.c</name>
+                    <name>$PROJ_DIR$\..\src\Core\Src\stm32f1xx_it.c</name>
                 </file>
             </group>
             <group>
@@ -1509,19 +1500,19 @@
                 <group>
                     <name>App</name>
                     <file>
-                        <name>$PROJ_DIR$\..\USB_DEVICE\App\usb_device.c</name>
+                        <name>$PROJ_DIR$\..\src\USB_DEVICE\App\usb_device.c</name>
                     </file>
                     <file>
-                        <name>$PROJ_DIR$\..\USB_DEVICE\App\usbd_cdc_if.c</name>
+                        <name>$PROJ_DIR$\..\src\USB_DEVICE\App\usbd_cdc_if.c</name>
                     </file>
                     <file>
-                        <name>$PROJ_DIR$\..\USB_DEVICE\App\usbd_desc.c</name>
+                        <name>$PROJ_DIR$\..\src\USB_DEVICE\App\usbd_desc.c</name>
                     </file>
                 </group>
                 <group>
                     <name>Target</name>
                     <file>
-                        <name>$PROJ_DIR$\..\USB_DEVICE\Target\usbd_conf.c</name>
+                        <name>$PROJ_DIR$\..\src\USB_DEVICE\Target\usbd_conf.c</name>
                     </file>
                 </group>
             </group>
@@ -1530,7 +1521,7 @@
     <group>
         <name>chrono</name>
         <file>
-            <name>$PROJ_DIR$\..\chrono\chrono.c</name>
+            <name>$PROJ_DIR$\..\src\chrono\chrono.c</name>
         </file>
     </group>
     <group>
@@ -1538,113 +1529,101 @@
         <group>
             <name>CMSIS</name>
             <file>
-                <name>$PROJ_DIR$\..\Core\Src\system_stm32f1xx.c</name>
+                <name>$PROJ_DIR$\..\src\Core\Src\system_stm32f1xx.c</name>
             </file>
         </group>
         <group>
             <name>STM32F1xx_HAL_Driver</name>
             <file>
-                <name>$PROJ_DIR$\..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal.c</name>
+                <name>$PROJ_DIR$\..\src\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_cortex.c</name>
+                <name>$PROJ_DIR$\..\src\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_cortex.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_dma.c</name>
+                <name>$PROJ_DIR$\..\src\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_exti.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_exti.c</name>
+                <name>$PROJ_DIR$\..\src\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash.c</name>
+                <name>$PROJ_DIR$\..\src\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash_ex.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash_ex.c</name>
+                <name>$PROJ_DIR$\..\src\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio.c</name>
+                <name>$PROJ_DIR$\..\src\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio_ex.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio_ex.c</name>
+                <name>$PROJ_DIR$\..\src\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_pcd.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_pcd.c</name>
+                <name>$PROJ_DIR$\..\src\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_pcd_ex.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_pcd_ex.c</name>
+                <name>$PROJ_DIR$\..\src\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_pwr.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_pwr.c</name>
+                <name>$PROJ_DIR$\..\src\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc.c</name>
+                <name>$PROJ_DIR$\..\src\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc_ex.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc_ex.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim_ex.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_uart.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_ll_usb.c</name>
+                <name>$PROJ_DIR$\..\src\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_ll_usb.c</name>
             </file>
         </group>
     </group>
     <group>
         <name>faraabin</name>
         <file>
-            <name>$PROJ_DIR$\..\faraabin\faraabin.c</name>
+            <name>$PROJ_DIR$\..\src\faraabin\faraabin.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\faraabin\faraabin_database.c</name>
+            <name>$PROJ_DIR$\..\src\faraabin\faraabin_database.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\faraabin\faraabin_default_fobjects.c</name>
+            <name>$PROJ_DIR$\..\src\faraabin\faraabin_default_fobjects.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\faraabin\faraabin_fobject_container.c</name>
+            <name>$PROJ_DIR$\..\src\faraabin\faraabin_fobject_container.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\faraabin\faraabin_fobject_databus.c</name>
+            <name>$PROJ_DIR$\..\src\faraabin\faraabin_fobject_databus.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\faraabin\faraabin_fobject_eventgroup.c</name>
+            <name>$PROJ_DIR$\..\src\faraabin\faraabin_fobject_eventgroup.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\faraabin\faraabin_fobject_function.c</name>
+            <name>$PROJ_DIR$\..\src\faraabin\faraabin_fobject_function.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\faraabin\faraabin_fobject_mcu.c</name>
+            <name>$PROJ_DIR$\..\src\faraabin\faraabin_fobject_mcu.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\faraabin\faraabin_fobject_vartype.c</name>
+            <name>$PROJ_DIR$\..\src\faraabin\faraabin_fobject_vartype.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\faraabin\faraabin_function_engine.c</name>
+            <name>$PROJ_DIR$\..\src\faraabin\faraabin_function_engine.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\faraabin\faraabin_link_buffer.c</name>
+            <name>$PROJ_DIR$\..\src\faraabin\faraabin_link_buffer.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\faraabin\faraabin_link_deserializer.c</name>
+            <name>$PROJ_DIR$\..\src\faraabin\faraabin_link_deserializer.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\faraabin\faraabin_link_handler.c</name>
+            <name>$PROJ_DIR$\..\src\faraabin\faraabin_link_handler.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\faraabin\faraabin_link_serializer.c</name>
+            <name>$PROJ_DIR$\..\src\faraabin\faraabin_link_serializer.c</name>
         </file>
     </group>
     <group>
         <name>faraabin_port</name>
         <file>
-            <name>$PROJ_DIR$\..\Core\Src\faraabin_port.c</name>
+            <name>$PROJ_DIR$\..\src\Core\Src\faraabin_port.c</name>
         </file>
     </group>
     <group>
@@ -1652,16 +1631,16 @@
         <group>
             <name>USB_Device_Library</name>
             <file>
-                <name>$PROJ_DIR$\..\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Src\usbd_cdc.c</name>
+                <name>$PROJ_DIR$\..\src\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Src\usbd_cdc.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_core.c</name>
+                <name>$PROJ_DIR$\..\src\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_core.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ctlreq.c</name>
+                <name>$PROJ_DIR$\..\src\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ctlreq.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ioreq.c</name>
+                <name>$PROJ_DIR$\..\src\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ioreq.c</name>
             </file>
         </group>
     </group>

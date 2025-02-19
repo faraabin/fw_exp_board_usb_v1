@@ -78,19 +78,19 @@ typedef enum {
 } eWaveType;
 
 /* Private variables ---------------------------------------------------------*/
-static eWaveType WaveType;  /*!< Type of the currently generated wave */
-static bool Enable;         /*!< Signal generator enable status: 'false' results in 0 output, 'true' generates signal as per user configurations */
-static float64_t Frequency; /*!< Frequency of the generated wave */
-static float64_t Amplitude; /*!< Amplitude of the generated wave */
-static float64_t Output;    /*!< Output of the signal generator */
+static eWaveType WaveType;  /*!< WaveType Type of the currently generated wave */
+static bool Enable;         /*!< Enable Signal generator enable status: 'false' results in 0 output, 'true' generates signal as per user configurations */
+static float64_t Frequency; /*!< Frequency Frequency of the generated wave */
+static float64_t Amplitude; /*!< Amplitude Amplitude of the generated wave */
+static float64_t Output;    /*!< Output Output of the signal generator */
 
-static uint32_t Execution;  /*!< Holds the execution time of the application in microseconds */
-static uint32_t Interval;   /*!< Holds the interval of the running application in microseconds */
+static uint32_t Execution;  /*!< Execution Holds the execution time of the application in microseconds */
+static uint32_t Interval;   /*!< Interval Holds the interval of the running application in microseconds */
 
-static float64_t t;         /*!< Main variable for holding the progress of time in the application, indicating time in seconds */
-static float64_t OmegaT;    /*!< Holds the product of omega and time (ω * t) for each step in generating the sine wave */
+static float64_t t;         /*!< t Main variable for holding the progress of time in the application, indicating time in seconds */
+static float64_t OmegaT;    /*!< OmegaT Holds the product of omega and time (ω * t) for each step in generating the sine wave */
 
-static sChrono Chrono;      /*!< Chrono object used for controlling the application's execution based on RUNTIME_PERIOD_US */
+static sChrono Chrono;      /*!< Chrono Chrono object used for controlling the application's execution based on RUNTIME_PERIOD_US */
 
 /**
  * @brief String array for printing the names of the wave types
@@ -104,12 +104,12 @@ static char* WaveTypeString[] = {
 
 };
 
-FARAABIN_CONTAINER_DEF_STATIC_(Container);        /*!< Faraabin container for introducing user variables to Faraabin */
-FARAABIN_DATABUS_DEF_STATIC_(Databus);            /*!< Faraabin databus for creating a data stream between MCU and PC to send data periodically */
-FARAABIN_EVENT_GROUP_DEF_STATIC_(TypeEventGroup); /*!< Faraabin event group for sending wave type change events */
-FARAABIN_EVENT_GROUP_DEF_STATIC_(FreqEventGroup); /*!< Faraabin event group for sending frequency change events */
-FARAABIN_EVENT_GROUP_DEF_STATIC_(AmplEventGroup); /*!< Faraabin event group for sending amplitude change events */
-FARAABIN_VAR_TYPE_DEF_STATIC_(eWaveType);         /*!< Faraabin variable type object for introducing 'eWaveType' typedef to Faraabin */
+FARAABIN_CONTAINER_DEF_STATIC_(Container);        /*!< Container Faraabin container for introducing user variables to Faraabin */
+FARAABIN_DATABUS_DEF_STATIC_(Databus);            /*!< Databus Faraabin databus for creating a data stream between MCU and PC to send data periodically */
+FARAABIN_EVENT_GROUP_DEF_STATIC_(TypeEventGroup); /*!< TypeEventGroup Faraabin event group for sending wave type change events */
+FARAABIN_EVENT_GROUP_DEF_STATIC_(FreqEventGroup); /*!< FreqEventGroup Faraabin event group for sending frequency change events */
+FARAABIN_EVENT_GROUP_DEF_STATIC_(AmplEventGroup); /*!< AmplEventGroup Faraabin event group for sending amplitude change events */
+FARAABIN_VAR_TYPE_DEF_STATIC_(eWaveType);         /*!< eWaveType Faraabin variable type object for introducing 'eWaveType' typedef to Faraabin */
 
 /* Private function prototypes -----------------------------------------------*/
 static void FaraabinReceiveFrameHandler(uint8_t *data, uint16_t size);

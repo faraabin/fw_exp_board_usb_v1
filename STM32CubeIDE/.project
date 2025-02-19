@@ -33,32 +33,32 @@
 		<link>
 			<name>Core</name>
 			<type>2</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/Core</locationURI>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/src/Core</locationURI>
 		</link>
 		<link>
 			<name>Drivers</name>
 			<type>2</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/Drivers</locationURI>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/src/Drivers</locationURI>
 		</link>
 		<link>
 			<name>Middlewares</name>
 			<type>2</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/Middlewares</locationURI>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/src/Middlewares</locationURI>
 		</link>
 		<link>
 			<name>USB_DEVICE</name>
 			<type>2</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/USB_DEVICE</locationURI>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/src/USB_DEVICE</locationURI>
 		</link>
 		<link>
 			<name>chrono</name>
 			<type>2</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/chrono</locationURI>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/src/chrono</locationURI>
 		</link>
 		<link>
 			<name>faraabin</name>
 			<type>2</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/faraabin</locationURI>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/src/faraabin</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

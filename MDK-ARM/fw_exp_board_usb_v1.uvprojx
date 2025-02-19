@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F103xB,ARM_MATH_CM3</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../USB_DEVICE/App;../USB_DEVICE/Target;../Drivers/STM32F1xx_HAL_Driver/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Middlewares/ST/STM32_USB_Device_Library/Core/Inc;../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include;..\chrono;..\faraabin;..\Drivers\CMSIS\DSP\Include</IncludePath>
+              <IncludePath>..\src\Core\Inc;..\src\USB_DEVICE\App;..\src\USB_DEVICE\Target;..\src\Drivers\STM32F1xx_HAL_Driver\Inc;..\src\Drivers\STM32F1xx_HAL_Driver\Inc\Legacy;..\src\Middlewares\ST\STM32_USB_Device_Library\Core\Inc;..\src\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc;..\src\Drivers\CMSIS\Device\ST\STM32F1xx\Include;..\src\Drivers\CMSIS\Include;..\src\chrono;..\src\faraabin;..\src\Drivers\CMSIS\DSP\Include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -397,32 +397,32 @@
             <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Core/Src/main.c</FilePath>
+              <FilePath>..\src\Core\Src\main.c</FilePath>
             </File>
             <File>
               <FileName>gpio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Core/Src/gpio.c</FilePath>
+              <FilePath>..\src\Core\Src\gpio.c</FilePath>
             </File>
             <File>
               <FileName>stm32f1xx_it.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Core/Src/stm32f1xx_it.c</FilePath>
+              <FilePath>..\src\Core\Src\stm32f1xx_it.c</FilePath>
             </File>
             <File>
               <FileName>stm32f1xx_hal_msp.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Core/Src/stm32f1xx_hal_msp.c</FilePath>
+              <FilePath>..\src\Core\Src\stm32f1xx_hal_msp.c</FilePath>
             </File>
             <File>
               <FileName>led_function.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Core\Src\led_function.c</FilePath>
+              <FilePath>..\src\Core\Src\led_function.c</FilePath>
             </File>
             <File>
               <FileName>arm_cortexM3l_math.lib</FileName>
               <FileType>4</FileType>
-              <FilePath>..\Drivers\CMSIS\Lib\ARM\arm_cortexM3l_math.lib</FilePath>
+              <FilePath>..\src\Drivers\CMSIS\Lib\ARM\arm_cortexM3l_math.lib</FilePath>
             </File>
           </Files>
         </Group>
@@ -432,17 +432,17 @@
             <File>
               <FileName>usb_device.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../USB_DEVICE/App/usb_device.c</FilePath>
+              <FilePath>..\src\USB_DEVICE\App\usb_device.c</FilePath>
             </File>
             <File>
               <FileName>usbd_desc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../USB_DEVICE/App/usbd_desc.c</FilePath>
+              <FilePath>..\src\USB_DEVICE\App\usbd_desc.c</FilePath>
             </File>
             <File>
               <FileName>usbd_cdc_if.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../USB_DEVICE/App/usbd_cdc_if.c</FilePath>
+              <FilePath>..\src\USB_DEVICE\App\usbd_cdc_if.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -452,7 +452,7 @@
             <File>
               <FileName>usbd_conf.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../USB_DEVICE/Target/usbd_conf.c</FilePath>
+              <FilePath>..\src\USB_DEVICE\Target\usbd_conf.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -460,89 +460,69 @@
           <GroupName>Drivers/STM32F1xx_HAL_Driver</GroupName>
           <Files>
             <File>
-              <FileName>stm32f1xx_hal_gpio_ex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f1xx_hal_pcd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pcd.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f1xx_hal_pcd_ex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pcd_ex.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f1xx_ll_usb.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_usb.c</FilePath>
-            </File>
-            <File>
               <FileName>stm32f1xx_hal.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f1xx_hal_rcc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f1xx_hal_rcc_ex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f1xx_hal_gpio.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f1xx_hal_dma.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c</FilePath>
+              <FilePath>..\src\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal.c</FilePath>
             </File>
             <File>
               <FileName>stm32f1xx_hal_cortex.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f1xx_hal_pwr.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f1xx_hal_flash.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f1xx_hal_flash_ex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c</FilePath>
+              <FilePath>..\src\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_cortex.c</FilePath>
             </File>
             <File>
               <FileName>stm32f1xx_hal_exti.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.c</FilePath>
+              <FilePath>..\src\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_exti.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f1xx_hal_tim.c</FileName>
+              <FileName>stm32f1xx_hal_flash.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c</FilePath>
+              <FilePath>..\src\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f1xx_hal_tim_ex.c</FileName>
+              <FileName>stm32f1xx_hal_flash_ex.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c</FilePath>
+              <FilePath>..\src\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash_ex.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f1xx_hal_uart.c</FileName>
+              <FileName>stm32f1xx_hal_gpio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c</FilePath>
+              <FilePath>..\src\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_hal_gpio_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\src\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_hal_pcd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\src\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_pcd.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_hal_pcd_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\src\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_pcd_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_hal_pwr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\src\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_pwr.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_hal_rcc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\src\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_hal_rcc_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\src\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_ll_usb.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\src\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_ll_usb.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -552,7 +532,7 @@
             <File>
               <FileName>system_stm32f1xx.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Core/Src/system_stm32f1xx.c</FilePath>
+              <FilePath>..\src\Core\Src\system_stm32f1xx.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -562,22 +542,22 @@
             <File>
               <FileName>usbd_core.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c</FilePath>
+              <FilePath>..\src\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_core.c</FilePath>
             </File>
             <File>
               <FileName>usbd_ctlreq.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c</FilePath>
+              <FilePath>..\src\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ctlreq.c</FilePath>
             </File>
             <File>
               <FileName>usbd_ioreq.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c</FilePath>
+              <FilePath>..\src\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ioreq.c</FilePath>
             </File>
             <File>
               <FileName>usbd_cdc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.c</FilePath>
+              <FilePath>..\src\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Src\usbd_cdc.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -587,7 +567,7 @@
             <File>
               <FileName>chrono.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\chrono\chrono.c</FilePath>
+              <FilePath>..\src\chrono\chrono.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -597,72 +577,72 @@
             <File>
               <FileName>faraabin.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\faraabin\faraabin.c</FilePath>
+              <FilePath>..\src\faraabin\faraabin.c</FilePath>
             </File>
             <File>
               <FileName>faraabin_database.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\faraabin\faraabin_database.c</FilePath>
+              <FilePath>..\src\faraabin\faraabin_database.c</FilePath>
             </File>
             <File>
               <FileName>faraabin_default_fobjects.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\faraabin\faraabin_default_fobjects.c</FilePath>
+              <FilePath>..\src\faraabin\faraabin_default_fobjects.c</FilePath>
             </File>
             <File>
               <FileName>faraabin_fobject_container.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\faraabin\faraabin_fobject_container.c</FilePath>
+              <FilePath>..\src\faraabin\faraabin_fobject_container.c</FilePath>
             </File>
             <File>
               <FileName>faraabin_fobject_databus.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\faraabin\faraabin_fobject_databus.c</FilePath>
+              <FilePath>..\src\faraabin\faraabin_fobject_databus.c</FilePath>
             </File>
             <File>
               <FileName>faraabin_fobject_eventgroup.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\faraabin\faraabin_fobject_eventgroup.c</FilePath>
+              <FilePath>..\src\faraabin\faraabin_fobject_eventgroup.c</FilePath>
             </File>
             <File>
               <FileName>faraabin_fobject_function.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\faraabin\faraabin_fobject_function.c</FilePath>
+              <FilePath>..\src\faraabin\faraabin_fobject_function.c</FilePath>
             </File>
             <File>
               <FileName>faraabin_fobject_mcu.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\faraabin\faraabin_fobject_mcu.c</FilePath>
+              <FilePath>..\src\faraabin\faraabin_fobject_mcu.c</FilePath>
             </File>
             <File>
               <FileName>faraabin_fobject_vartype.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\faraabin\faraabin_fobject_vartype.c</FilePath>
+              <FilePath>..\src\faraabin\faraabin_fobject_vartype.c</FilePath>
             </File>
             <File>
               <FileName>faraabin_function_engine.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\faraabin\faraabin_function_engine.c</FilePath>
+              <FilePath>..\src\faraabin\faraabin_function_engine.c</FilePath>
             </File>
             <File>
               <FileName>faraabin_link_buffer.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\faraabin\faraabin_link_buffer.c</FilePath>
+              <FilePath>..\src\faraabin\faraabin_link_buffer.c</FilePath>
             </File>
             <File>
               <FileName>faraabin_link_deserializer.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\faraabin\faraabin_link_deserializer.c</FilePath>
+              <FilePath>..\src\faraabin\faraabin_link_deserializer.c</FilePath>
             </File>
             <File>
               <FileName>faraabin_link_handler.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\faraabin\faraabin_link_handler.c</FilePath>
+              <FilePath>..\src\faraabin\faraabin_link_handler.c</FilePath>
             </File>
             <File>
               <FileName>faraabin_link_serializer.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\faraabin\faraabin_link_serializer.c</FilePath>
+              <FilePath>..\src\faraabin\faraabin_link_serializer.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -672,7 +652,7 @@
             <File>
               <FileName>faraabin_port.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Core\Src\faraabin_port.c</FilePath>
+              <FilePath>..\src\Core\Src\faraabin_port.c</FilePath>
             </File>
           </Files>
         </Group>
