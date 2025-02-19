@@ -118,7 +118,6 @@ uint8_t fFaraabin_Send(uint8_t *data, uint16_t size) {
  */
 bool fFaraabin_IsSending(void) {
 
-  //User should return that last sending data is finished or not.
   return false;
 }
 
@@ -128,7 +127,7 @@ bool fFaraabin_IsSending(void) {
  */
 void fFaraabin_ResetMcu(void) {
   
-  //User should write code here to reset MCU.
+  HAL_NVIC_SystemReset();
 }
 
 /*
