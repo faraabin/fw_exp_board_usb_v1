@@ -1,9 +1,0 @@
-C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/src/chrono/ex/chrono_long.c:70:6:fChronoLong_Start	8	static
-C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/src/chrono/ex/chrono_long.c:86:6:fChronoLong_Stop	0	static
-C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/src/chrono/ex/chrono_long.c:100:10:fChronoLong_ElapsedS	16	static
-C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/src/chrono/ex/chrono_long.c:121:10:fChronoLong_ElapsedMs	16	static
-C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/src/chrono/ex/chrono_long.c:145:10:fChronoLong_LeftS	16	static
-C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/src/chrono/ex/chrono_long.c:179:10:fChronoLong_LeftMs	16	static
-C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/src/chrono/ex/chrono_long.c:208:6:fChronoLong_StartTimeoutS	8	static
-C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/src/chrono/ex/chrono_long.c:222:6:fChronoLong_StartTimeoutMs	8	static
-C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/src/chrono/ex/chrono_long.c:238:8:fChronoLong_IsTimeout	24	static

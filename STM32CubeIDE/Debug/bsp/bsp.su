@@ -1,5 +1,0 @@
-C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/src/bsp/bsp.c:74:9:fBsp_Led_On	8	static
-C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/src/bsp/bsp.c:90:9:fBsp_Led_Off	8	static
-C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/src/bsp/bsp.c:105:6:Error_Handler	8	static,ignoring_inline_asm
-C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/src/bsp/bsp.c:53:9:fBsp_Init	96	static
-C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/src/bsp/bsp.c:202:6:HAL_MspInit	8	static

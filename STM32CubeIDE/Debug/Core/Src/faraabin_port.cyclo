@@ -1,9 +1,0 @@
-C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/src/Core/Src/faraabin_port.c:47:7:fFaraabin_GetFirmwareName	1
-C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/src/Core/Src/faraabin_port.c:56:7:fFaraabin_GetFirmwareInfo	1
-C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/src/Core/Src/faraabin_port.c:71:10:fFaraabin_GetTxBufferPointer	1
-C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/src/Core/Src/faraabin_port.c:80:10:fFaraabin_GetTxBufferSize	1
-C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/src/Core/Src/faraabin_port.c:91:10:fFaraabin_GetRxBufferPointer	1
-C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/src/Core/Src/faraabin_port.c:100:10:fFaraabin_GetRxBufferSize	1
-C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/src/Core/Src/faraabin_port.c:109:9:fFaraabin_Send	1
-C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/src/Core/Src/faraabin_port.c:119:6:fFaraabin_IsSending	1
-C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/src/Core/Src/faraabin_port.c:128:6:fFaraabin_ResetMcu	1
