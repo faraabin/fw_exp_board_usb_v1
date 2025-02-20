@@ -359,19 +359,21 @@
                 <option>
                     <name>CCIncludePath2</name>
                     <state>$PROJ_DIR$/../src/Core/Inc</state>
-                    <state>$PROJ_DIR$/../src/USB_DEVICE/App</state>
-                    <state>$PROJ_DIR$/../src/USB_DEVICE/Target</state>
+                    <state>$PROJ_DIR$/../src/library/USB_DEVICE/App</state>
+                    <state>$PROJ_DIR$/../src/library/USB_DEVICE/Target</state>
                     <state>$PROJ_DIR$/../src/Drivers/STM32F1xx_HAL_Driver/Inc</state>
                     <state>$PROJ_DIR$/../src/Drivers/STM32F1xx_HAL_Driver/Inc/Legacy</state>
-                    <state>$PROJ_DIR$/../src/Middlewares/ST/STM32_USB_Device_Library/Core/Inc</state>
-                    <state>$PROJ_DIR$/../src/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc</state>
+                    <state>$PROJ_DIR$/../src/library/Middlewares/ST/STM32_USB_Device_Library/Core/Inc</state>
+                    <state>$PROJ_DIR$/../src/library/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc</state>
                     <state>$PROJ_DIR$/../src/Drivers/CMSIS/Device/ST/STM32F1xx/Include</state>
                     <state>$PROJ_DIR$/../src/Drivers/CMSIS/Include</state>
-                    <state>$PROJ_DIR$/../src/chrono</state>
-                    <state>$PROJ_DIR$/../src/faraabin</state>
+                    <state>$PROJ_DIR$/../src/library/chrono</state>
+                    <state>$PROJ_DIR$/../src/library/faraabin</state>
                     <state>$PROJ_DIR$/../src/Drivers\CMSIS\DSP\Include</state>
                     <state>$PROJ_DIR$/../src/Drivers\CMSIS\Include</state>
-                    <state>C:\Users\ASUS\Desktop\fw_exp_board_usb_v1\src\bsp</state>
+                    <state>$PROJ_DIR$/../src/bsp</state>
+                    <state>$PROJ_DIR$/../src/app</state>
+                    <state>$PROJ_DIR$/../src/faraabin_port</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -1123,6 +1125,15 @@
     <group>
         <name>Application</name>
         <group>
+            <name>app</name>
+            <file>
+                <name>$PROJ_DIR$\..\src\app\app_signal_generator.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\app\led_function.c</name>
+            </file>
+        </group>
+        <group>
             <name>EWARM</name>
             <file>
                 <name>$PROJ_DIR$\startup_stm32f103xb.s</name>
@@ -1133,13 +1144,7 @@
             <group>
                 <name>Core</name>
                 <file>
-                    <name>$PROJ_DIR$\..\src\Core\Src\app_signal_generator.c</name>
-                </file>
-                <file>
                     <name>$PROJ_DIR$\..\src\Drivers\CMSIS\Lib\IAR\iar_cortexM3l_math.a</name>
-                </file>
-                <file>
-                    <name>$PROJ_DIR$\..\src\Core\Src\led_function.c</name>
                 </file>
                 <file>
                     <name>$PROJ_DIR$\..\src\Core\Src\main.c</name>
@@ -1153,19 +1158,19 @@
                 <group>
                     <name>App</name>
                     <file>
-                        <name>$PROJ_DIR$\..\src\USB_DEVICE\App\usb_device.c</name>
+                        <name>$PROJ_DIR$\..\src\library\USB_DEVICE\App\usb_device.c</name>
                     </file>
                     <file>
-                        <name>$PROJ_DIR$\..\src\USB_DEVICE\App\usbd_cdc_if.c</name>
+                        <name>$PROJ_DIR$\..\src\library\USB_DEVICE\App\usbd_cdc_if.c</name>
                     </file>
                     <file>
-                        <name>$PROJ_DIR$\..\src\USB_DEVICE\App\usbd_desc.c</name>
+                        <name>$PROJ_DIR$\..\src\library\USB_DEVICE\App\usbd_desc.c</name>
                     </file>
                 </group>
                 <group>
                     <name>Target</name>
                     <file>
-                        <name>$PROJ_DIR$\..\src\USB_DEVICE\Target\usbd_conf.c</name>
+                        <name>$PROJ_DIR$\..\src\library\USB_DEVICE\Target\usbd_conf.c</name>
                     </file>
                 </group>
             </group>
@@ -1180,7 +1185,7 @@
     <group>
         <name>chrono</name>
         <file>
-            <name>$PROJ_DIR$\..\src\chrono\chrono.c</name>
+            <name>$PROJ_DIR$\..\src\library\chrono\chrono.c</name>
         </file>
     </group>
     <group>
@@ -1237,52 +1242,52 @@
     <group>
         <name>faraabin</name>
         <file>
-            <name>$PROJ_DIR$\..\src\faraabin\faraabin.c</name>
+            <name>$PROJ_DIR$\..\src\library\faraabin\faraabin.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\src\faraabin\faraabin_database.c</name>
+            <name>$PROJ_DIR$\..\src\library\faraabin\faraabin_database.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\src\faraabin\faraabin_default_fobjects.c</name>
+            <name>$PROJ_DIR$\..\src\library\faraabin\faraabin_default_fobjects.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\src\faraabin\faraabin_fobject_container.c</name>
+            <name>$PROJ_DIR$\..\src\library\faraabin\faraabin_fobject_container.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\src\faraabin\faraabin_fobject_databus.c</name>
+            <name>$PROJ_DIR$\..\src\library\faraabin\faraabin_fobject_databus.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\src\faraabin\faraabin_fobject_eventgroup.c</name>
+            <name>$PROJ_DIR$\..\src\library\faraabin\faraabin_fobject_eventgroup.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\src\faraabin\faraabin_fobject_function.c</name>
+            <name>$PROJ_DIR$\..\src\library\faraabin\faraabin_fobject_function.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\src\faraabin\faraabin_fobject_mcu.c</name>
+            <name>$PROJ_DIR$\..\src\library\faraabin\faraabin_fobject_mcu.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\src\faraabin\faraabin_fobject_vartype.c</name>
+            <name>$PROJ_DIR$\..\src\library\faraabin\faraabin_fobject_vartype.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\src\faraabin\faraabin_function_engine.c</name>
+            <name>$PROJ_DIR$\..\src\library\faraabin\faraabin_function_engine.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\src\faraabin\faraabin_link_buffer.c</name>
+            <name>$PROJ_DIR$\..\src\library\faraabin\faraabin_link_buffer.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\src\faraabin\faraabin_link_deserializer.c</name>
+            <name>$PROJ_DIR$\..\src\library\faraabin\faraabin_link_deserializer.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\src\faraabin\faraabin_link_handler.c</name>
+            <name>$PROJ_DIR$\..\src\library\faraabin\faraabin_link_handler.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\src\faraabin\faraabin_link_serializer.c</name>
+            <name>$PROJ_DIR$\..\src\library\faraabin\faraabin_link_serializer.c</name>
         </file>
     </group>
     <group>
         <name>faraabin_port</name>
         <file>
-            <name>$PROJ_DIR$\..\src\Core\Src\faraabin_port.c</name>
+            <name>$PROJ_DIR$\..\src\faraabin_port\faraabin_port.c</name>
         </file>
     </group>
     <group>
@@ -1290,16 +1295,16 @@
         <group>
             <name>USB_Device_Library</name>
             <file>
-                <name>$PROJ_DIR$\..\src\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Src\usbd_cdc.c</name>
+                <name>$PROJ_DIR$\..\src\library\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Src\usbd_cdc.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\src\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_core.c</name>
+                <name>$PROJ_DIR$\..\src\library\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_core.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\src\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ctlreq.c</name>
+                <name>$PROJ_DIR$\..\src\library\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ctlreq.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\src\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ioreq.c</name>
+                <name>$PROJ_DIR$\..\src\library\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ioreq.c</name>
             </file>
         </group>
     </group>

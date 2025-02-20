@@ -35,8 +35,10 @@ extern "C" {
  * @brief Bsp function return types.
  * 
  */
-#define BSP_OK        ((uint8_t)0U) /*!< Indicates no error. */
-#define BSP_NOT_INIT  ((uint8_t)1U) /*!< Indicates that BSP is not initialized. */
+#define BSP_OK              ((uint8_t)0U) /*!< Indicates no error. */
+#define BSP_NOT_INIT        ((uint8_t)1U) /*!< Indicates that BSP is not initialized. */
+#define BSP_NULL_REF_ERROR  ((uint8_t)2U) /*!< Indicates that NULL reference is passed. */
+#define BSP_USB_ERROR       ((uint8_t)3U) /*!< Indicates that error ocurred on usb. */
 
 /* Exported macro ------------------------------------------------------------*/
 /* Exported types ------------------------------------------------------------*/
@@ -44,8 +46,14 @@ extern "C" {
 /* Exported functions prototypes ---------------------------------------------*/
 uint8_t fBsp_Init(void);
 
+uint8_t fBsp_TickInit(void);
+uint32_t fBsp_GetTick(void);
+
 uint8_t fBsp_Led_On(void);
 uint8_t fBsp_Led_Off(void);
+
+uint8_t fBsp_VCP_Send(uint8_t *data, uint16_t size);
+uint8_t fBsp_VCP_RegisterFrameReceivedCallback(void(*fptr)(uint8_t *data, uint16_t size));
 
 void Error_Handler(void);
 

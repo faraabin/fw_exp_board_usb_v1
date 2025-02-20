@@ -21,6 +21,9 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "led_function.h"
+
+#include "bsp.h"
+
 #include "chrono.h"
 
 #include "stm32f1xx_hal.h"
@@ -29,13 +32,6 @@
 
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
-/**
- * @brief These macroes are written to control the state of the on-board LED.
- * 
- */
-#define LED_ON_()   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, GPIO_PIN_RESET);
-#define LED_OFF_()  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, GPIO_PIN_SET);
-
 /* Private typedef -----------------------------------------------------------*/
 FARAABIN_FUNCTION_GROUP_TYPE_DEF_(void*);
 
@@ -55,7 +51,7 @@ FARAABIN_FUNCTION_GROUP_TYPE_DEF_(void*);
  */
 FARAABIN_FUNCTION_(LedFunction, TurnOn, "Turns on-board LED on.") {
 
-  LED_ON_();
+  fBsp_Led_On();
   
   FARAABIN_FUNCTION_END_();
 }
@@ -66,7 +62,7 @@ FARAABIN_FUNCTION_(LedFunction, TurnOn, "Turns on-board LED on.") {
  */
 FARAABIN_FUNCTION_(LedFunction, TurnOff, "Turns on-board LED off.") {
 
-  LED_OFF_();
+  fBsp_Led_Off();
   
   FARAABIN_FUNCTION_END_();
 }

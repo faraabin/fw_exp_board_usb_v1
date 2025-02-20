@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F103xB,ARM_MATH_CM3</Define>
               <Undefine></Undefine>
-              <IncludePath>..\src\Core\Inc;..\src\USB_DEVICE\App;..\src\USB_DEVICE\Target;..\src\Drivers\STM32F1xx_HAL_Driver\Inc;..\src\Drivers\STM32F1xx_HAL_Driver\Inc\Legacy;..\src\Middlewares\ST\STM32_USB_Device_Library\Core\Inc;..\src\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc;..\src\Drivers\CMSIS\Device\ST\STM32F1xx\Include;..\src\Drivers\CMSIS\Include;..\src\chrono;..\src\faraabin;..\src\Drivers\CMSIS\DSP\Include;..\src\bsp</IncludePath>
+              <IncludePath>..\src\Core\Inc;..\src\library\USB_DEVICE\App;..\src\library\USB_DEVICE\Target;..\src\Drivers\STM32F1xx_HAL_Driver\Inc;..\src\Drivers\STM32F1xx_HAL_Driver\Inc\Legacy;..\src\library\Middlewares\ST\STM32_USB_Device_Library\Core\Inc;..\src\library\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc;..\src\Drivers\CMSIS\Device\ST\STM32F1xx\Include;..\src\Drivers\CMSIS\Include;..\src\library\chrono;..\src\library\faraabin;..\src\Drivers\CMSIS\DSP\Include;..\src\bsp;..\src\app;..\src\faraabin_port</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -402,6 +402,21 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>app</GroupName>
+          <Files>
+            <File>
+              <FileName>app_signal_generator.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\src\app\app_signal_generator.c</FilePath>
+            </File>
+            <File>
+              <FileName>led_function.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\src\app\led_function.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Application/User/Core</GroupName>
           <Files>
             <File>
@@ -413,16 +428,6 @@
               <FileName>stm32f1xx_it.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\src\Core\Src\stm32f1xx_it.c</FilePath>
-            </File>
-            <File>
-              <FileName>led_function.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\src\Core\Src\led_function.c</FilePath>
-            </File>
-            <File>
-              <FileName>app_signal_generator.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\src\Core\Src\app_signal_generator.c</FilePath>
             </File>
             <File>
               <FileName>arm_cortexM3l_math.lib</FileName>
@@ -437,17 +442,17 @@
             <File>
               <FileName>usb_device.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\src\USB_DEVICE\App\usb_device.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_desc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\src\USB_DEVICE\App\usbd_desc.c</FilePath>
+              <FilePath>..\src\library\USB_DEVICE\App\usb_device.c</FilePath>
             </File>
             <File>
               <FileName>usbd_cdc_if.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\src\USB_DEVICE\App\usbd_cdc_if.c</FilePath>
+              <FilePath>..\src\library\USB_DEVICE\App\usbd_cdc_if.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_desc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\src\library\USB_DEVICE\App\usbd_desc.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -457,7 +462,7 @@
             <File>
               <FileName>usbd_conf.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\src\USB_DEVICE\Target\usbd_conf.c</FilePath>
+              <FilePath>..\src\library\USB_DEVICE\Target\usbd_conf.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -557,22 +562,22 @@
             <File>
               <FileName>usbd_core.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\src\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_core.c</FilePath>
+              <FilePath>..\src\library\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_core.c</FilePath>
             </File>
             <File>
               <FileName>usbd_ctlreq.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\src\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ctlreq.c</FilePath>
+              <FilePath>..\src\library\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ctlreq.c</FilePath>
             </File>
             <File>
               <FileName>usbd_ioreq.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\src\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ioreq.c</FilePath>
+              <FilePath>..\src\library\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ioreq.c</FilePath>
             </File>
             <File>
               <FileName>usbd_cdc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\src\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Src\usbd_cdc.c</FilePath>
+              <FilePath>..\src\library\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Src\usbd_cdc.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -582,7 +587,7 @@
             <File>
               <FileName>chrono.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\src\chrono\chrono.c</FilePath>
+              <FilePath>..\src\library\chrono\chrono.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -592,72 +597,72 @@
             <File>
               <FileName>faraabin.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\src\faraabin\faraabin.c</FilePath>
+              <FilePath>..\src\library\faraabin\faraabin.c</FilePath>
             </File>
             <File>
               <FileName>faraabin_database.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\src\faraabin\faraabin_database.c</FilePath>
+              <FilePath>..\src\library\faraabin\faraabin_database.c</FilePath>
             </File>
             <File>
               <FileName>faraabin_default_fobjects.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\src\faraabin\faraabin_default_fobjects.c</FilePath>
+              <FilePath>..\src\library\faraabin\faraabin_default_fobjects.c</FilePath>
             </File>
             <File>
               <FileName>faraabin_fobject_container.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\src\faraabin\faraabin_fobject_container.c</FilePath>
+              <FilePath>..\src\library\faraabin\faraabin_fobject_container.c</FilePath>
             </File>
             <File>
               <FileName>faraabin_fobject_databus.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\src\faraabin\faraabin_fobject_databus.c</FilePath>
+              <FilePath>..\src\library\faraabin\faraabin_fobject_databus.c</FilePath>
             </File>
             <File>
               <FileName>faraabin_fobject_eventgroup.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\src\faraabin\faraabin_fobject_eventgroup.c</FilePath>
+              <FilePath>..\src\library\faraabin\faraabin_fobject_eventgroup.c</FilePath>
             </File>
             <File>
               <FileName>faraabin_fobject_function.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\src\faraabin\faraabin_fobject_function.c</FilePath>
+              <FilePath>..\src\library\faraabin\faraabin_fobject_function.c</FilePath>
             </File>
             <File>
               <FileName>faraabin_fobject_mcu.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\src\faraabin\faraabin_fobject_mcu.c</FilePath>
+              <FilePath>..\src\library\faraabin\faraabin_fobject_mcu.c</FilePath>
             </File>
             <File>
               <FileName>faraabin_fobject_vartype.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\src\faraabin\faraabin_fobject_vartype.c</FilePath>
+              <FilePath>..\src\library\faraabin\faraabin_fobject_vartype.c</FilePath>
             </File>
             <File>
               <FileName>faraabin_function_engine.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\src\faraabin\faraabin_function_engine.c</FilePath>
+              <FilePath>..\src\library\faraabin\faraabin_function_engine.c</FilePath>
             </File>
             <File>
               <FileName>faraabin_link_buffer.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\src\faraabin\faraabin_link_buffer.c</FilePath>
+              <FilePath>..\src\library\faraabin\faraabin_link_buffer.c</FilePath>
             </File>
             <File>
               <FileName>faraabin_link_deserializer.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\src\faraabin\faraabin_link_deserializer.c</FilePath>
+              <FilePath>..\src\library\faraabin\faraabin_link_deserializer.c</FilePath>
             </File>
             <File>
               <FileName>faraabin_link_handler.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\src\faraabin\faraabin_link_handler.c</FilePath>
+              <FilePath>..\src\library\faraabin\faraabin_link_handler.c</FilePath>
             </File>
             <File>
               <FileName>faraabin_link_serializer.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\src\faraabin\faraabin_link_serializer.c</FilePath>
+              <FilePath>..\src\library\faraabin\faraabin_link_serializer.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -667,7 +672,7 @@
             <File>
               <FileName>faraabin_port.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\src\Core\Src\faraabin_port.c</FilePath>
+              <FilePath>..\src\faraabin_port\faraabin_port.c</FilePath>
             </File>
           </Files>
         </Group>

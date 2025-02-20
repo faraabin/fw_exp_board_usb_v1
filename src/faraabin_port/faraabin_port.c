@@ -22,7 +22,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "faraabin_port.h"
 
-#include "usbd_cdc_if.h"
+#include "bsp.h"
+#include "stm32f1xx.h"
 
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -108,7 +109,7 @@ uint32_t fFaraabin_GetRxBufferSize(void) {
  */
 uint8_t fFaraabin_Send(uint8_t *data, uint16_t size) {
 
-  return CDC_Transmit_FS(data, size);
+  return fBsp_VCP_Send(data, size);
 }
 
 /**

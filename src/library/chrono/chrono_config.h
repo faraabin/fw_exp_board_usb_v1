@@ -46,7 +46,7 @@ extern "C" {
  * @note For example, if you have a timer that counts upto 0xFFFFFFFFU, CHRONO_TICK_TOP_VALUE should be this value.
  * 
  */
-#define CHRONO_TICK_TOP_VALUE   (0xFFFFFFU)
+#define CHRONO_TICK_TOP_VALUE   (0x00FFFFFFU)
 
 /**
  * @brief Set the coefficient for converting one tick of the tick generator to nanoseconds.
@@ -61,7 +61,7 @@ extern "C" {
   *        and TICK_COUNTERMODE_DOWN if it counts downward from CHRONO_TICK_TOP_VALUE to zero.
   *
   */
-#define CHRONO_TICK_COUNTERMODE TICK_COUNTERMODE_UP
+#define CHRONO_TICK_COUNTERMODE TICK_COUNTERMODE_DOWN
 
 /**
  * @brief User typedef for measurements in chrono module

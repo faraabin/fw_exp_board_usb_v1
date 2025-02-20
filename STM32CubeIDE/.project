@@ -43,12 +43,17 @@
 		<link>
 			<name>Middlewares</name>
 			<type>2</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/src/Middlewares</locationURI>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/src/library/Middlewares</locationURI>
 		</link>
 		<link>
 			<name>USB_DEVICE</name>
 			<type>2</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/src/USB_DEVICE</locationURI>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/src/library/USB_DEVICE</locationURI>
+		</link>
+		<link>
+			<name>app</name>
+			<type>2</type>
+			<location>C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/src/app</location>
 		</link>
 		<link>
 			<name>bsp</name>
@@ -58,12 +63,17 @@
 		<link>
 			<name>chrono</name>
 			<type>2</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/src/chrono</locationURI>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/src/library/chrono</locationURI>
 		</link>
 		<link>
 			<name>faraabin</name>
 			<type>2</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/src/faraabin</locationURI>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/src/library/faraabin</locationURI>
+		</link>
+		<link>
+			<name>faraabin_port</name>
+			<type>2</type>
+			<location>C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/src/faraabin_port</location>
 		</link>
 	</linkedResources>
 </projectDescription>

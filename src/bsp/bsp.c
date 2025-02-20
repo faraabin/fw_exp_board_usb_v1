@@ -22,8 +22,11 @@
 /* Includes ------------------------------------------------------------------*/
 #include "bsp.h"
 
+#include "chrono.h"
+
 #include "stm32f1xx_hal.h"
 #include "usb_device.h"
+#include "usbd_cdc_if.h"
 
 #include <stdbool.h>
 
@@ -67,6 +70,24 @@ uint8_t fBsp_Init(void) {
 }
 
 /**
+ * @brief 
+ * 
+ * @return uint8_t 
+ */
+uint8_t fBsp_TickInit(void) {
+  return 0;
+}
+
+/**
+ * @brief 
+ * 
+ * @return uint32_t 
+ */
+uint32_t fBsp_GetTick(void) {
+  return SysTick->VAL;
+}
+
+/**
  * @brief Turns on-board LED on.
  * 
  * @return status One of the Bsp function return types.
@@ -99,6 +120,49 @@ uint8_t fBsp_Led_Off(void) {
 }
 
 /**
+ * @brief 
+ * 
+ * @param data 
+ * @param size 
+ * @return uint8_t 
+ */
+uint8_t fBsp_VCP_Send(uint8_t *data, uint16_t size) {
+
+  if(!Init) {
+    return BSP_NOT_INIT;
+  }
+
+  if(CDC_Transmit_FS(data, size) != USBD_OK) {
+    return BSP_USB_ERROR;
+  }
+
+  return BSP_OK;
+}
+
+/**
+ * @brief 
+ * 
+ * @param fptr 
+ * @return uint8_t 
+ */
+uint8_t fBsp_VCP_RegisterFrameReceivedCallback(void(*fptr)(uint8_t *data, uint16_t size)) {
+
+  if(!Init) {
+    return BSP_NOT_INIT;
+  }
+
+  if(fptr == NULL) {
+    return BSP_NULL_REF_ERROR;
+  }
+
+  if(CDC_RegisterReceiveCallback_FS(fptr) != USBD_OK) {
+    return BSP_USB_ERROR;
+  }
+
+  return BSP_OK;
+}
+
+/**
  * @brief  This function is executed in case of error occurrence.
  * @retval None
  */
@@ -109,9 +173,9 @@ void Error_Handler(void) {
   {
 
     fBsp_Led_Off();
-    HAL_Delay(500);
+    HAL_Delay(250);
     fBsp_Led_On();
-    HAL_Delay(500);
+    HAL_Delay(250);
 
   }
 }
@@ -194,6 +258,41 @@ static uint8_t fBspInitLed(void) {
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   return 0;
+}
+
+/**
+ * @brief this function is defined here to prevent enabling systick timer.
+ * 
+ * @param TickPriority 
+ * @return HAL_StatusTypeDef 
+ */
+HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority) {
+
+  SysTick->LOAD  = (uint32_t)(0xFFFFFF - 1UL);                      /* set reload register */
+  SysTick->VAL   = 0UL;                                             /* Load the SysTick Counter Value */
+  SysTick->CTRL  = SysTick_CTRL_CLKSOURCE_Msk |
+                   SysTick_CTRL_TICKINT_Msk;                        /* Enable SysTick IRQ and SysTick Timer */
+  return HAL_OK;
+}
+
+/**
+ * @brief This function provides minimum delay (in milliseconds) based
+ *        on variable incremented.
+ * @param Delay  specifies the delay time length, in milliseconds.
+ * @retval None
+ */
+void HAL_Delay(volatile uint32_t Delay) {
+
+  fChrono_DelayMs(Delay);
+}
+
+/**
+ * @brief Provide a tick value in millisecond.
+ * @retval tick value
+ */
+uint32_t HAL_GetTick(void) {
+
+  return (uint32_t)fChrono_GetContinuousTickMs();
 }
 
 /**

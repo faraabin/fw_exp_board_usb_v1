@@ -47,8 +47,6 @@
 #include "chrono.h"
 #include "faraabin.h"
 
-#include "usbd_cdc_if.h"
-
 /* Private define ------------------------------------------------------------*/
 /**
  * @brief Period of the application's execution in microseconds.
@@ -92,25 +90,26 @@ static void FaraabinReceiveFrameHandler(uint8_t *data, uint16_t size);
   * @retval int
   */
 int main(void) {
-
-  /* Board Initialization ---------------------------------------------------*/
-  fBsp_Init();
   
-  /* Register USB receive callback to a function that handles Faraabin frames. */
-  CDC_RegisterReceiveCallback_FS(FaraabinReceiveFrameHandler);
-
-  /* Chrono Initialization --------------------------------------------------*/
-  /* Initialize the chrono module. */
-  /* HAL_GetTick function pointer is passed to chrono for measuring time ticks. */
-  if (fChrono_Init(HAL_GetTick) != CHRONO_OK) {
+  /* Board Initialization -----------------------------------------------------*/
+  /* Initialize the tick of the system. */
+  fBsp_TickInit();
+  /* Initialize chrono module. */
+  if (fChrono_Init(fBsp_GetTick) != CHRONO_OK) {
     Error_Handler();
   }
+  /* Initialize board peripherals. */
+  fBsp_Init();
+  
+  /* Faraabin Initialization --------------------------------------------------*/
+  /* Register USB receive callback to a function that handles Faraabin frames. */
+  fBsp_VCP_RegisterFrameReceivedCallback(FaraabinReceiveFrameHandler);
   /* Initialize Faraabin as per user configurations in faraabin_config.h and user interface in faraabin_port.c */
   if (fFaraabin_Init() != FARAABIN_OK) {
     Error_Handler();
   }
-   
-  /* Faraabin Probes Initialization -----------------------------------------*/
+  
+  /* Faraabin Probes Initialization -------------------------------------------*/
   /* Initialize the container that introduces user variables and functions to Faraabin. */
   FARAABIN_Container_Init_(&Container);
   /* Initialize eWaveType variable type object. Faraabin needs this information to know the type of eWaveType. */
@@ -132,16 +131,16 @@ int main(void) {
 
   /* Initialize LedFunction group and introduce it to Faraabin. */
   FARAABIN_FunctionGroupType_Init_(&LedFunction);
-
-  /* Initializing signal generator and setting initial values ---------------*/
+  
+  /* Initializing signal generator and setting initial values -----------------*/
   fAppSignalGenerator_Init(RUNTIME_PERIOD_US);
   WaveType = eWAVE_TYPE_SIN;
   Frequency = 1.0;
   Amplitude = 1.0;
   
   fChrono_StartTimeoutUs(&Chrono, RUNTIME_PERIOD_US);
- 
-  /* Infinite loop */
+  
+  /* Infinite loop ------------------------------------------------------------*/
   while (1) {
     /* This is the runtime in which the application runs periodically. */
     /* fChrono_StartTimeoutUs() is called immediately after fChrono_IsTimeout() to set the chrono for the next step of the application's execution. */
@@ -200,20 +199,6 @@ int main(void) {
 
   }
 }
-
-#ifdef  USE_FULL_ASSERT
-/**
-  * @brief  Reports the name of the source file and the source line number
-  *         where the assert_param error has occurred.
-  * @param  file: pointer to the source file name
-  * @param  line: assert_param error line source number
-  * @retval None
-  */
-void assert_failed(uint8_t *file, uint32_t line) {
-  /* User can add his own implementation to report the file name and line number,
-     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-}
-#endif /* USE_FULL_ASSERT */
 
 /*
 ╔══════════════════════════════════════════════════════════════════════════════════╗

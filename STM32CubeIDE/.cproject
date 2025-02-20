@@ -46,16 +46,18 @@
 									<listOptionValue builtIn="false" value="../../src/Core/Inc"/>
 									<listOptionValue builtIn="false" value="../../src/Drivers/CMSIS/Include"/>
 									<listOptionValue builtIn="false" value="../../src/Drivers/CMSIS/DSP/Include"/>
-									<listOptionValue builtIn="false" value="../../src/chrono"/>
-									<listOptionValue builtIn="false" value="../../src/faraabin"/>
 									<listOptionValue builtIn="false" value="../../src/Drivers/STM32F1xx_HAL_Driver/Inc/Legacy"/>
 									<listOptionValue builtIn="false" value="../../src/Drivers/STM32F1xx_HAL_Driver/Inc"/>
 									<listOptionValue builtIn="false" value="../../src/Drivers/CMSIS/Device/ST/STM32F1xx/Include"/>
-									<listOptionValue builtIn="false" value="../../src/USB_DEVICE/App"/>
-									<listOptionValue builtIn="false" value="../../src/USB_DEVICE/Target"/>
-									<listOptionValue builtIn="false" value="../../src/Middlewares/ST/STM32_USB_Device_Library/Core/Inc"/>
-									<listOptionValue builtIn="false" value="../../src/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc"/>
 									<listOptionValue builtIn="false" value="../../src/bsp"/>
+									<listOptionValue builtIn="false" value="../../src/library/chrono"/>
+									<listOptionValue builtIn="false" value="../../src/library/faraabin"/>
+									<listOptionValue builtIn="false" value="../../src/library/USB_DEVICE/App"/>
+									<listOptionValue builtIn="false" value="../../src/library/USB_DEVICE/Target"/>
+									<listOptionValue builtIn="false" value="../../src/library/Middlewares/ST/STM32_USB_Device_Library/Core/Inc"/>
+									<listOptionValue builtIn="false" value="../../src/library/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc"/>
+									<listOptionValue builtIn="false" value="../../src/app"/>
+									<listOptionValue builtIn="false" value="../../src/faraabin_port"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.499735362" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c"/>
 							</tool>
