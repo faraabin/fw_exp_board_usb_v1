@@ -371,6 +371,7 @@
                     <state>$PROJ_DIR$/../src/faraabin</state>
                     <state>$PROJ_DIR$/../src/Drivers\CMSIS\DSP\Include</state>
                     <state>$PROJ_DIR$/../src/Drivers\CMSIS\Include</state>
+                    <state>C:\Users\ASUS\Desktop\fw_exp_board_usb_v1\src\bsp</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -1132,7 +1133,7 @@
             <group>
                 <name>Core</name>
                 <file>
-                    <name>$PROJ_DIR$\..\src\Core\Src\gpio.c</name>
+                    <name>$PROJ_DIR$\..\src\Core\Src\app_signal_generator.c</name>
                 </file>
                 <file>
                     <name>$PROJ_DIR$\..\src\Drivers\CMSIS\Lib\IAR\iar_cortexM3l_math.a</name>
@@ -1142,9 +1143,6 @@
                 </file>
                 <file>
                     <name>$PROJ_DIR$\..\src\Core\Src\main.c</name>
-                </file>
-                <file>
-                    <name>$PROJ_DIR$\..\src\Core\Src\stm32f1xx_hal_msp.c</name>
                 </file>
                 <file>
                     <name>$PROJ_DIR$\..\src\Core\Src\stm32f1xx_it.c</name>
@@ -1172,6 +1170,12 @@
                 </group>
             </group>
         </group>
+    </group>
+    <group>
+        <name>bsp</name>
+        <file>
+            <name>$PROJ_DIR$\..\src\bsp\bsp.c</name>
+        </file>
     </group>
     <group>
         <name>chrono</name>

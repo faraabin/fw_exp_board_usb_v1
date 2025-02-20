@@ -15,7 +15,8 @@
  * https://github.com/FaraabinCo
  *
  ******************************************************************************
- *
+ * 
+ * @verbatim
  * In this example, a simple software signal generator is used to demonstrate some of
  * Faraabin's probes and basic features.
  *
@@ -33,23 +34,20 @@
  * - Sending commands to the MCU from a PC to run a function while the main application is executing
  * 
  * You can access the Faraabin documentation at github and find out more about other features, probes and add-ons.
+ * @endverbatim
  * 
  */
 
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
-#include "usb_device.h"
-#include "gpio.h"
-
-#include "usbd_cdc_if.h"
-
+#include "app_signal_generator.h"
 #include "led_function.h"
+
+#include "bsp.h"
 
 #include "chrono.h"
 #include "faraabin.h"
 
-#include "arm_math.h"
-#include <math.h>
+#include "usbd_cdc_if.h"
 
 /* Private define ------------------------------------------------------------*/
 /**
@@ -57,26 +55,8 @@
  */
 #define RUNTIME_PERIOD_US (1000)
 
-/**
- * @brief Defines the angular frequency (omega) needed for generating a sine wave.
- */
-#define OMEGA             (2.0 * (float64_t)PI * Frequency)
-
 /* Private macro -------------------------------------------------------------*/
 /* Private typedef -----------------------------------------------------------*/
-/**
- * @brief Defines possible wave types that the user can select,
- *        which the application will generate.
- */
-typedef enum {
-
-  eWAVE_TYPE_NONE = 0,
-  eWAVE_TYPE_PULSE_TRAIN,
-  eWAVE_TYPE_SAW_TOOTH,
-  eWAVE_TYPE_SIN
-
-} eWaveType;
-
 /* Private variables ---------------------------------------------------------*/
 static eWaveType WaveType;  /*!< WaveType Type of the currently generated wave */
 static bool Enable;         /*!< Enable Signal generator enable status: 'false' results in 0 output, 'true' generates signal as per user configurations */
@@ -87,22 +67,7 @@ static float64_t Output;    /*!< Output Output of the signal generator */
 static uint32_t Execution;  /*!< Execution Holds the execution time of the application in microseconds */
 static uint32_t Interval;   /*!< Interval Holds the interval of the running application in microseconds */
 
-static float64_t t;         /*!< t Main variable for holding the progress of time in the application, indicating time in seconds */
-static float64_t OmegaT;    /*!< OmegaT Holds the product of omega and time (ω * t) for each step in generating the sine wave */
-
 static sChrono Chrono;      /*!< Chrono Chrono object used for controlling the application's execution based on RUNTIME_PERIOD_US */
-
-/**
- * @brief String array for printing the names of the wave types
- */
-static char* WaveTypeString[] = {
-
-  "eWAVE_TYPE_NONE",
-  "eWAVE_TYPE_PULSE_TRAIN",
-  "eWAVE_TYPE_SAW_TOOTH",
-  "eWAVE_TYPE_SIN"
-
-};
 
 FARAABIN_CONTAINER_DEF_STATIC_(Container);        /*!< Container Faraabin container for introducing user variables to Faraabin */
 FARAABIN_DATABUS_DEF_STATIC_(Databus);            /*!< Databus Faraabin databus for creating a data stream between MCU and PC to send data periodically */
@@ -113,7 +78,6 @@ FARAABIN_VAR_TYPE_DEF_STATIC_(eWaveType);         /*!< eWaveType Faraabin variab
 
 /* Private function prototypes -----------------------------------------------*/
 static void FaraabinReceiveFrameHandler(uint8_t *data, uint16_t size);
-static void SystemClock_Config(void);
 
 /* Variables -----------------------------------------------------------------*/
 
@@ -128,14 +92,10 @@ static void SystemClock_Config(void);
   * @retval int
   */
 int main(void) {
-  /* MCU Configuration ------------------------------------------------------*/
-  /* Reset all peripherals, initialize the Flash interface and the Systick. */
-  HAL_Init();
-  /* Configure the system clock. */
-  SystemClock_Config();
-  /* Initialize all configured peripherals. */
-  MX_GPIO_Init();
-  MX_USB_DEVICE_Init();
+
+  /* Board Initialization ---------------------------------------------------*/
+  fBsp_Init();
+  
   /* Register USB receive callback to a function that handles Faraabin frames. */
   CDC_RegisterReceiveCallback_FS(FaraabinReceiveFrameHandler);
 
@@ -173,11 +133,11 @@ int main(void) {
   /* Initialize LedFunction group and introduce it to Faraabin. */
   FARAABIN_FunctionGroupType_Init_(&LedFunction);
 
-  /* Set initial values for the variables and start the chrono ---------------*/
+  /* Initializing signal generator and setting initial values ---------------*/
+  fAppSignalGenerator_Init(RUNTIME_PERIOD_US);
   WaveType = eWAVE_TYPE_SIN;
   Frequency = 1.0;
   Amplitude = 1.0;
-  t = 0.0;
   
   fChrono_StartTimeoutUs(&Chrono, RUNTIME_PERIOD_US);
  
@@ -193,62 +153,8 @@ int main(void) {
       static uint32_t lastTickBegin = 0;
       uint32_t tickBegin = fChrono_GetTick();
 
-      /* Main variable for holding the progress of time in the application, indicating time in seconds. */
-      t += ((float64_t)RUNTIME_PERIOD_US / 1000000.0);
-
-      /* The signal generator application sets the value of the output based on the user configurations. */
-      /* Users can set the output wave type, enable status, frequency, and amplitude. */
-      if(Enable) {
-        
-        switch (WaveType) {
-
-          case eWAVE_TYPE_NONE:
-          default: {
-            
-            /* If the output type is 'eWAVE_TYPE_NONE', the output will be zero. */
-            Output = 0;
-            break;
-          }
-          case eWAVE_TYPE_PULSE_TRAIN: {
-
-            /* 'eWAVE_TYPE_PULSE_TRAIN' generates a pulse train that alternates between -Amplitude and +Amplitude at the given Frequency. */
-            static int8_t pulseSign = 1;
-            if (fmod(t, (1.0 / Frequency)) >= 0.5) {
-              pulseSign = -1;
-            } else {
-              pulseSign = 1;
-            }
-
-            Output = Amplitude * (float64_t)pulseSign;
-            
-            break;
-          }
-          case eWAVE_TYPE_SAW_TOOTH: {
-
-            /* 'eWAVE_TYPE_SAW_TOOTH' generates a sawtooth signal that ramps up from zero to Amplitude at the given Frequency. */
-            Output = Amplitude * fmod(t, (1.0 / Frequency));
-            
-            break;
-          }
-          case eWAVE_TYPE_SIN: {
-
-            /* 'eWAVE_TYPE_SIN' generates a sine wave that oscillates between -Amplitude and +Amplitude at the given Frequency. */
-            OmegaT = OMEGA * t;
-            if (OmegaT > (2.0 * (float64_t)PI)) {
-              OmegaT -= (2.0 * (float64_t)PI);
-            }
-
-            Output = Amplitude * arm_sin_f32(OmegaT);
-
-            break;
-          }
-        }
-      } else {
-        
-        /* If the signal generator Enable status is false, the output will always be zero regardless of the wave type. */
-        Output = 0.0;
-        
-      }
+      /* Run signal generator with given inputs. Result is written onto Output. */
+      Output = fAppSignalGenerator_Run(Enable, WaveType, Frequency, Amplitude);
 
       /* This part detects any change in the 'WaveType' variable value. If a change is detected, a message is sent to Faraabin. */
       static eWaveType OldType = eWAVE_TYPE_NONE;
@@ -292,18 +198,6 @@ int main(void) {
     /* fFaraabin_Run() function is executed in a low priority part of the main loop. Whenever the CPU has time, it will execute this part. */
     fFaraabin_Run();
 
-  }
-}
-
- /**
-  * @brief  This function is executed in case of error occurrence.
-  * @retval None
-  */
-void Error_Handler(void) {
-  /* User can add his own implementation to report error return state */
-  __disable_irq();
-  while (1)
-  {
   }
 }
 
@@ -376,53 +270,6 @@ static void FaraabinReceiveFrameHandler(uint8_t *data, uint16_t size) {
     
     fFaraabin_CharReceived(data[i]);
     
-  }
-  
-}
-
-/**
-  * @brief System Clock Configuration
-  * @retval None
-  */
-static void SystemClock_Config(void) {
-  
-  RCC_OscInitTypeDef RCC_OscInitStruct = {0};
-  RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
-  RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
-
-  /** Initializes the RCC Oscillators according to the specified parameters
- * in the RCC_OscInitTypeDef structure.
- */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
-  RCC_OscInitStruct.HSEState = RCC_HSE_BYPASS;
-  RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
-  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
-  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-  RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL6;
-  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-  {
-    Error_Handler();
-  }
-
-  /** Initializes the CPU, AHB and APB buses clocks
- */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
-  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
-  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
-
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USB;
-  PeriphClkInit.UsbClockSelection = RCC_USBCLKSOURCE_PLL;
-  if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
-  {
-    Error_Handler();
   }
   
 }

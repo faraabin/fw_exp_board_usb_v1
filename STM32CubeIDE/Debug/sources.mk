@@ -39,6 +39,7 @@ Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src \
 Middlewares/ST/STM32_USB_Device_Library/Core/Src \
 USB_DEVICE/App \
 USB_DEVICE/Target \
+bsp \
 chrono \
 chrono/ex \
 faraabin \

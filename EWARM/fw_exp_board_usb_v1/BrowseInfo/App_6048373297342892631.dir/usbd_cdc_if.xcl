@@ -37,6 +37,8 @@ C:\Users\ASUS\Desktop\fw_exp_board_usb_v1\EWARM/../src/Drivers\CMSIS\DSP\Include
 -I
 C:\Users\ASUS\Desktop\fw_exp_board_usb_v1\EWARM/../src/Drivers\CMSIS\Include
 -I
+C:\Users\ASUS\Desktop\fw_exp_board_usb_v1\src\bsp
+-I
 C:\iar\ewarm-9.60.3\arm\inc\c\aarch32
 -I
 C:\iar\ewarm-9.60.3\arm\inc
@@ -68,6 +70,8 @@ C:\Users\ASUS\Desktop\fw_exp_board_usb_v1\src\faraabin
 C:\Users\ASUS\Desktop\fw_exp_board_usb_v1\src\Drivers\CMSIS\DSP\Include
 -I
 C:\Users\ASUS\Desktop\fw_exp_board_usb_v1\src\Drivers\CMSIS\Include
+-I
+C:\Users\ASUS\Desktop\fw_exp_board_usb_v1\src\bsp
 -D__CHAR_BITS__=8
 -D__CHAR_MAX__=0xff
 -D__CHAR_MIN__=0

@@ -12,6 +12,7 @@ RM := rm -rf
 -include faraabin/subdir.mk
 -include chrono/ex/subdir.mk
 -include chrono/subdir.mk
+-include bsp/subdir.mk
 -include USB_DEVICE/Target/subdir.mk
 -include USB_DEVICE/App/subdir.mk
 -include Middlewares/ST/STM32_USB_Device_Library/Core/Src/subdir.mk
