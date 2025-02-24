@@ -95,7 +95,7 @@ int main(void) {
   /* Initialize the tick of the system. */
   fBsp_TickInit();
   /* Initialize chrono module. */
-  if (fChrono_Init(fBsp_GetTick) != CHRONO_OK) {
+  if (fChrono_Init(fBsp_GetTickPointer()) != CHRONO_OK) {
     Error_Handler();
   }
   /* Initialize board peripherals. */
@@ -108,7 +108,7 @@ int main(void) {
   if (fFaraabin_Init() != FARAABIN_OK) {
     Error_Handler();
   }
-  
+
   /* Faraabin Probes Initialization -------------------------------------------*/
   /* Initialize the container that introduces user variables and functions to Faraabin. */
   FARAABIN_Container_Init_(&Container);
@@ -194,7 +194,8 @@ int main(void) {
 
     }
     
-    /* fFaraabin_Run() function is executed in a low priority part of the main loop. Whenever the CPU has time, it will execute this part. */
+    /* The fFaraabin_Run() function is executed at the end of the infinite loop. */
+    /* User can also call it during very low-priority runtime. Hence, when the CPU has idle time, Faraabin will execute without impacting higher priority runtimes or tasks. */
     fFaraabin_Run();
 
   }
@@ -251,12 +252,11 @@ FARAABIN_CONTAINER_FUNC_(Container) {
   */
 static void FaraabinReceiveFrameHandler(uint8_t *data, uint16_t size) {
   
-  for(uint16_t i = 0; i < size; i++) {
+  for (uint16_t i = 0; i < size; i++) {
     
     fFaraabin_CharReceived(data[i]);
     
   }
-  
 }
 
 /************************ © COPYRIGHT FaraabinCo *****END OF FILE****/

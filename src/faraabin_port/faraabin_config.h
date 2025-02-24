@@ -64,7 +64,7 @@ extern "C" {
   */
 #define FB_FEATURE_FLAG_MCU_CLI                /*!< This feature ebables you to create FunctionGroups and run your functions in faraabin UI. */
 #define FB_FEATURE_FLAG_BUFFER_OVF             /*!< This features enables the buffer overflow notification. Activating this feature can be time consuming. */
-//#define FB_FEATURE_FLAG_ALLOW_SEND_DICT_BLOCKING /*!< This features enables that dictionary send by blocking fFaraabin_Run() function. */
+#define FB_FEATURE_FLAG_ALLOW_SEND_DICT_BLOCKING /*!< This features enables that dictionary send by blocking fFaraabin_Run() function. */
 
 /** @} */ //End of FB_FEATURE_FLAG
 

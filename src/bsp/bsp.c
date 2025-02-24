@@ -72,19 +72,24 @@ uint8_t fBsp_Init(void) {
 /**
  * @brief 
  * 
- * @return uint8_t 
+ * @return initStat Retruns '0' if successful and '1' if it fails.
  */
 uint8_t fBsp_TickInit(void) {
+  
+  if(HAL_InitTick(2U) != HAL_OK) {
+    return 1;
+  }
+  
   return 0;
 }
 
 /**
  * @brief 
  * 
- * @return uint32_t 
+ * @return pTick Pointer to the Tick generator value register
  */
-uint32_t fBsp_GetTick(void) {
-  return SysTick->VAL;
+uint32_t* fBsp_GetTickPointer(void) {
+  return (uint32_t*)&(SysTick->VAL);
 }
 
 /**
@@ -268,10 +273,12 @@ static uint8_t fBspInitLed(void) {
  */
 HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority) {
 
-  SysTick->LOAD  = (uint32_t)(0xFFFFFF - 1UL);                      /* set reload register */
+  SysTick->LOAD  = (uint32_t)(0xFFFFFF);                            /* set reload register */
   SysTick->VAL   = 0UL;                                             /* Load the SysTick Counter Value */
   SysTick->CTRL  = SysTick_CTRL_CLKSOURCE_Msk |
+                   SysTick_CTRL_ENABLE_Msk    |
                    SysTick_CTRL_TICKINT_Msk;                        /* Enable SysTick IRQ and SysTick Timer */
+  
   return HAL_OK;
 }
 

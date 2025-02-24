@@ -53,27 +53,27 @@
 		<link>
 			<name>app</name>
 			<type>2</type>
-			<location>C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/src/app</location>
+			<locationURI>PARENT-1-PROJECT_LOC/src/app</locationURI>
 		</link>
 		<link>
 			<name>bsp</name>
 			<type>2</type>
-			<location>C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/src/bsp</location>
+			<locationURI>PARENT-1-PROJECT_LOC/src/bsp</locationURI>
 		</link>
 		<link>
 			<name>chrono</name>
 			<type>2</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/src/library/chrono</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/src/library/chrono</locationURI>
 		</link>
 		<link>
 			<name>faraabin</name>
 			<type>2</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/src/library/faraabin</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/src/library/faraabin</locationURI>
 		</link>
 		<link>
 			<name>faraabin_port</name>
 			<type>2</type>
-			<location>C:/Users/ASUS/Desktop/fw_exp_board_usb_v1/src/faraabin_port</location>
+			<locationURI>PARENT-1-PROJECT_LOC/src/faraabin_port</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

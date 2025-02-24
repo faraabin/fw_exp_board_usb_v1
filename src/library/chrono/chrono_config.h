@@ -38,7 +38,7 @@ extern "C" {
   * @note In cases that user wants to generate the tick and reading its value is not possible by dereferencing the tick address,
   *       value of current tick can be read via calling a function.
   */
-#define CHRONO_TICK_TYPE  TICK_TYPE_FUNCTION
+#define CHRONO_TICK_TYPE  TICK_TYPE_VARIABLE
 
 /**
  * @brief Set the top value that the tick generator can count.
@@ -54,7 +54,7 @@ extern "C" {
  * @note For example, if you have a timer that counts with 1MHz frequency, CHRONO_TICK_TO_NANOSECOND_COEF should be 1000.
  * 
  */
-#define CHRONO_TICK_TO_NANOSECOND_COEF  (1000U)
+#define CHRONO_TICK_TO_NANOSECOND_COEF  ((double)(1000.0 / 48.0))
 
 /**
   * @brief Select the counter mode of the tick generator. Possible modes are TICK_COUNTERMODE_UP if the counter starts from zero to CHRONO_TICK_TOP_VALUE

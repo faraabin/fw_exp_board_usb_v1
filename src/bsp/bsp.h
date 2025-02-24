@@ -47,7 +47,7 @@ extern "C" {
 uint8_t fBsp_Init(void);
 
 uint8_t fBsp_TickInit(void);
-uint32_t fBsp_GetTick(void);
+uint32_t* fBsp_GetTickPointer(void);
 
 uint8_t fBsp_Led_On(void);
 uint8_t fBsp_Led_Off(void);

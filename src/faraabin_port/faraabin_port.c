@@ -30,7 +30,7 @@
 /* Private typedef -----------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 static char fwName[] = "EXPERIENCE_BOARD";
-static uint8_t fbTxBuffer[1000];
+static uint8_t fbTxBuffer[2500];
 static uint8_t fbRxBuffer[1000];
 
 /* Private function prototypes -----------------------------------------------*/
