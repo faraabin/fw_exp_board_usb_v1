@@ -115,12 +115,12 @@ int main(void) {
   /* Initialize eWaveType variable type object. Faraabin needs this information to know the type of eWaveType. */
   FARAABIN_VAR_TYPE_ENUM_INIT_(eWaveType);
 
-  /* Initialize Faraabin databus with 5 channels and a division factor of 5. */
+  /* Initialize Faraabin databus with 5 channels and a division factor of 1. */
   /* The databus will start in stream mode while the 'Output' variable is already attached to it. */
   FARAABIN_DATABUS_SET_VALUE_(Databus.ChannelQty, 5);
-  FARAABIN_DATABUS_SET_VALUE_(Databus.StreamDivideBy, 5);
+  FARAABIN_DATABUS_SET_VALUE_(Databus.StreamDivideBy, 1);
   FARAABIN_DataBus_Init_(&Databus);
-  FARAABIN_DataBus_StartStreamMode_(&Databus);
+  FARAABIN_DataBus_Stop_(&Databus);
   FARAABIN_DataBus_AttachVariable_F64_(&Databus, &Output);
   FARAABIN_DataBus_Enable_(&Databus);
 
@@ -142,6 +142,7 @@ int main(void) {
   
   /* Infinite loop ------------------------------------------------------------*/
   while (1) {
+    
     /* This is the runtime in which the application runs periodically. */
     /* fChrono_StartTimeoutUs() is called immediately after fChrono_IsTimeout() to set the chrono for the next step of the application's execution. */
     if (fChrono_IsTimeout(&Chrono)) {

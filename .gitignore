@@ -6,6 +6,9 @@
 # User-specific folders
 .vscode
 MDK-ARM\listing_output
+STM32CubeIDE\.settings
+STM32CubeIDE\Debug
+STM32CubeIDE\Release
 
 # User-specific files
 *.ioc

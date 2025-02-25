@@ -30,6 +30,7 @@
 #include "usbd_cdc.h"
 
 /* USER CODE BEGIN INCLUDE */
+#include <stdbool.h>
 
 /* USER CODE END INCLUDE */
 
@@ -109,6 +110,7 @@ uint8_t CDC_Transmit_FS(uint8_t* Buf, uint16_t Len);
 
 /* USER CODE BEGIN EXPORTED_FUNCTIONS */
 uint8_t CDC_RegisterReceiveCallback_FS(void(*fptr)(uint8_t* Buf, uint16_t Len));
+bool CDC_IsReadyToSend_FS(void);
 
 /* USER CODE END EXPORTED_FUNCTIONS */
 

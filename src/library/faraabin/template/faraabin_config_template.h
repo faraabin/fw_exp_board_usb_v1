@@ -55,7 +55,7 @@ extern "C" {
 
 /** @} */ //End of FB_FEATURE_FLAG
 
-/** @defgroup FB_FEATURE_FLAG123
+/** @defgroup FB_FEATURE_FLAG
   * @brief Faraabin features can be Enabled/Disabled using these comments.
   * 
   * @note To disable a feature, simply comment corresponding FB_FEATURE_FLAG.

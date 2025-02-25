@@ -29,6 +29,7 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include <stdint.h>
+#include <stdbool.h>
 
 /* Exported defines ----------------------------------------------------------*/
 /**
@@ -54,6 +55,7 @@ uint8_t fBsp_Led_Off(void);
 
 uint8_t fBsp_VCP_Send(uint8_t *data, uint16_t size);
 uint8_t fBsp_VCP_RegisterFrameReceivedCallback(void(*fptr)(uint8_t *data, uint16_t size));
+bool fBsp_VCP_IsSending(void);
 
 void Error_Handler(void);
 

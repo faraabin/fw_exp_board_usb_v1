@@ -54,7 +54,7 @@ extern "C" {
  * @note For example, if you have a timer that counts with 1MHz frequency, CHRONO_TICK_TO_NANOSECOND_COEF should be 1000.
  * 
  */
-#define CHRONO_TICK_TO_NANOSECOND_COEF  ((double)(1000.0 / 48.0))
+#define CHRONO_TICK_TO_NANOSECOND_COEF  (500U)
 
 /**
   * @brief Select the counter mode of the tick generator. Possible modes are TICK_COUNTERMODE_UP if the counter starts from zero to CHRONO_TICK_TOP_VALUE

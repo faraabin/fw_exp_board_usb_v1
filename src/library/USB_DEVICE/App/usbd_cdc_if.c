@@ -31,6 +31,7 @@
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
+static bool IsLineCodingReceived;
 
 /* USER CODE END PV */
 
@@ -153,6 +154,7 @@ static int8_t CDC_Init_FS(void)
   /* Set Application Buffers */
   USBD_CDC_SetTxBuffer(&hUsbDeviceFS, UserTxBufferFS, 0);
   USBD_CDC_SetRxBuffer(&hUsbDeviceFS, UserRxBufferFS);
+  IsLineCodingReceived = false;
   return (USBD_OK);
   /* USER CODE END 3 */
 }
@@ -217,17 +219,35 @@ static int8_t CDC_Control_FS(uint8_t cmd, uint8_t* pbuf, uint16_t length)
   /*                                        4 - Space                            */
   /* 6      | bDataBits  |   1   | Number Data bits (5, 6, 7, 8 or 16).          */
   /*******************************************************************************/
-    case CDC_SET_LINE_CODING:
+    case CDC_SET_LINE_CODING: {
 
-    break;
+      uint32_t baudrate = (uint32_t)pbuf[0] | ((uint32_t)pbuf[1] << 8) | ((uint32_t)pbuf[2] << 16) | ((uint32_t)pbuf[3] << 24);
+      
+      if(baudrate == 0) {
+        IsLineCodingReceived = false;
+      } else {
+        IsLineCodingReceived = true;
+      }
+      
+      
+      break;
+    }
 
     case CDC_GET_LINE_CODING:
 
     break;
 
-    case CDC_SET_CONTROL_LINE_STATE:
-
-    break;
+    case CDC_SET_CONTROL_LINE_STATE: {
+      
+      uint16_t bitmap = 0;
+      bitmap = (uint16_t)pbuf[0] | ((uint16_t)pbuf[1] << 8);
+      
+      if((bitmap && 0x01) == 0) {
+        IsLineCodingReceived = false;
+      }
+      
+      break;
+    }
 
     case CDC_SEND_BREAK:
 
@@ -316,6 +336,19 @@ uint8_t CDC_RegisterReceiveCallback_FS(void(*fptr)(uint8_t* Buf, uint16_t Len)) 
   CDC_ReceiveCallback_FS = fptr;
   
   return USBD_OK;
+}
+
+/**
+  * @brief  CDC_IsReadyToSend_FS
+  *         Checks if the device is ready for sending.
+  *         @note
+  *
+  *
+  * @retval true if USB is ready, false if it is busy or sending.
+  */
+bool CDC_IsReadyToSend_FS(void) {
+  
+  return (IsLineCodingReceived && (hUsbDeviceFS.dev_state != USBD_STATE_SUSPENDED));
 }
 
 /* USER CODE END PRIVATE_FUNCTIONS_IMPLEMENTATION */

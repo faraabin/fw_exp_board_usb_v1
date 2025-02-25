@@ -119,7 +119,7 @@ uint8_t fFaraabin_Send(uint8_t *data, uint16_t size) {
  */
 bool fFaraabin_IsSending(void) {
 
-  return false;
+  return fBsp_VCP_IsSending();
 }
 
 /**
