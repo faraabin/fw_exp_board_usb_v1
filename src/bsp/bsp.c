@@ -37,6 +37,7 @@ static bool Init;
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
 static uint8_t fBspInitLed(void);
+static uint8_t fBspReenumerateUsb(void);
 
 /* Variables -----------------------------------------------------------------*/
 
@@ -61,6 +62,7 @@ uint8_t fBsp_Init(void) {
   SystemClock_Config();
   /* Initialize all configured peripherals. */
   fBspInitLed();
+  fBspReenumerateUsb();
   MX_USB_DEVICE_Init();
 
   Init = true;
@@ -274,6 +276,31 @@ static uint8_t fBspInitLed(void) {
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  return 0;
+}
+
+/**
+ * @brief 
+ * 
+ * @return uint8_t 
+ */
+static uint8_t fBspReenumerateUsb(void) {
+
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
+
+  /* GPIO Port Clock Enable */
+  __HAL_RCC_GPIOB_CLK_ENABLE();
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, GPIO_PIN_SET);
+
+  /*Configure GPIO pin : PB15 */
+  GPIO_InitStruct.Pin = GPIO_PIN_15;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   return 0;
 }

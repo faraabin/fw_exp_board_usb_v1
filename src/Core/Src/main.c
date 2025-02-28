@@ -121,7 +121,6 @@ int main(void) {
   FARAABIN_DATABUS_SET_VALUE_(Databus.StreamDivideBy, 1);
   FARAABIN_DataBus_Init_(&Databus);
   FARAABIN_DataBus_Stop_(&Databus);
-  FARAABIN_DataBus_AttachVariable_F64_(&Databus, &Output);
   FARAABIN_DataBus_Enable_(&Databus);
 
   /* Initialize Faraabin event groups for sending type, amplitude, and frequency change events. */

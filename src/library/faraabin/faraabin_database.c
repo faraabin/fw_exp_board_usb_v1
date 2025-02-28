@@ -106,6 +106,8 @@ uint8_t fFaraabinDatabase_Init(void) {
 #endif
 
   FaraabinFlags.Status.Bitfield.McuReset = 1U;
+	
+	FaraabinFlags.Features.Bitfield.IsChronoTickUp = (CHRONO_TICK_COUNTERMODE == TICK_COUNTERMODE_UP);
   
   return 0U;
 }

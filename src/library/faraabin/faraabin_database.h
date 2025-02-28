@@ -56,7 +56,7 @@ typedef struct {
   
   uint32_t AllowSendDickBlocking : 1;  /*!< Reserved feature flag for future use. */
 	
-  uint32_t ReservedFlag09     : 1;  /*!< Reserved feature flag for future use. */
+  uint32_t IsChronoTickUp     : 1;  /*!< Reserved feature flag for future use. */
   uint32_t ReservedFlag10     : 1;  /*!< Reserved feature flag for future use. */
   uint32_t ReservedFlag11     : 1;  /*!< Reserved feature flag for future use. */
   uint32_t ReservedFlag12     : 1;  /*!< Reserved feature flag for future use. */

@@ -59,7 +59,7 @@ char* fFaraabin_GetFirmwareInfo(void) {
   //User can send custom text as info.
   //User can also send any information data in JSON format.
   //Faraabin setect & parse JSON and show key-value pair in pc application.
-	return "{\"Clock\":\"48MHz\"}";
+	return "{\"Clock\":\"16MHz\"}";
 }
 
 /**
