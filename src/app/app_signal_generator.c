@@ -113,10 +113,12 @@ float64_t fAppSignalGenerator_Run(bool enable, eWaveType type, float64_t frq, fl
 
         /* 'eWAVE_TYPE_PULSE_TRAIN' generates a pulse train that alternates between -Amplitude and +Amplitude at the given Frequency. */
         static int8_t pulseSign = 1;
-        if (fmod(t, (1.0 / frq)) >= 0.5) {
-          pulseSign = -1;
-        } else {
+        double period = (1.0 / frq);
+        
+        if (fmod(t, period) < (period / 2.0)) {
           pulseSign = 1;
+        } else {
+          pulseSign = -1;
         }
 
         output = amp * (float64_t)pulseSign;
@@ -126,7 +128,8 @@ float64_t fAppSignalGenerator_Run(bool enable, eWaveType type, float64_t frq, fl
       case eWAVE_TYPE_SAW_TOOTH: {
 
         /* 'eWAVE_TYPE_SAW_TOOTH' generates a sawtooth signal that ramps up from zero to Amplitude at the given Frequency. */
-        output = amp * fmod(t, (1.0 / frq));
+        double period = (1.0 / frq);
+        output = 2 * amp * (t / period - floor(t / period + 0.5));
         
         break;
       }
