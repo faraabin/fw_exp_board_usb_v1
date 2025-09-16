@@ -40,6 +40,12 @@ extern "C" {
 #include "chrono_config.h"
 
 /* Exported defines ----------------------------------------------------------*/
+/**
+ * @brief Define result type & value of chrono functions.
+ * 
+ */
+typedef uint8_t chrono_res_t;
+
 #define CHRONO_OK                     (0U)
 #define CHRONO_ERROR_TICK_TOP_ZERO    (1U)
 #define CHRONO_ERROR_TICK_TO_NS_ZERO  (2U)
@@ -114,12 +120,20 @@ extern "C" {
   * @brief Definition of bool_t for misra compliance.
   * 
   */
-#ifndef bool_t
+#ifndef bool_t__
+#define bool_t__
+
 typedef bool bool_t;
 
+#ifndef FALSE
 #define FALSE ((bool_t)0)
+#endif  //FALSE
+
+#ifndef TRUE
 #define TRUE  ((bool_t)1)
-#endif
+#endif  //TRUE
+
+#endif  //bool_t
 
 /**
   * @brief Definition of the Chrono object.
@@ -165,12 +179,12 @@ typedef struct {
 
 #if (CHRONO_TICK_TYPE == TICK_TYPE_VARIABLE)
 
-  uint8_t fChrono_Init(volatile tick_t *tickValue);
+  chrono_res_t fChrono_Init(volatile tick_t *tickValue);
 
 #elif (CHRONO_TICK_TYPE == TICK_TYPE_FUNCTION)
   
   typedef tick_t(*fpTick_t)(void);
-  uint8_t fChrono_Init(tick_t(*fpTickValue)(void));
+  chrono_res_t fChrono_Init(tick_t(*fpTickValue)(void));
 
 #else
 
@@ -313,8 +327,8 @@ void fChrono_DelayUs(timeUs_t delayUs);
  *  @{
  */
 
-tick_t fChrono_Start(sChrono * const me);
-tick_t fChrono_Stop(sChrono * const me);
+void fChrono_Start(sChrono * const me);
+void fChrono_Stop(sChrono * const me);
 
 /** @} */ //End of DELAY
 

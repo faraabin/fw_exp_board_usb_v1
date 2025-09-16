@@ -5,7 +5,7 @@
  ******************************************************************************
  * @attention
  *
- * Copyright (c) 2024 FaraabinCo.
+ * Copyright (c) 2012-2025 FaraabinCo.
  * All rights reserved.
  *
  * This software is licensed under terms that can be found in the LICENSE file
@@ -28,9 +28,9 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "faraabin_fobject_vartype.h"
+#include "faraabin_dependency.h"
 
-#include "faraabin_config.h"
+#include "faraabin_fobject_vartype.h"
 
 /* Exported defines ----------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
@@ -43,11 +43,11 @@ extern "C" {
  */
 #define FARAABIN_VAR_TYPE_PRIMITIVE_INIT_(typeName_) \
   do{\
-    __faraabin_vartype_##typeName_.Name = #typeName_;\
-    __faraabin_vartype_##typeName_.Filename = FILENAME__;\
+    __faraabin_vartype_##typeName_.Name = (char*)#typeName_;\
+    __faraabin_vartype_##typeName_.FileName = (char*)FILENAME__;\
     __faraabin_vartype_##typeName_.Path = "System";\
     __faraabin_vartype_##typeName_.Size = sizeof(typeName_);\
-    __faraabin_vartype_##typeName_.DataType = eVAR_DATA_TYPE_PRIMITIVE;\
+    __faraabin_vartype_##typeName_.DataType = VAR_DATA_TYPE_PRIMITIVE;\
     __faraabin_vartype_##typeName_.fpSendMember = NULL;\
     uint8_t ret = fFaraabinFobjectVarType_Init(&(__faraabin_vartype_##typeName_));\
     (void)ret;\
@@ -99,7 +99,7 @@ extern "C" {
  */
 #define FARAABIN_VAR_TYPE_DEF_STATIC_(typeName_)  \
   static sFaraabinFobjectVarType __faraabin_vartype_##typeName_;\
-  void __faraabin_vartype_member_func_##typeName_(uint32_t structPtr, uint8_t reqSeq)
+  static void __faraabin_vartype_member_func_##typeName_(uint32_t structPtr, uint8_t reqSeq)
 
 /**
  * @brief externs a global user-defined typedef.
@@ -118,11 +118,11 @@ extern "C" {
  */
 #define FARAABIN_VAR_TYPE_STRUCT_INIT_WP_(typeName_, path_) \
   do{\
-    __faraabin_vartype_##typeName_.Name = #typeName_;\
-    __faraabin_vartype_##typeName_.Filename = FILENAME__;\
+    __faraabin_vartype_##typeName_.Name = (char *)#typeName_;\
+    __faraabin_vartype_##typeName_.FileName = (char *)FILENAME__;\
     __faraabin_vartype_##typeName_.Path = (char*)path_;\
     __faraabin_vartype_##typeName_.Size = sizeof(typeName_);\
-    __faraabin_vartype_##typeName_.DataType = eVAR_DATA_TYPE_USER_DEFINED_STRUCT;\
+    __faraabin_vartype_##typeName_.DataType = VAR_DATA_TYPE_USER_DEFINED_STRUCT;\
     __faraabin_vartype_##typeName_.fpSendMember = __faraabin_vartype_member_func_##typeName_;\
     uint8_t ret = fFaraabinFobjectVarType_Init(&(__faraabin_vartype_##typeName_));\
     (void)ret;\
@@ -177,7 +177,7 @@ extern "C" {
  * @param memberArrayQty_ Number of elements if corresponding member is an array.
  */
 #define FARAABIN_VAR_TYPE_STRUCT_MEMBER_(memberType_, memberName_, memberArrayQty_) \
-  fFaraabinLinkSerializer_VarTypeStructMemberDict(\
+  fFaraabinLink_Serialize_VarTypeStructMemberDict(\
     structPtr,\
     (uint32_t)&(__faraabin_vartype_##memberType_),\
     (uint32_t)&(__faraabin_type_ptr->memberName_),\
@@ -196,11 +196,11 @@ extern "C" {
  */
 #define FARAABIN_VAR_TYPE_ENUM_INIT_WP_(typeName_, path_) \
   do{\
-    __faraabin_vartype_##typeName_.Name = #typeName_;\
-    __faraabin_vartype_##typeName_.Filename = FILENAME__;\
+    __faraabin_vartype_##typeName_.Name = (char*)#typeName_;\
+    __faraabin_vartype_##typeName_.FileName = (char*)FILENAME__;\
     __faraabin_vartype_##typeName_.Path = (char*)path_;\
     __faraabin_vartype_##typeName_.Size = sizeof(typeName_);\
-    __faraabin_vartype_##typeName_.DataType = eVAR_DATA_TYPE_USER_DEFINED_ENUM;\
+    __faraabin_vartype_##typeName_.DataType = VAR_DATA_TYPE_USER_DEFINED_ENUM;\
     __faraabin_vartype_##typeName_.fpSendMember = __faraabin_vartype_member_func_##typeName_;\
     uint8_t ret = fFaraabinFobjectVarType_Init(&(__faraabin_vartype_##typeName_));\
     (void)ret;\
@@ -252,7 +252,7 @@ extern "C" {
  * @param memberName_ Name of the enumeration member.
  */
 #define FARAABIN_VAR_TYPE_ENUM_MEMBER_(memberName_) \
-  fFaraabinLinkSerializer_VarTypeEnumMemberDict(\
+  fFaraabinLink_Serialize_VarTypeEnumMemberDict(\
     enumPtr,\
     (uint16_t)memberName_,\
     (#memberName_),\

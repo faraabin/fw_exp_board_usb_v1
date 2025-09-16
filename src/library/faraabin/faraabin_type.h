@@ -5,7 +5,7 @@
  ******************************************************************************
  * @attention
  *
- * Copyright (c) 2024 FaraabinCo.
+ * Copyright (c) 2012-2025 FaraabinCo.
  * All rights reserved.
  *
  * This software is licensed under terms that can be found in the LICENSE file
@@ -43,24 +43,39 @@ extern "C" {
 #endif
 
 /* Exported types ------------------------------------------------------------*/
-#ifndef float32_t
-    typedef float   float32_t;
+#ifndef float32_t__
+#define float32_t__
+typedef float   float32_t;
 #endif
 
-#ifndef float64_t
-    typedef double  float64_t;
+#ifndef float64_t__
+#define float64_t__
+typedef double  float64_t;
 #endif
 
-#ifndef bool_t
-    typedef bool    bool_t;
+#ifndef bool_t__
+#define bool_t__
+
+typedef bool    bool_t;
+
+#ifndef FALSE
+#define FALSE ((bool_t)0)
+#endif  //FALSE
+
+#ifndef TRUE
+#define TRUE  ((bool_t)1)
+#endif  //TRUE
+
 #endif
 
 /**
  * @brief Union for 2 bytes data for easy manipulation of the bytes.
  * 
+ * @note MISRA C:2012 Rule 19.2 deviation.
+ * 
  */
-#ifndef __uByte2
-#define __uByte2
+#ifndef uByte2__
+#define uByte2__
 typedef union {
   
   uint8_t Byte[2];
@@ -73,9 +88,11 @@ typedef union {
 /**
  * @brief Union for 4 bytes data for easy manipulation of the bytes.
  * 
+ * @note MISRA C:2012 Rule 19.2 deviation.
+ * 
  */
-#ifndef __uByte4
-#define __uByte4
+#ifndef uByte4__
+#define uByte4__
 typedef union {
   
   uint8_t Byte[4];
@@ -91,9 +108,11 @@ typedef union {
 /**
  * @brief Union for 8 bytes data for easy manipulation of the bytes.
  * 
+ * @note MISRA C:2012 Rule 19.2 deviation.
+ * 
  */
-#ifndef __uByte8
-#define __uByte8
+#ifndef uByte8__
+#define uByte8__
 typedef union {
   
   uint8_t Byte[8];

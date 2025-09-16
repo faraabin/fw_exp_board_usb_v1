@@ -5,7 +5,7 @@
   ******************************************************************************
  * @attention
  *
- * Copyright (c) 2024 FaraabinCo.
+ * Copyright (c) 2012-2025 FaraabinCo.
  * All rights reserved.
  *
  * This software is licensed under terms that can be found in the LICENSE file
@@ -28,9 +28,9 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "faraabin_fobject_container.h"
+#include "faraabin_dependency.h"
 
-#include "faraabin_config.h"
+#include "faraabin_fobject_container.h"
 
 /* Exported defines ----------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
@@ -101,7 +101,7 @@ extern "C" {
 #define FARAABIN_Container_Init_WithPath_(pContainer_, path_) \
   do {\
 		(pContainer_)->Path = (char*)path_;\
-    (pContainer_)->Filename = FILENAME__;\
+    (pContainer_)->FileName = FILENAME__;\
     uint8_t ret = fFaraabinFobjectContainer_Init(pContainer_);\
     (void)ret;\
   }while(0)

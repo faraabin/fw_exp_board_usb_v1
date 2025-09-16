@@ -5,7 +5,7 @@
  ******************************************************************************
  * @attention
  *
- * Copyright (c) 2024 FaraabinCo.
+ * Copyright (c) 2012-2025 FaraabinCo.
  * All rights reserved.
  *
  * This software is licensed under terms that can be found in the LICENSE file
@@ -28,8 +28,6 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "faraabin_internal_config.h"
-
 #include <stdint.h>
 #include <stdbool.h>
 #include <string.h>
@@ -47,35 +45,29 @@ extern "C" {
  * @brief Faraabin fobject types.
  * 
  */
-typedef enum {
-	
-	eFO_TYPE_MCU = 0,
-	eFO_TYPE_GENERAL,
-  eFO_TYPE_VAR,
-	eFO_TYPE_VAR_TYPE,
-  eFO_TYPE_EVENT_GROUP,
-	eFO_TYPE_FUNCTION,
-	eFO_TYPE_FUNCTION_GROUP,
-	eFO_TYPE_FUNCTION_GROUP_TYPE,
-  eFO_TYPE_DATABUS,
-	eFO_TYPE_PROCESS,
-	eFO_TYPE_CODE_BLOCK,
-	eFO_TYPE_STATE_MACHINE,
-	eFO_TYPE_CONTAINER,
-	
-	eFO_TYPE_FOBJECT_END,
-	
-	eFO_TYPE_FOBJECT,
-	
-	eFO_TYPE_STATE_MACHINE_STATE,
-	eFO_TYPE_STATE_MACHINE_TRANSITION,
-	eFO_TYPE_VAR_TYPE_ENUM_MEMBER,
-	eFO_TYPE_VAR_TYPE_STRUCT_MEMBER,
-	eFO_TYPE_ENTITY_NUMERICAL,
-	eFO_TYPE_ENTITY_EVENT,
-	eFO_TYPE_FUNCTION_GROUP_TYPE_MEMBER,
-  
-}eFaraabin_FobjectType;
+#define FO_TYPE_MCU                         ((uint8_t)0U)
+#define FO_TYPE_GENERAL                     ((uint8_t)1U)
+#define FO_TYPE_VAR                         ((uint8_t)2U)
+#define FO_TYPE_VAR_TYPE                    ((uint8_t)3U)
+#define FO_TYPE_EVENT_GROUP                 ((uint8_t)4U)
+#define FO_TYPE_FUNCTION                    ((uint8_t)5U)
+#define FO_TYPE_FUNCTION_GROUP              ((uint8_t)6U)
+#define FO_TYPE_FUNCTION_GROUP_TYPE         ((uint8_t)7U)
+#define FO_TYPE_DATABUS                     ((uint8_t)8U)
+#define FO_TYPE_PROCESS                     ((uint8_t)9U)
+#define FO_TYPE_CODE_BLOCK                  ((uint8_t)10U)
+#define FO_TYPE_STATE_MACHINE               ((uint8_t)11U)
+#define FO_TYPE_CONTAINER                   ((uint8_t)12U)
+#define FO_TYPE_FOBJECT_END                 ((uint8_t)13U)
+
+#define FO_TYPE_FOBJECT                     ((uint8_t)14U)
+#define FO_TYPE_STATE_MACHINE_STATE         ((uint8_t)15U)
+#define FO_TYPE_STATE_MACHINE_TRANSITION    ((uint8_t)16U)
+#define FO_TYPE_VAR_TYPE_ENUM_MEMBER        ((uint8_t)17U)
+#define FO_TYPE_VAR_TYPE_STRUCT_MEMBER      ((uint8_t)18U)
+#define FO_TYPE_ENTITY_NUMERICAL            ((uint8_t)19U)
+#define FO_TYPE_ENTITY_EVENT                ((uint8_t)20U)
+#define FO_TYPE_FUNCTION_GROUP_TYPE_MEMBER  ((uint8_t)21U)
 
 /* Exported constants --------------------------------------------------------*/
 /* Exported functions prototypes ---------------------------------------------*/

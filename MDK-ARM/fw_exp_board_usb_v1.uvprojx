@@ -10,7 +10,7 @@
       <TargetName>fw_exp_board_usb_v1</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060960::V5.06 update 7 for Certification (build 960)::.\ARM_Compiler_5.06u7</pCCUsed>
+      <pCCUsed>5060960::V5.06 update 7 (build 960)::.\ARM_Compiler_5.06u7</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
@@ -314,7 +314,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>1</Optim>
+            <Optim>4</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F103xB,ARM_MATH_CM3</Define>
               <Undefine></Undefine>
-              <IncludePath>..\src\Core\Inc;..\src\library\USB_DEVICE\App;..\src\library\USB_DEVICE\Target;..\src\Drivers\STM32F1xx_HAL_Driver\Inc;..\src\Drivers\STM32F1xx_HAL_Driver\Inc\Legacy;..\src\library\Middlewares\ST\STM32_USB_Device_Library\Core\Inc;..\src\library\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc;..\src\Drivers\CMSIS\Device\ST\STM32F1xx\Include;..\src\Drivers\CMSIS\Include;..\src\library\chrono;..\src\library\faraabin;..\src\Drivers\CMSIS\DSP\Include;..\src\bsp;..\src\app;..\src\faraabin_port</IncludePath>
+              <IncludePath>..\src\Core\Inc;..\src\library\USB_DEVICE\App;..\src\library\USB_DEVICE\Target;..\src\Drivers\STM32F1xx_HAL_Driver\Inc;..\src\Drivers\STM32F1xx_HAL_Driver\Inc\Legacy;..\src\library\Middlewares\ST\STM32_USB_Device_Library\Core\Inc;..\src\library\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc;..\src\Drivers\CMSIS\Device\ST\STM32F1xx\Include;..\src\Drivers\CMSIS\Include;..\src\library\chrono;..\src\library\faraabin;..\src\Drivers\CMSIS\DSP\Include;..\src\bsp;..\src\app;..\src\faraabin_port;..\src\chrono_port</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -598,71 +598,6 @@
               <FileName>faraabin.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\src\library\faraabin\faraabin.c</FilePath>
-            </File>
-            <File>
-              <FileName>faraabin_database.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\src\library\faraabin\faraabin_database.c</FilePath>
-            </File>
-            <File>
-              <FileName>faraabin_default_fobjects.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\src\library\faraabin\faraabin_default_fobjects.c</FilePath>
-            </File>
-            <File>
-              <FileName>faraabin_fobject_container.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\src\library\faraabin\faraabin_fobject_container.c</FilePath>
-            </File>
-            <File>
-              <FileName>faraabin_fobject_databus.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\src\library\faraabin\faraabin_fobject_databus.c</FilePath>
-            </File>
-            <File>
-              <FileName>faraabin_fobject_eventgroup.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\src\library\faraabin\faraabin_fobject_eventgroup.c</FilePath>
-            </File>
-            <File>
-              <FileName>faraabin_fobject_function.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\src\library\faraabin\faraabin_fobject_function.c</FilePath>
-            </File>
-            <File>
-              <FileName>faraabin_fobject_mcu.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\src\library\faraabin\faraabin_fobject_mcu.c</FilePath>
-            </File>
-            <File>
-              <FileName>faraabin_fobject_vartype.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\src\library\faraabin\faraabin_fobject_vartype.c</FilePath>
-            </File>
-            <File>
-              <FileName>faraabin_function_engine.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\src\library\faraabin\faraabin_function_engine.c</FilePath>
-            </File>
-            <File>
-              <FileName>faraabin_link_buffer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\src\library\faraabin\faraabin_link_buffer.c</FilePath>
-            </File>
-            <File>
-              <FileName>faraabin_link_deserializer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\src\library\faraabin\faraabin_link_deserializer.c</FilePath>
-            </File>
-            <File>
-              <FileName>faraabin_link_handler.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\src\library\faraabin\faraabin_link_handler.c</FilePath>
-            </File>
-            <File>
-              <FileName>faraabin_link_serializer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\src\library\faraabin\faraabin_link_serializer.c</FilePath>
             </File>
           </Files>
         </Group>

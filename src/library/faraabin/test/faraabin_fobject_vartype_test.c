@@ -85,7 +85,7 @@ static void RunTests(void);
 static void OneTimeSetup(void);
 static void OneTimeTeardown(void);
 
-static uint8_t VartypeTestAccessCallback(eFaraabinVarAccessType accessType, uint32_t varPtr, uint8_t *data, uint16_t size);
+static uint8_t VartypeTestAccessCallback(bool isWrite, uint32_t varPtr, uint8_t *data, uint16_t size);
 
 /* Variables -----------------------------------------------------------------*/
 
@@ -195,7 +195,7 @@ static void OneTimeTeardown(void) {
  * @param size 
  * @return uint8_t 
  */
-static uint8_t VartypeTestAccessCallback(eFaraabinVarAccessType accessType, uint32_t varPtr, uint8_t *data, uint16_t size) {
+static uint8_t VartypeTestAccessCallback(bool isWrite, uint32_t varPtr, uint8_t *data, uint16_t size) {
   return 0;
 }
 

@@ -5,7 +5,7 @@
  ******************************************************************************
  * @attention
  *
- * Copyright (c) 2024 FaraabinCo.
+ * Copyright (c) 2012-2025 FaraabinCo.
  * All rights reserved.
  *
  * This software is licensed under terms that can be found in the LICENSE file
@@ -28,10 +28,10 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "faraabin_link_serializer.h"
-	
-#include "faraabin_config.h"
+#include "faraabin_dependency.h"
 
+#include "faraabin_serializer.h"
+	
 /* Exported defines ----------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 /**
@@ -39,196 +39,196 @@ extern "C" {
  * 
  */
 #define Faraabin_EventSystem_End_(fobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_) \
-  fFaraabinLinkSerializer_SerializeEvent(fobjectPtr_, 0U, fobjectSeqPtr_, fobjectEnableState, eFB_COMMON_PROP_ID_EVENT_LIB, eFO_EVENT_SEVERITY_INFO, event_id_, NULL, 0, 0, false, NULL, NULL, true)
+  fFaraabinLink_Serialize_Event(fobjectPtr_, 0U, fobjectSeqPtr_, fobjectEnableState, FB_COMMON_PROP_ID_EVENT_LIB, FO_EVENT_SEVERITY_INFO, event_id_, NULL, 0, 0, false, NULL, NULL, true, false)
 
 /**
  * @brief Sends an End system event with extended pointer to Faraabin.
  * 
  */
 #define Faraabin_EventSystemExtended_End_(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_) \
-  fFaraabinLinkSerializer_SerializeEvent(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, eFB_COMMON_PROP_ID_EVENT_LIB, eFO_EVENT_SEVERITY_INFO, event_id_, NULL, 0, 0, false, NULL, NULL, true)
+  fFaraabinLink_Serialize_Event(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, FB_COMMON_PROP_ID_EVENT_LIB, FO_EVENT_SEVERITY_INFO, event_id_, NULL, 0, 0, false, NULL, NULL, true, false)
 
 /**
  * @brief Sends a Param End system event to Faraabin.
  * 
  */
 #define Faraabin_EventSystem_ParamEnd_(fobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, param_, param_size_) \
-  fFaraabinLinkSerializer_SerializeEvent(fobjectPtr_, 0U, fobjectSeqPtr_, fobjectEnableState, eFB_COMMON_PROP_ID_EVENT_LIB, eFO_EVENT_SEVERITY_INFO, event_id_, param_, param_size_, 0, false, NULL, NULL, true)
+  fFaraabinLink_Serialize_Event(fobjectPtr_, 0U, fobjectSeqPtr_, fobjectEnableState, FB_COMMON_PROP_ID_EVENT_LIB, FO_EVENT_SEVERITY_INFO, event_id_, param_, param_size_, 0, false, NULL, NULL, true, false)
 
 /**
  * @brief Sends a Param End system event with extended pointer to Faraabin.
  * 
  */
 #define Faraabin_EventSystemExtended_ParamEnd_(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, param_, param_size_) \
-  fFaraabinLinkSerializer_SerializeEvent(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, eFB_COMMON_PROP_ID_EVENT_LIB, eFO_EVENT_SEVERITY_INFO, event_id_, param_, param_size_, 0, false, NULL, NULL, true)
+  fFaraabinLink_Serialize_Event(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, FB_COMMON_PROP_ID_EVENT_LIB, FO_EVENT_SEVERITY_INFO, event_id_, param_, param_size_, 0, false, NULL, NULL, true, false)
 
 /**
  * @brief Sends a Response End system event to Faraabin.
  * 
  */
-#define Faraabin_EventSystem_EndResponse_(fobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, req_seq_) \
-  fFaraabinLinkSerializer_SerializeEvent(fobjectPtr_, 0U, fobjectSeqPtr_, fobjectEnableState, eFB_COMMON_PROP_ID_EVENT_LIB, eFO_EVENT_SEVERITY_INFO, event_id_, NULL, 0, req_seq_, true, NULL, NULL, true)
+#define Faraabin_EventSystem_EndResponse_(fobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, req_seq_, isCmdBuffer_) \
+  fFaraabinLink_Serialize_Event(fobjectPtr_, 0U, fobjectSeqPtr_, fobjectEnableState, FB_COMMON_PROP_ID_EVENT_LIB, FO_EVENT_SEVERITY_INFO, event_id_, NULL, 0, req_seq_, true, NULL, NULL, true, isCmdBuffer_)
 
 /**
  * @brief Sends a Response End system event with extended pointer to Faraabin.
  * 
  */
-#define Faraabin_EventSystemExtended_EndResponse_(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, req_seq_) \
-  fFaraabinLinkSerializer_SerializeEvent(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, eFB_COMMON_PROP_ID_EVENT_LIB, eFO_EVENT_SEVERITY_INFO, event_id_, NULL, 0, req_seq_, true, NULL, NULL, true)
+#define Faraabin_EventSystemExtended_EndResponse_(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, req_seq_, isCmdBuffer_) \
+  fFaraabinLink_Serialize_Event(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, FB_COMMON_PROP_ID_EVENT_LIB, FO_EVENT_SEVERITY_INFO, event_id_, NULL, 0, req_seq_, true, NULL, NULL, true, isCmdBuffer_)
 
 /**
  * @brief Sends a Response system event to Faraabin.
  * 
  */
-#define Faraabin_EventSystem_Response_(fobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, req_seq_) \
-  fFaraabinLinkSerializer_SerializeEvent(fobjectPtr_, 0U, fobjectSeqPtr_, fobjectEnableState, eFB_COMMON_PROP_ID_EVENT_LIB, eFO_EVENT_SEVERITY_INFO, event_id_, NULL, 0, req_seq_, true, NULL, NULL, false)
+#define Faraabin_EventSystem_Response_(fobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, req_seq_, isCmdBuffer_) \
+  fFaraabinLink_Serialize_Event(fobjectPtr_, 0U, fobjectSeqPtr_, fobjectEnableState, FB_COMMON_PROP_ID_EVENT_LIB, FO_EVENT_SEVERITY_INFO, event_id_, NULL, 0, req_seq_, true, NULL, NULL, false, isCmdBuffer_)
 
 /**
  * @brief Sends a Response system event with extended pointer to Faraabin.
  * 
  */
-#define Faraabin_EventSystemExtended_Response_(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, req_seq_) \
-  fFaraabinLinkSerializer_SerializeEvent(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, eFB_COMMON_PROP_ID_EVENT_LIB, eFO_EVENT_SEVERITY_INFO, event_id_, NULL, 0, req_seq_, true, NULL, NULL, false)
+#define Faraabin_EventSystemExtended_Response_(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, req_seq_, isCmdBuffer_) \
+  fFaraabinLink_Serialize_Event(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, FB_COMMON_PROP_ID_EVENT_LIB, FO_EVENT_SEVERITY_INFO, event_id_, NULL, 0, req_seq_, true, NULL, NULL, false, isCmdBuffer_)
 
 /**
  * @brief Sends a Param Response system event to Faraabin.
  * 
  */
-#define Faraabin_EventSystem_ParamResponse_(fobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, param_, param_size_, req_seq_) \
-  fFaraabinLinkSerializer_SerializeEvent(fobjectPtr_, 0U, fobjectSeqPtr_, fobjectEnableState, eFB_COMMON_PROP_ID_EVENT_LIB, eFO_EVENT_SEVERITY_INFO, event_id_, param_, param_size_, req_seq_, true, NULL, NULL, false)
+#define Faraabin_EventSystem_ParamResponse_(fobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, param_, param_size_, req_seq_, isCmdBuffer_) \
+  fFaraabinLink_Serialize_Event(fobjectPtr_, 0U, fobjectSeqPtr_, fobjectEnableState, FB_COMMON_PROP_ID_EVENT_LIB, FO_EVENT_SEVERITY_INFO, event_id_, param_, param_size_, req_seq_, true, NULL, NULL, false, isCmdBuffer_)
 
 /**
  * @brief Sends a Param Response system event with extended pointer to Faraabin.
  * 
  */
-#define Faraabin_EventSystemExtended_ParamResponse_(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, param_, param_size_, req_seq_) \
-  fFaraabinLinkSerializer_SerializeEvent(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, eFB_COMMON_PROP_ID_EVENT_LIB, eFO_EVENT_SEVERITY_INFO, event_id_, param_, param_size_, req_seq_, true, NULL, NULL, false)
+#define Faraabin_EventSystemExtended_ParamResponse_(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, param_, param_size_, req_seq_, isCmdBuffer_) \
+  fFaraabinLink_Serialize_Event(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, FB_COMMON_PROP_ID_EVENT_LIB, FO_EVENT_SEVERITY_INFO, event_id_, param_, param_size_, req_seq_, true, NULL, NULL, false, isCmdBuffer_)
 
 /**
  * @brief Sends a Param Response End system event to Faraabin.
  * 
  */
-#define Faraabin_EventSystem_ParamEndResponse_(fobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, param_, param_size_, req_seq_) \
-  fFaraabinLinkSerializer_SerializeEvent(fobjectPtr_, 0U, fobjectSeqPtr_, fobjectEnableState, eFB_COMMON_PROP_ID_EVENT_LIB, eFO_EVENT_SEVERITY_INFO, event_id_, param_, param_size_, req_seq_, true, NULL, NULL, true)
+#define Faraabin_EventSystem_ParamEndResponse_(fobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, param_, param_size_, req_seq_, isCmdBuffer_) \
+  fFaraabinLink_Serialize_Event(fobjectPtr_, 0U, fobjectSeqPtr_, fobjectEnableState, FB_COMMON_PROP_ID_EVENT_LIB, FO_EVENT_SEVERITY_INFO, event_id_, param_, param_size_, req_seq_, true, NULL, NULL, true, isCmdBuffer_)
 
 /**
  * @brief Sends a Param Response End system event with extended pointer to Faraabin.
  * 
  */
-#define Faraabin_EventSystemExtended_ParamEndResponse_(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, param_, param_size_, req_seq_) \
-  fFaraabinLinkSerializer_SerializeEvent(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, eFB_COMMON_PROP_ID_EVENT_LIB, eFO_EVENT_SEVERITY_INFO, event_id_, param_, param_size_, req_seq_, true, NULL, NULL, true)
+#define Faraabin_EventSystemExtended_ParamEndResponse_(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, param_, param_size_, req_seq_, isCmdBuffer_) \
+  fFaraabinLink_Serialize_Event(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, FB_COMMON_PROP_ID_EVENT_LIB, FO_EVENT_SEVERITY_INFO, event_id_, param_, param_size_, req_seq_, true, NULL, NULL, true, isCmdBuffer_)
 
 /**
  * @brief Sends a Response with payload system event to Faraabin.
  * 
  */
-#define Faraabin_EventSystem_ResponsePayload_(fobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, generatepayloadFunc_, generatePayloadParam_, req_seq_, isEnd_) \
-  fFaraabinLinkSerializer_SerializeEvent(fobjectPtr_, 0U, fobjectSeqPtr_, fobjectEnableState, eFB_COMMON_PROP_ID_EVENT_LIB, eFO_EVENT_SEVERITY_INFO, event_id_, NULL, 0, req_seq_, true, generatepayloadFunc_, generatePayloadParam_, isEnd_)
+#define Faraabin_EventSystem_ResponsePayload_(fobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, generatepayloadFunc_, generatePayloadParam_, req_seq_, isEnd_, isCmdBuffer_) \
+  fFaraabinLink_Serialize_Event(fobjectPtr_, 0U, fobjectSeqPtr_, fobjectEnableState, FB_COMMON_PROP_ID_EVENT_LIB, FO_EVENT_SEVERITY_INFO, event_id_, NULL, 0, req_seq_, true, generatepayloadFunc_, generatePayloadParam_, isEnd_, isCmdBuffer_)
 
 /**
  * @brief Sends a Response with payload system event with extended pointer to Faraabin.
  * 
  */
-#define Faraabin_EventSystemExtended_ResponsePayload_(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, generatepayloadFunc_, generatePayloadParam_, req_seq_, isEnd_) \
-  fFaraabinLinkSerializer_SerializeEvent(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, eFB_COMMON_PROP_ID_EVENT_LIB, eFO_EVENT_SEVERITY_INFO, event_id_, NULL, 0, req_seq_, true, generatepayloadFunc_, generatePayloadParam_, isEnd_)
+#define Faraabin_EventSystemExtended_ResponsePayload_(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, generatepayloadFunc_, generatePayloadParam_, req_seq_, isEnd_, isCmdBuffer_) \
+  fFaraabinLink_Serialize_Event(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, FB_COMMON_PROP_ID_EVENT_LIB, FO_EVENT_SEVERITY_INFO, event_id_, NULL, 0, req_seq_, true, generatepayloadFunc_, generatePayloadParam_, isEnd_, isCmdBuffer_)
 
 /**
  * @brief Sends an Exception End system event to Faraabin.
  * 
  */
 #define Faraabin_EventSystemException_End_(fobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_) \
-  fFaraabinLinkSerializer_SerializeEvent(fobjectPtr_, 0U, fobjectSeqPtr_, fobjectEnableState, eFB_COMMON_PROP_ID_EVENT_LIB_EXCEPTION, eFO_EVENT_SEVERITY_INFO, event_id_, NULL, 0, 0, false, NULL, NULL, true)
+  fFaraabinLink_Serialize_Event(fobjectPtr_, 0U, fobjectSeqPtr_, fobjectEnableState, FB_COMMON_PROP_ID_EVENT_LIB_EXCEPTION, FO_EVENT_SEVERITY_INFO, event_id_, NULL, 0, 0, false, NULL, NULL, true, false)
 
 /**
  * @brief Sends an Exception End system event with extended pointer to Faraabin.
  * 
  */
 #define Faraabin_EventSystemExceptionExtended_End_(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_) \
-  fFaraabinLinkSerializer_SerializeEvent(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, eFB_COMMON_PROP_ID_EVENT_LIB_EXCEPTION, eFO_EVENT_SEVERITY_INFO, event_id_, NULL, 0, 0, false, NULL, NULL, true)
+  fFaraabinLink_Serialize_Event(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, FB_COMMON_PROP_ID_EVENT_LIB_EXCEPTION, FO_EVENT_SEVERITY_INFO, event_id_, NULL, 0, 0, false, NULL, NULL, true, false)
 
 /**
  * @brief Sends an Exception End with param system event to Faraabin.
  * 
  */
 #define Faraabin_EventSystemException_ParamEnd_(fobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, param_, param_size_) \
-  fFaraabinLinkSerializer_SerializeEvent(fobjectPtr_, 0U, fobjectSeqPtr_, fobjectEnableState, eFB_COMMON_PROP_ID_EVENT_LIB_EXCEPTION, eFO_EVENT_SEVERITY_INFO, event_id_, param_, param_size_, 0, false, NULL, NULL, true)
+  fFaraabinLink_Serialize_Event(fobjectPtr_, 0U, fobjectSeqPtr_, fobjectEnableState, FB_COMMON_PROP_ID_EVENT_LIB_EXCEPTION, FO_EVENT_SEVERITY_INFO, event_id_, param_, param_size_, 0, false, NULL, NULL, true, false)
 
 /**
  * @brief Sends an Exception End with param system event with extended pointer to Faraabin.
  * 
  */
 #define Faraabin_EventSystemExceptionExtended_ParamEnd_(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, param_, param_size_) \
-  fFaraabinLinkSerializer_SerializeEvent(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, eFB_COMMON_PROP_ID_EVENT_LIB_EXCEPTION, eFO_EVENT_SEVERITY_INFO, event_id_, param_, param_size_, 0, false, NULL, NULL, true)
+  fFaraabinLink_Serialize_Event(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, FB_COMMON_PROP_ID_EVENT_LIB_EXCEPTION, FO_EVENT_SEVERITY_INFO, event_id_, param_, param_size_, 0, false, NULL, NULL, true, false)
 
 /**
  * @brief Sends an Exception Response End system event to Faraabin.
  * 
  */
-#define Faraabin_EventSystemException_EndResponse_(fobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, req_seq_) \
-  fFaraabinLinkSerializer_SerializeEvent(fobjectPtr_, 0U, fobjectSeqPtr_, fobjectEnableState, eFB_COMMON_PROP_ID_EVENT_LIB_EXCEPTION, eFO_EVENT_SEVERITY_INFO, event_id_, NULL, 0, req_seq_, true, NULL, NULL, true)
+#define Faraabin_EventSystemException_EndResponse_(fobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, req_seq_, isCmdBuffer_) \
+  fFaraabinLink_Serialize_Event(fobjectPtr_, 0U, fobjectSeqPtr_, fobjectEnableState, FB_COMMON_PROP_ID_EVENT_LIB_EXCEPTION, FO_EVENT_SEVERITY_INFO, event_id_, NULL, 0, req_seq_, true, NULL, NULL, true, isCmdBuffer_)
 
 /**
  * @brief Sends an Exception Response End system event with extended pointer to Faraabin.
  * 
  */
-#define Faraabin_EventSystemExceptionExtended_EndResponse_(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, req_seq_) \
-  fFaraabinLinkSerializer_SerializeEvent(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, eFB_COMMON_PROP_ID_EVENT_LIB_EXCEPTION, eFO_EVENT_SEVERITY_INFO, event_id_, NULL, 0, req_seq_, true, NULL, NULL, true)
+#define Faraabin_EventSystemExceptionExtended_EndResponse_(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, req_seq_, isCmdBuffer_) \
+  fFaraabinLink_Serialize_Event(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, FB_COMMON_PROP_ID_EVENT_LIB_EXCEPTION, FO_EVENT_SEVERITY_INFO, event_id_, NULL, 0, req_seq_, true, NULL, NULL, true, isCmdBuffer_)
 
 /**
  * @brief Sends an Exception Response system event to Faraabin.
  * 
  */
-#define Faraabin_EventSystemException_Response_(fobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, req_seq_) \
-  fFaraabinLinkSerializer_SerializeEvent(fobjectPtr_, 0U, fobjectSeqPtr_, fobjectEnableState, eFB_COMMON_PROP_ID_EVENT_LIB_EXCEPTION, eFO_EVENT_SEVERITY_INFO, event_id_, NULL, 0, req_seq_, true, NULL, NULL, false)
+#define Faraabin_EventSystemException_Response_(fobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, req_seq_, isCmdBuffer_) \
+  fFaraabinLink_Serialize_Event(fobjectPtr_, 0U, fobjectSeqPtr_, fobjectEnableState, FB_COMMON_PROP_ID_EVENT_LIB_EXCEPTION, FO_EVENT_SEVERITY_INFO, event_id_, NULL, 0, req_seq_, true, NULL, NULL, false, isCmdBuffer_)
 
 /**
  * @brief Sends an Exception Response system event with extended pointer to Faraabin.
  * 
  */
-#define Faraabin_EventSystemExceptionExtended_Response_(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, req_seq_) \
-  fFaraabinLinkSerializer_SerializeEvent(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, eFB_COMMON_PROP_ID_EVENT_LIB_EXCEPTION, eFO_EVENT_SEVERITY_INFO, event_id_, NULL, 0, req_seq_, true, NULL, NULL, false)
+#define Faraabin_EventSystemExceptionExtended_Response_(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, req_seq_, isCmdBuffer_) \
+  fFaraabinLink_Serialize_Event(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, FB_COMMON_PROP_ID_EVENT_LIB_EXCEPTION, FO_EVENT_SEVERITY_INFO, event_id_, NULL, 0, req_seq_, true, NULL, NULL, false, isCmdBuffer_)
 
 /**
  * @brief Sends an Exception Response with param system event to Faraabin.
  * 
  */
-#define Faraabin_EventSystemException_ParamResponse_(fobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, param_, param_size_, req_seq_) \
-  fFaraabinLinkSerializer_SerializeEvent(fobjectPtr_, 0U, fobjectSeqPtr_, fobjectEnableState, eFB_COMMON_PROP_ID_EVENT_LIB_EXCEPTION, eFO_EVENT_SEVERITY_INFO, event_id_, param_, param_size_, req_seq_, true, NULL, NULL, false)
+#define Faraabin_EventSystemException_ParamResponse_(fobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, param_, param_size_, req_seq_, isCmdBuffer_) \
+  fFaraabinLink_Serialize_Event(fobjectPtr_, 0U, fobjectSeqPtr_, fobjectEnableState, FB_COMMON_PROP_ID_EVENT_LIB_EXCEPTION, FO_EVENT_SEVERITY_INFO, event_id_, param_, param_size_, req_seq_, true, NULL, NULL, false, isCmdBuffer_)
 
 /**
  * @brief Sends an Exception Response with param system event with extended pointer to Faraabin.
  * 
  */
-#define Faraabin_EventSystemExceptionExtended_ParamResponse_(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, param_, param_size_, req_seq_) \
-  fFaraabinLinkSerializer_SerializeEvent(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, eFB_COMMON_PROP_ID_EVENT_LIB_EXCEPTION, eFO_EVENT_SEVERITY_INFO, event_id_, param_, param_size_, req_seq_, true, NULL, NULL, false)
+#define Faraabin_EventSystemExceptionExtended_ParamResponse_(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, param_, param_size_, req_seq_, isCmdBuffer_) \
+  fFaraabinLink_Serialize_Event(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, FB_COMMON_PROP_ID_EVENT_LIB_EXCEPTION, FO_EVENT_SEVERITY_INFO, event_id_, param_, param_size_, req_seq_, true, NULL, NULL, false, isCmdBuffer_)
 
 /**
  * @brief Sends an Exception Response End with param system event to Faraabin.
  * 
  */
-#define Faraabin_EventSystemException_ParamEndResponse_(fobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, param_, param_size_, req_seq_) \
-  fFaraabinLinkSerializer_SerializeEvent(fobjectPtr_, 0U, fobjectSeqPtr_, fobjectEnableState, eFB_COMMON_PROP_ID_EVENT_LIB_EXCEPTION, eFO_EVENT_SEVERITY_INFO, event_id_, param_, param_size_, req_seq_, true, NULL, NULL, true)
+#define Faraabin_EventSystemException_ParamEndResponse_(fobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, param_, param_size_, req_seq_, isCmdBuffer_) \
+  fFaraabinLink_Serialize_Event(fobjectPtr_, 0U, fobjectSeqPtr_, fobjectEnableState, FB_COMMON_PROP_ID_EVENT_LIB_EXCEPTION, FO_EVENT_SEVERITY_INFO, event_id_, param_, param_size_, req_seq_, true, NULL, NULL, true, isCmdBuffer_)
 
 /**
  * @brief Sends an Exception Response End with param system event with extended pointer to Faraabin.
  * 
  */
-#define Faraabin_EventSystemExceptionExtended_ParamEndResponse_(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, param_, param_size_, req_seq_) \
-  fFaraabinLinkSerializer_SerializeEvent(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, eFB_COMMON_PROP_ID_EVENT_LIB_EXCEPTION, eFO_EVENT_SEVERITY_INFO, event_id_, param_, param_size_, req_seq_, true, NULL, NULL, true)
+#define Faraabin_EventSystemExceptionExtended_ParamEndResponse_(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, param_, param_size_, req_seq_, isCmdBuffer_) \
+  fFaraabinLink_Serialize_Event(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, FB_COMMON_PROP_ID_EVENT_LIB_EXCEPTION, FO_EVENT_SEVERITY_INFO, event_id_, param_, param_size_, req_seq_, true, NULL, NULL, true, isCmdBuffer_)
 
 /**
  * @brief Sends an Exception Response with payload system event to Faraabin.
  * 
  */
-#define Faraabin_EventSystemException_ResponsePayload_(fobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, generatepayloadFunc_, generatePayloadParam_, req_seq_, isEnd_) \
-  fFaraabinLinkSerializer_SerializeEvent(fobjectPtr_, 0U, fobjectSeqPtr_, fobjectEnableState, eFB_COMMON_PROP_ID_EVENT_LIB_EXCEPTION, eFO_EVENT_SEVERITY_INFO, event_id_, NULL, 0, req_seq_, true, generatepayloadFunc_, generatePayloadParam_, isEnd_)
+#define Faraabin_EventSystemException_ResponsePayload_(fobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, generatepayloadFunc_, generatePayloadParam_, req_seq_, isEnd_, isCmdBuffer_) \
+  fFaraabinLink_Serialize_Event(fobjectPtr_, 0U, fobjectSeqPtr_, fobjectEnableState, FB_COMMON_PROP_ID_EVENT_LIB_EXCEPTION, FO_EVENT_SEVERITY_INFO, event_id_, NULL, 0, req_seq_, true, generatepayloadFunc_, generatePayloadParam_, isEnd_, isCmdBuffer_)
 
 /**
  * @brief Sends an Exception Response with payload system event with extended pointer to Faraabin.
  * 
  */
-#define Faraabin_EventSystemExceptionExtended_ResponsePayload_(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, generatepayloadFunc_, generatePayloadParam_, req_seq_, isEnd_) \
-  fFaraabinLinkSerializer_SerializeEvent(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, eFB_COMMON_PROP_ID_EVENT_LIB_EXCEPTION, eFO_EVENT_SEVERITY_INFO, event_id_, NULL, 0, req_seq_, true, generatepayloadFunc_, generatePayloadParam_, isEnd_)  
+#define Faraabin_EventSystemExceptionExtended_ResponsePayload_(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, event_id_, generatepayloadFunc_, generatePayloadParam_, req_seq_, isEnd_, isCmdBuffer_) \
+  fFaraabinLink_Serialize_Event(fobjectPtr_, extendedFobjectPtr_, fobjectSeqPtr_, fobjectEnableState, FB_COMMON_PROP_ID_EVENT_LIB_EXCEPTION, FO_EVENT_SEVERITY_INFO, event_id_, NULL, 0, req_seq_, true, generatepayloadFunc_, generatePayloadParam_, isEnd_, isCmdBuffer_)
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

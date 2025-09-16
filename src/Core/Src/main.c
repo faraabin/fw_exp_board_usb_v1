@@ -54,6 +54,7 @@
 #define RUNTIME_PERIOD_US (1000)
 
 /* Private macro -------------------------------------------------------------*/
+#define sizeOfArray_(_array)  (sizeof(_array) / sizeof(_array[0]))
 /* Private typedef -----------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 static eWaveType WaveType;  /*!< WaveType Type of the currently generated wave */
@@ -67,6 +68,8 @@ static uint32_t Interval;   /*!< Interval Holds the interval of the running appl
 
 static sChrono Chrono;      /*!< Chrono Chrono object used for controlling the application's execution based on RUNTIME_PERIOD_US */
 
+sFaraabinFobjectDataBus_Channel DatabusBufferChannels[5]; /* Buffer for "Databus" pBufferChannels */
+
 FARAABIN_CONTAINER_DEF_STATIC_(Container);        /*!< Container Faraabin container for introducing user variables to Faraabin */
 FARAABIN_DATABUS_DEF_STATIC_(Databus);            /*!< Databus Faraabin databus for creating a data stream between MCU and PC to send data periodically */
 FARAABIN_EVENT_GROUP_DEF_STATIC_(TypeEventGroup); /*!< TypeEventGroup Faraabin event group for sending wave type change events */
@@ -75,8 +78,6 @@ FARAABIN_EVENT_GROUP_DEF_STATIC_(AmplEventGroup); /*!< AmplEventGroup Faraabin e
 FARAABIN_VAR_TYPE_DEF_STATIC_(eWaveType);         /*!< eWaveType Faraabin variable type object for introducing 'eWaveType' typedef to Faraabin */
 
 /* Private function prototypes -----------------------------------------------*/
-static void FaraabinReceiveFrameHandler(uint8_t *data, uint16_t size);
-
 /* Variables -----------------------------------------------------------------*/
 
 /*
@@ -102,8 +103,6 @@ int main(void) {
   fBsp_Init();
   
   /* Faraabin Initialization --------------------------------------------------*/
-  /* Register USB receive callback to a function that handles Faraabin frames. */
-  fBsp_VCP_RegisterFrameReceivedCallback(FaraabinReceiveFrameHandler);
   /* Initialize Faraabin as per user configurations in faraabin_config.h and user interface in faraabin_port.c */
   if (fFaraabin_Init() != FARAABIN_OK) {
     Error_Handler();
@@ -117,7 +116,8 @@ int main(void) {
 
   /* Initialize Faraabin databus with 5 channels and a division factor of 1. */
   /* The databus will start in stream mode while the 'Output' variable is already attached to it. */
-  FARAABIN_DATABUS_SET_VALUE_(Databus.ChannelQty, 5);
+  FARAABIN_DATABUS_SET_VALUE_(Databus.pBufferChannels, DatabusBufferChannels);
+  FARAABIN_DATABUS_SET_VALUE_(Databus.ChannelQty, sizeOfArray_(DatabusBufferChannels));
   FARAABIN_DATABUS_SET_VALUE_(Databus.StreamDivideBy, 1);
   FARAABIN_DataBus_Init_(&Databus);
   FARAABIN_DataBus_Stop_(&Databus);
@@ -242,21 +242,6 @@ FARAABIN_CONTAINER_FUNC_(Container) {
   FARAABIN_FUNCTION_GROUP_DICT_(LedFunction);
 
   FARAABIN_CONTAINER_FUNC_END_;
-}
-
-/**
-  * @brief Passes received frame from the PC to fFaraabin_CharReceived() function for parsing the frame.
-  * @param data Pointer to the received frame buffer
-  * @param size Size of the received frame
-  * @retval None
-  */
-static void FaraabinReceiveFrameHandler(uint8_t *data, uint16_t size) {
-  
-  for (uint16_t i = 0; i < size; i++) {
-    
-    fFaraabin_CharReceived(data[i]);
-    
-  }
 }
 
 /************************ © COPYRIGHT FaraabinCo *****END OF FILE****/

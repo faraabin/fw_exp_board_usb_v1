@@ -5,7 +5,7 @@
  ******************************************************************************
  * @attention
  *
- * Copyright (c) 2024 FaraabinCo.
+ * Copyright (c) 2012-2025 FaraabinCo.
  * All rights reserved.
  *
  * This software is licensed under terms that can be found in the LICENSE file
@@ -28,9 +28,9 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
+#include "faraabin_dependency.h"
+
 #include "faraabin_default_fobjects.h"
-	
-#include "faraabin_config.h"
 
 /* Exported defines ----------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/

@@ -62,9 +62,8 @@ extern "C" {
   *       To enable a feature, uncomment corresponding FB_FEATURE_FLAG.
   * @{
   */
-//#define FB_FEATURE_FLAG_MCU_CLI                /*!< This feature ebables you to create FunctionGroups and run your functions in faraabin UI. */
-#define FB_FEATURE_FLAG_BUFFER_OVF             /*!< This features enables the buffer overflow notification. Activating this feature can be time consuming. */
-//#define FB_FEATURE_FLAG_ALLOW_SEND_DICT_BLOCKING /*!< This features enables that dictionary send by blocking fFaraabin_Run() function. */
+#define FB_FEATURE_FLAG_MCU_CLI                     /*!< This feature ebables you to create FunctionGroups and run your functions in faraabin UI. */
+//#define FB_FEATURE_FLAG_ALLOW_SEND_DICT_BLOCKING  /*!< This features enables that dictionary send by blocking fFaraabin_Run() function. */
 
 /** @} */ //End of FB_FEATURE_FLAG
 
@@ -144,16 +143,6 @@ extern "C" {
 /** @} */ //End of FARAABIN_CONFIG
 
 /* Exported macro ------------------------------------------------------------*/
-/**
- * @brief Disables all interrupts in embedded software.
- * 
- * @note To overcome mixing of the faraabin data that is being generated in different processes(IRQ or Task), faraabin often needs 
- *       to disable all interrupts and reenable them after generating the frame.
- * 
- */
-#define FB_PORT_DISABLE_IRQ		__disable_irq()   /*!< Disables all interrupts in embedded software. */
-#define FB_PORT_ENABLE_IRQ		__enable_irq()    /*!< Eanbles configured interrupts in embedded software. */
-
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 /* Exported functions prototypes ---------------------------------------------*/

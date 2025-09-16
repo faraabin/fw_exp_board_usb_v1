@@ -5,7 +5,7 @@
  ******************************************************************************
  * @attention
  *
- * Copyright (c) 2024 FaraabinCo.
+ * Copyright (c) 2012-2025 FaraabinCo.
  * All rights reserved.
  *
  * This software is licensed under terms that can be found in the LICENSE file
@@ -28,10 +28,9 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "faraabin_fobject_function.h"
+#include "faraabin_dependency.h"
 
-#include "faraabin_config.h"
-#include "add_on/runtime_scaler/runtime_scaler.h"
+#include "faraabin_fobject_function.h"
 
 /* Exported defines ----------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
@@ -63,8 +62,9 @@ extern "C" {
 #define FARAABIN_FUNCTION_GROUP_(groupName_, groupHelp_) \
   static void groupName##_##_func(uint32_t fobjectPtr, uint8_t reqSeq);\
   sFaraabinFobjectFunctionGroupType groupName_ = {\
-    ._type = eFO_TYPE_FUNCTION_GROUP_TYPE,\
+    ._type = FO_TYPE_FUNCTION_GROUP_TYPE,\
     .Name = #groupName_,\
+    .Path = "type",\
     .Seq = 0,\
     .fpSendMember = groupName##_##_func,\
     .Help = groupHelp_\
@@ -78,7 +78,7 @@ extern "C" {
  * @param functionName_ Name of function to add to the group.
  */
 #define FARAABIN_FUNCTION_GROUP_ADD_(groupName_, functionName_) \
-  fFaraabinLinkSerializer_FunctionGroupTypeMemberDict((uint32_t)&(groupName_), &(groupName_##_##functionName_##_obj), reqSeq)
+  fFaraabinLink_Serialize_FnGrpTypeMemberDict((uint32_t)&(groupName_), &(groupName_##_##functionName_##_obj), reqSeq)
 
 /**
  * @brief Initializes function group.
@@ -87,7 +87,7 @@ extern "C" {
  */
 #define FARAABIN_FunctionGroupType_Init_(pFunctionGroup_) \
   do{\
-    (pFunctionGroup_)->Filename = FILENAME__;\
+    (pFunctionGroup_)->FileName = (char *)FILENAME__;\
     uint8_t ret = fFaraabinFobjectFunctionGroupType_Init(pFunctionGroup_);\
     (void)ret;\
   }while(0)
@@ -100,7 +100,7 @@ extern "C" {
  * @param path_ Path of the function group.
  */
 #define FARAABIN_FUNCTION_GROUP_OBJECT_DICT_WP_(groupName_, objectName_, path_) \
-  fFaraabinLinkSerializer_FunctionGroupDict(\
+  fFaraabinLink_Serialize_FnGrpDict(\
   path_,\
   FILENAME__,\
   #objectName_,\
@@ -123,10 +123,10 @@ extern "C" {
  * @param path_ Path of the function group.
  */
 #define FARAABIN_FUNCTION_GROUP_DICT_WP_(groupName_, path_) \
-  fFaraabinLinkSerializer_FunctionGroupDict(\
+  fFaraabinLink_Serialize_FnGrpDict(\
   path_,\
   FILENAME__,\
-  "NoName",\
+  #groupName_,\
   0,\
   (uint32_t)&groupName_,\
   reqSeq)
@@ -148,7 +148,7 @@ extern "C" {
 #define FARAABIN_FUNCTION_(groupName_, functionName_, functionHelp_)  \
   static uint8_t groupName##_##functionName_##_func(uint32_t objectPtr, char *param, bool isFirstRun);\
   static sFaraabinFobjectFunction groupName_##_##functionName_##_obj = {\
-    ._type = eFO_TYPE_FUNCTION,\
+    ._type = FO_TYPE_FUNCTION,\
     .Name = #functionName_,\
     .Help = functionHelp_,\
     .Seq = 0,\

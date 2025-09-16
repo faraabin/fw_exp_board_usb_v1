@@ -5,7 +5,7 @@
  ******************************************************************************
  * @attention
  *
- * Copyright (c) 2024 FaraabinCo.
+ * Copyright (c) 2012-2025 FaraabinCo.
  * All rights reserved.
  *
  * This software is licensed under terms that can be found in the LICENSE file
@@ -28,9 +28,9 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "faraabin_fobject_eventgroup.h"
+#include "faraabin_dependency.h"
 
-#include "faraabin_config.h"
+#include "faraabin_fobject_eventgroup.h"
 
 /* Exported defines ----------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
@@ -78,8 +78,8 @@ sFaraabinFobjectEventGroup egName_ = {\
  */
 #define FARAABIN_EventGroup_Init_WithPath_(pEg_, path_) \
   do{\
-    (pEg_)->Path = path_;\
-    (pEg_)->Filename = FILENAME__;\
+    (pEg_)->Path = (char *)path_;\
+    (pEg_)->FileName = (char *)FILENAME__;\
     uint8_t ret = fFaraabinFobjectEventGroup_Init(pEg_);\
     (void)ret;\
   }while(0)
@@ -119,7 +119,7 @@ sFaraabinFobjectEventGroup egName_ = {\
  * @param pEg_ Pointer to the event group.
  */
 #define FARAABIN_PrintfTo_(pEg_, ...) \
-fFaraabinLinkSerializer_SerializeEventPrintf((uint32_t)pEg_, 0, &((pEg_)->Seq), (pEg_)->Enable, eFB_COMMON_PROP_ID_EVENT_USER_DATA, eFO_EVENT_SEVERITY_INFO, __VA_ARGS__)
+fFaraabinLink_Serialize_EventPrintf((uint32_t)pEg_, 0, &((pEg_)->Seq), (pEg_)->Enable, FB_COMMON_PROP_ID_EVENT_USER_DATA, FO_EVENT_SEVERITY_INFO, __VA_ARGS__)
 
 /**
  * @brief Generates a string type event with severity of WARNING and sends it to the specified event group.
@@ -129,7 +129,7 @@ fFaraabinLinkSerializer_SerializeEventPrintf((uint32_t)pEg_, 0, &((pEg_)->Seq), 
  * @param pEg_ Pointer to the event group.
  */
 #define FARAABIN_PrintfWarningTo_(pEg_, ...) \
-fFaraabinLinkSerializer_SerializeEventPrintf((uint32_t)pEg_, 0, &((pEg_)->Seq), (pEg_)->Enable, eFB_COMMON_PROP_ID_EVENT_USER_DATA, eFO_EVENT_SEVERITY_WARNING, __VA_ARGS__)
+fFaraabinLink_Serialize_EventPrintf((uint32_t)pEg_, 0, &((pEg_)->Seq), (pEg_)->Enable, FB_COMMON_PROP_ID_EVENT_USER_DATA, FO_EVENT_SEVERITY_WARNING, __VA_ARGS__)
 
 /**
  * @brief Generates a string type event with severity of ERROR and sends it to the specified event group.
@@ -139,7 +139,7 @@ fFaraabinLinkSerializer_SerializeEventPrintf((uint32_t)pEg_, 0, &((pEg_)->Seq), 
  * @param pEg_ Pointer to the event group.
  */
 #define FARAABIN_PrintfErrorTo_(pEg_, ...) \
-fFaraabinLinkSerializer_SerializeEventPrintf((uint32_t)pEg_, 0, &((pEg_)->Seq), (pEg_)->Enable, eFB_COMMON_PROP_ID_EVENT_USER_DATA, eFO_EVENT_SEVERITY_ERROR, __VA_ARGS__)
+fFaraabinLink_Serialize_EventPrintf((uint32_t)pEg_, 0, &((pEg_)->Seq), (pEg_)->Enable, FB_COMMON_PROP_ID_EVENT_USER_DATA, FO_EVENT_SEVERITY_ERROR, __VA_ARGS__)
 
 /**
  * @brief Generates a string type event and sends it to the terminal of the specified event group.
@@ -149,7 +149,7 @@ fFaraabinLinkSerializer_SerializeEventPrintf((uint32_t)pEg_, 0, &((pEg_)->Seq), 
  * @param pEg_ Pointer to the event group.
  */
 #define FARAABIN_PrintfToTerminal_(pEg_, ...) \
-fFaraabinLinkSerializer_SerializeEventPrintf((uint32_t)pEg_, 0, &((pEg_)->Seq), (pEg_)->Enable, eFB_COMMON_PROP_ID_EVENT_USER_TERMINAL, eFO_EVENT_SEVERITY_INFO, __VA_ARGS__)
+fFaraabinLink_Serialize_EventPrintf((uint32_t)pEg_, 0, &((pEg_)->Seq), (pEg_)->Enable, FB_COMMON_PROP_ID_EVENT_USER_TERMINAL, FO_EVENT_SEVERITY_INFO, __VA_ARGS__)
 
 #ifdef FB_FEATURE_FLAG_MCU_CLI
 
@@ -160,7 +160,7 @@ fFaraabinLinkSerializer_SerializeEventPrintf((uint32_t)pEg_, 0, &((pEg_)->Seq), 
  * 
  */
 #define FARAABIN_PrintfToFunction_(...) \
-fFaraabinLinkSerializer_SerializeEventPrintf((uint32_t)__funcPtr__, objectPtr, &(__funcPtr__->Seq), true, eFB_COMMON_PROP_ID_EVENT_USER_DATA, eFO_EVENT_SEVERITY_INFO, __VA_ARGS__)
+fFaraabinLink_Serialize_EventPrintf((uint32_t)__funcPtr__, objectPtr, &(__funcPtr__->Seq), true, FB_COMMON_PROP_ID_EVENT_USER_DATA, FO_EVENT_SEVERITY_INFO, __VA_ARGS__)
 #endif
 
 /**
@@ -172,7 +172,7 @@ fFaraabinLinkSerializer_SerializeEventPrintf((uint32_t)__funcPtr__, objectPtr, &
  * @param pStr_ Pointer to the string.
  */
 #define FARAABIN_PutsTo_(pEg_, pStr_) \
-fFaraabinLinkSerializer_SerializeEventPuts((uint32_t)pEg_, 0, &((pEg_)->Seq), (pEg_)->Enable, eFB_COMMON_PROP_ID_EVENT_USER_DATA, eFO_EVENT_SEVERITY_INFO, pStr_)
+fFaraabinLink_Serialize_EventPuts((uint32_t)pEg_, 0, &((pEg_)->Seq), (pEg_)->Enable, FB_COMMON_PROP_ID_EVENT_USER_DATA, FO_EVENT_SEVERITY_INFO, pStr_)
 
 /**
  * @brief Generates string type event with severity of WARNING and sends it to the specified event group.
@@ -183,7 +183,7 @@ fFaraabinLinkSerializer_SerializeEventPuts((uint32_t)pEg_, 0, &((pEg_)->Seq), (p
  * @param pStr_ Pointer to the string.
  */
 #define FARAABIN_PutsWarningTo_(pEg_, pStr_) \
-fFaraabinLinkSerializer_SerializeEventPuts((uint32_t)pEg_, 0, &((pEg_)->Seq), (pEg_)->Enable, eFB_COMMON_PROP_ID_EVENT_USER_DATA, eFO_EVENT_SEVERITY_WARNING, pStr_)
+fFaraabinLink_Serialize_EventPuts((uint32_t)pEg_, 0, &((pEg_)->Seq), (pEg_)->Enable, FB_COMMON_PROP_ID_EVENT_USER_DATA, FO_EVENT_SEVERITY_WARNING, pStr_)
 
 /**
  * @brief Generates string type event with severity of ERROR and sends it to the specified event group.
@@ -194,7 +194,7 @@ fFaraabinLinkSerializer_SerializeEventPuts((uint32_t)pEg_, 0, &((pEg_)->Seq), (p
  * @param pStr_ Pointer to the string.
  */
 #define FARAABIN_PutsErrorTo_(pEg_, pStr_) \
-fFaraabinLinkSerializer_SerializeEventPuts((uint32_t)pEg_, 0, &((pEg_)->Seq), (pEg_)->Enable, eFB_COMMON_PROP_ID_EVENT_USER_DATA, eFO_EVENT_SEVERITY_ERROR, pStr_)
+fFaraabinLink_Serialize_EventPuts((uint32_t)pEg_, 0, &((pEg_)->Seq), (pEg_)->Enable, FB_COMMON_PROP_ID_EVENT_USER_DATA, FO_EVENT_SEVERITY_ERROR, pStr_)
 
 /**
  * @brief Generates string type event and sends it to the terminal of the event group.
@@ -205,7 +205,7 @@ fFaraabinLinkSerializer_SerializeEventPuts((uint32_t)pEg_, 0, &((pEg_)->Seq), (p
  * @param pStr_ Pointer to the string.
  */
 #define FARAABIN_PutsToTerminal_(pEg_, pStr_) \
-fFaraabinLinkSerializer_SerializeEventPuts((uint32_t)pEg_, 0, &((pEg_)->Seq), (pEg_)->Enable, eFB_COMMON_PROP_ID_EVENT_USER_TERMINAL, eFO_EVENT_SEVERITY_INFO, pStr_)
+fFaraabinLink_Serialize_EventPuts((uint32_t)pEg_, 0, &((pEg_)->Seq), (pEg_)->Enable, FB_COMMON_PROP_ID_EVENT_USER_TERMINAL, FO_EVENT_SEVERITY_INFO, pStr_)
 
 #ifdef FB_FEATURE_FLAG_MCU_CLI
 
@@ -217,7 +217,7 @@ fFaraabinLinkSerializer_SerializeEventPuts((uint32_t)pEg_, 0, &((pEg_)->Seq), (p
  * @param pStr_ Pointer to the string.
  */
 #define FARAABIN_PutsToFunction_(pStr_) \
-fFaraabinLinkSerializer_SerializeEventPuts((uint32_t)__funcPtr__, objectPtr, &(__funcPtr__->Seq), true, eFB_COMMON_PROP_ID_EVENT_USER_DATA, eFO_EVENT_SEVERITY_INFO, pStr_)
+fFaraabinLink_Serialize_EventPuts((uint32_t)__funcPtr__, objectPtr, &(__funcPtr__->Seq), true, FB_COMMON_PROP_ID_EVENT_USER_DATA, FO_EVENT_SEVERITY_INFO, pStr_)
 #endif
 
 /**
@@ -228,7 +228,7 @@ fFaraabinLinkSerializer_SerializeEventPuts((uint32_t)__funcPtr__, objectPtr, &(_
  * @param eventId_ ID of the event.
  */
 #define FARAABIN_SendEventTo_(pEg_, enumName_, eventId_) \
-fFaraabinLinkSerializer_SerializeEventEnumId((uint32_t)pEg_, 0, &((pEg_)->Seq), (pEg_)->Enable, eFO_EVENT_SEVERITY_INFO, (uint32_t)&__faraabin_vartype_##enumName_, eventId_)
+fFaraabinLink_Serialize_EventEnumId((uint32_t)pEg_, 0, &((pEg_)->Seq), (pEg_)->Enable, FO_EVENT_SEVERITY_INFO, (uint32_t)&__faraabin_vartype_##enumName_, eventId_)
 
 /**
  * @brief Sends an enumerated event with severity of WARNING to a specified event group.
@@ -238,7 +238,7 @@ fFaraabinLinkSerializer_SerializeEventEnumId((uint32_t)pEg_, 0, &((pEg_)->Seq), 
  * @param eventId_ ID of the event.
  */
 #define FARAABIN_SendEventWarningTo_(pEg_, enumName_, eventId_) \
-fFaraabinLinkSerializer_SerializeEventEnumId((uint32_t)pEg_, 0, &((pEg_)->Seq), (pEg_)->Enable, eFO_EVENT_SEVERITY_WARNING, (uint32_t)&__faraabin_vartype_##enumName_, eventId_)
+fFaraabinLink_Serialize_EventEnumId((uint32_t)pEg_, 0, &((pEg_)->Seq), (pEg_)->Enable, FO_EVENT_SEVERITY_WARNING, (uint32_t)&__faraabin_vartype_##enumName_, eventId_)
 
 /**
  * @brief Sends an enumerated event with severity of ERROR to a specified event group.
@@ -248,7 +248,23 @@ fFaraabinLinkSerializer_SerializeEventEnumId((uint32_t)pEg_, 0, &((pEg_)->Seq), 
  * @param eventId_ ID of the event.
  */
 #define FARAABIN_SendEventErrorTo_(pEg_, enumName_, eventId_) \
-fFaraabinLinkSerializer_SerializeEventEnumId((uint32_t)pEg_, 0, &((pEg_)->Seq), (pEg_)->Enable, eFO_EVENT_SEVERITY_ERROR, (uint32_t)&__faraabin_vartype_##enumName_, eventId_)
+fFaraabinLink_Serialize_EventEnumId((uint32_t)pEg_, 0, &((pEg_)->Seq), (pEg_)->Enable, FO_EVENT_SEVERITY_ERROR, (uint32_t)&__faraabin_vartype_##enumName_, eventId_)
+
+/**
+ * @brief Generates string type event and sends it to the specified event group.
+ * 
+ * @note This macro works just like printf() function for printing an stream of string.
+ * 
+ * @param pEg_ Pointer to the event group.
+ */
+#define FARAABIN_NotifyTo_(...) \
+  fFaraabinLink_Serialize_EventPrintf((uint32_t)&NotificationEventGroup, 0, &(NotificationEventGroup.Seq), NotificationEventGroup.Enable, FB_COMMON_PROP_ID_EVENT_USER_DATA, FO_EVENT_SEVERITY_INFO, __VA_ARGS__)
+
+#define FARAABIN_NotifyWarningTo_(...) \
+  fFaraabinLink_Serialize_EventPrintf((uint32_t)&NotificationEventGroup, 0, &(NotificationEventGroup.Seq), NotificationEventGroup.Enable, FB_COMMON_PROP_ID_EVENT_USER_DATA, FO_EVENT_SEVERITY_WARNING, __VA_ARGS__)
+
+#define FARAABIN_NotifyErrorTo_(...) \
+  fFaraabinLink_Serialize_EventPrintf((uint32_t)&NotificationEventGroup, 0, &(NotificationEventGroup.Seq), NotificationEventGroup.Enable, FB_COMMON_PROP_ID_EVENT_USER_DATA, FO_EVENT_SEVERITY_ERROR, __VA_ARGS__)
 
 #endif
 

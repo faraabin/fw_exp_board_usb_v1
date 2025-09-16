@@ -5,7 +5,7 @@
  ******************************************************************************
  * @attention
  *
- * Copyright (c) 2024 FaraabinCo.
+ * Copyright (c) 2012-2025 FaraabinCo.
  * All rights reserved.
  *
  * This software is licensed under terms that can be found in the LICENSE file
@@ -43,11 +43,11 @@ typedef struct {
   
   bool _init;                             /*!< Init status of the fobject. */
   
-  const char *Name;                       /*!< Name given to the fobject. */
+  char *Name;                             /*!< Name given to the fobject. */
   
-  const char *Path;                       /*!< Path given to the fobject. */
+  char *Path;                             /*!< Path given to the fobject. */
   
-  const char *Filename;                   /*!< Filename of the fobject. */
+  char *FileName;                         /*!< FileName of the fobject. */
   
   uint8_t Seq;                            /*!< Sequence counter. */
   

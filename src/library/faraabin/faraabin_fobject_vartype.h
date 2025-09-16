@@ -5,7 +5,7 @@
  ******************************************************************************
  * @attention
  *
- * Copyright (c) 2024 FaraabinCo.
+ * Copyright (c) 2012-2025 FaraabinCo.
  * All rights reserved.
  *
  * This software is licensed under terms that can be found in the LICENSE file
@@ -37,39 +37,35 @@ extern "C" {
 /* Exported defines ----------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 /* Exported types ------------------------------------------------------------*/
-/**
- * @brief Data type of the variable.
- * 
+/** @defgroup VAR_DATA_TYPE Data type of the variable fobject group.
+ *  @{
  */
-typedef enum {
-  
-  eVAR_DATA_TYPE_PRIMITIVE = 0,
-  eVAR_DATA_TYPE_USER_DEFINED_STRUCT,
-  eVAR_DATA_TYPE_USER_DEFINED_ENUM,
-  eVAR_DATA_TYPE_USER_DEFINED_UNION
-  
-}eFaraabinFobjectVarType_DataType;
 
-/**
- * @brief Primitive variable types.
- * 
+#define VAR_DATA_TYPE_PRIMITIVE           ((uint8_t)0x00U)
+#define VAR_DATA_TYPE_USER_DEFINED_STRUCT ((uint8_t)0x01U)
+#define VAR_DATA_TYPE_USER_DEFINED_ENUM   ((uint8_t)0x02U)
+#define VAR_DATA_TYPE_USER_DEFINED_UNION  ((uint8_t)0x03U)
+
+/** @} */ //End of VAR_DATA_TYPE
+
+/** @defgroup VAR_DATA_TYPE_PRIMITIVE Type of the primitive variables group.
+ *  @{
  */
-typedef enum {
-  
-  eVAR_DATA_TYPE_PRIMITIVE_NONE    = 0,
-  eVAR_DATA_TYPE_PRIMITIVE_BOOL    = 1,
-  eVAR_DATA_TYPE_PRIMITIVE_UINT8   = 2,
-  eVAR_DATA_TYPE_PRIMITIVE_INT8    = 3,
-  eVAR_DATA_TYPE_PRIMITIVE_UINT16  = 4,
-  eVAR_DATA_TYPE_PRIMITIVE_INT16   = 5,
-  eVAR_DATA_TYPE_PRIMITIVE_UINT32  = 6,
-  eVAR_DATA_TYPE_PRIMITIVE_INT32   = 7,
-  eVAR_DATA_TYPE_PRIMITIVE_UINT64  = 8,
-  eVAR_DATA_TYPE_PRIMITIVE_INT64   = 9,
-  eVAR_DATA_TYPE_PRIMITIVE_FLOAT32 = 10,
-  eVAR_DATA_TYPE_PRIMITIVE_FLOAT64 = 11
-  
-}eFaraabinFobjectVarType_PrimitiveId;
+
+#define VAR_DATA_TYPE_PRIMITIVE_NONE    ((uint8_t)0x00U)
+#define VAR_DATA_TYPE_PRIMITIVE_BOOL    ((uint8_t)0x01U)
+#define VAR_DATA_TYPE_PRIMITIVE_UINT8   ((uint8_t)0x02U)
+#define VAR_DATA_TYPE_PRIMITIVE_INT8    ((uint8_t)0x03U)
+#define VAR_DATA_TYPE_PRIMITIVE_UINT16  ((uint8_t)0x04U)
+#define VAR_DATA_TYPE_PRIMITIVE_INT16   ((uint8_t)0x05U)
+#define VAR_DATA_TYPE_PRIMITIVE_UINT32  ((uint8_t)0x06U)
+#define VAR_DATA_TYPE_PRIMITIVE_INT32   ((uint8_t)0x07U)
+#define VAR_DATA_TYPE_PRIMITIVE_UINT64  ((uint8_t)0x08U)
+#define VAR_DATA_TYPE_PRIMITIVE_INT64   ((uint8_t)0x09U)
+#define VAR_DATA_TYPE_PRIMITIVE_FLOAT32 ((uint8_t)0x0AU)
+#define VAR_DATA_TYPE_PRIMITIVE_FLOAT64 ((uint8_t)0x0BU)
+
+/** @} */ //End of VAR_DATA_TYPE_PRIMITIVE
 
 /**
  * @brief Faraabin variable type fobject.
@@ -81,17 +77,17 @@ typedef struct {
   
   bool _init;                                               /*!< Initialization status the fobject. */
   
-  const char *Name;                                         /*!< Name given to the fobject. */
+  char *Name;                                               /*!< Name given to the fobject. */
   
-  const char *Path;                                         /*!< Path given to the fobject. */
+  char *Path;                                               /*!< Path given to the fobject. */
   
-  const char *Filename;                                     /*!< Filename of the fobject. */
+  char *FileName;                                           /*!< FileName of the fobject. */
   
   uint8_t Seq;                                              /*!< Sequence counter. */
   
   bool Enable;                                              /*!< Enable status of the fobject. */
 
-  eFaraabinFobjectVarType_DataType DataType;                /*!< Fobject data type. */
+  uint8_t DataType;                                         /*!< Fobject data type. Could be one of VAR_DATA_TYPE values. */
   
   uint32_t Size;                                            /*!< Size of the fobject object. */
   

@@ -5,7 +5,7 @@
  ******************************************************************************
  * @attention
  *
- * Copyright (c) 2024 FaraabinCo.
+ * Copyright (c) 2012-2025 FaraabinCo.
  * All rights reserved.
  *
  * This software is licensed under terms that can be found in the LICENSE file
@@ -28,9 +28,9 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "faraabin_fobject_databus.h"
+#include "faraabin_dependency.h"
 
-#include "faraabin_config.h"
+#include "faraabin_fobject_databus.h"
 
 /* Exported defines ----------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
@@ -50,11 +50,9 @@ extern "C" {
     .TrigDivideBy = 1,\
     .TimeAfterTrigMs = 100,\
     .ChannelQty = 10,\
-    ._pBufferChannels = NULL,\
-    ._isBufferChannelsStatic = false,\
+    .pBufferChannels = NULL,\
     .BufferCaptureSize = 0,\
-    ._pBufferCapture = NULL,\
-    ._isBufferCaptureStatic = false,\
+    .pBufferCapture = NULL,\
     .Enable = false,\
     ._init = false\
   }
@@ -91,8 +89,8 @@ extern "C" {
  */
 #define FARAABIN_DataBus_Init_WithPath_(pDatabus_, path_) \
   do{\
-    (pDatabus_)->Path = path_;\
-    (pDatabus_)->Filename = FILENAME__;\
+    (pDatabus_)->Path = (char *)path_;\
+    (pDatabus_)->FileName = (char *)FILENAME__;\
     uint8_t ret = fFaraabinFobjectDataBus_Init(pDatabus_);\
     (void)ret;\
   }while(0)
@@ -161,82 +159,82 @@ extern "C" {
  * @param pVar_ Pointer to variable
  */
 #define FARAABIN_DataBus_AttachVariable_BOOL_(pDatabus_, pVar_) \
-  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(*pVar_), eVAR_DATA_TYPE_PRIMITIVE, eVAR_DATA_TYPE_PRIMITIVE_BOOL, eFO_TYPE_VAR)
+  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(*pVar_), VAR_DATA_TYPE_PRIMITIVE, VAR_DATA_TYPE_PRIMITIVE_BOOL, FO_TYPE_VAR)
 
 #define FARAABIN_DataBus_AttachVariable_BOOL_ARRAY_(pDatabus_, pVar_) \
-  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(pVar_), eVAR_DATA_TYPE_PRIMITIVE, eVAR_DATA_TYPE_PRIMITIVE_BOOL, eFO_TYPE_VAR)
+  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(pVar_), VAR_DATA_TYPE_PRIMITIVE, VAR_DATA_TYPE_PRIMITIVE_BOOL, FO_TYPE_VAR)
 
 #define FARAABIN_DataBus_AttachVariable_U8_(pDatabus_, pVar_) \
-  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(*pVar_), eVAR_DATA_TYPE_PRIMITIVE, eVAR_DATA_TYPE_PRIMITIVE_UINT8, eFO_TYPE_VAR)
+  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(*pVar_), VAR_DATA_TYPE_PRIMITIVE, VAR_DATA_TYPE_PRIMITIVE_UINT8, FO_TYPE_VAR)
 
 #define FARAABIN_DataBus_AttachVariable_U8_ARRAY_(pDatabus_, pVar_) \
-  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(pVar_), eVAR_DATA_TYPE_PRIMITIVE, eVAR_DATA_TYPE_PRIMITIVE_UINT8, eFO_TYPE_VAR)
+  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(pVar_), VAR_DATA_TYPE_PRIMITIVE, VAR_DATA_TYPE_PRIMITIVE_UINT8, FO_TYPE_VAR)
 
 #define FARAABIN_DataBus_AttachVariable_I8_(pDatabus_, pVar_) \
-  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(*pVar_), eVAR_DATA_TYPE_PRIMITIVE, eVAR_DATA_TYPE_PRIMITIVE_INT8, eFO_TYPE_VAR)
+  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(*pVar_), VAR_DATA_TYPE_PRIMITIVE, VAR_DATA_TYPE_PRIMITIVE_INT8, FO_TYPE_VAR)
 
 #define FARAABIN_DataBus_AttachVariable_I8_ARRAY_(pDatabus_, pVar_) \
-  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(pVar_), eVAR_DATA_TYPE_PRIMITIVE, eVAR_DATA_TYPE_PRIMITIVE_INT8, eFO_TYPE_VAR)
+  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(pVar_), VAR_DATA_TYPE_PRIMITIVE, VAR_DATA_TYPE_PRIMITIVE_INT8, FO_TYPE_VAR)
 
 #define FARAABIN_DataBus_AttachVariable_U16_(pDatabus_, pVar_)  \
-  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(*pVar_), eVAR_DATA_TYPE_PRIMITIVE, eVAR_DATA_TYPE_PRIMITIVE_UINT16, eFO_TYPE_VAR)
+  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(*pVar_), VAR_DATA_TYPE_PRIMITIVE, VAR_DATA_TYPE_PRIMITIVE_UINT16, FO_TYPE_VAR)
 
 #define FARAABIN_DataBus_AttachVariable_U16_ARRAY_(pDatabus_, pVar_)  \
-  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(pVar_), eVAR_DATA_TYPE_PRIMITIVE, eVAR_DATA_TYPE_PRIMITIVE_UINT16, eFO_TYPE_VAR)
+  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(pVar_), VAR_DATA_TYPE_PRIMITIVE, VAR_DATA_TYPE_PRIMITIVE_UINT16, FO_TYPE_VAR)
 
 #define FARAABIN_DataBus_AttachVariable_I16_(pDatabus_, pVar_)  \
-  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(*pVar_), eVAR_DATA_TYPE_PRIMITIVE, eVAR_DATA_TYPE_PRIMITIVE_INT16, eFO_TYPE_VAR)
+  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(*pVar_), VAR_DATA_TYPE_PRIMITIVE, VAR_DATA_TYPE_PRIMITIVE_INT16, FO_TYPE_VAR)
 
 #define FARAABIN_DataBus_AttachVariable_I16_ARRAY_(pDatabus_, pVar_)  \
-  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(pVar_), eVAR_DATA_TYPE_PRIMITIVE, eVAR_DATA_TYPE_PRIMITIVE_INT16, eFO_TYPE_VAR)
+  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(pVar_), VAR_DATA_TYPE_PRIMITIVE, VAR_DATA_TYPE_PRIMITIVE_INT16, FO_TYPE_VAR)
 
 #define FARAABIN_DataBus_AttachVariable_U32_(pDatabus_, pVar_)  \
-  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(*pVar_), eVAR_DATA_TYPE_PRIMITIVE, eVAR_DATA_TYPE_PRIMITIVE_UINT32, eFO_TYPE_VAR)
+  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(*pVar_), VAR_DATA_TYPE_PRIMITIVE, VAR_DATA_TYPE_PRIMITIVE_UINT32, FO_TYPE_VAR)
 
 #define FARAABIN_DataBus_AttachVariable_U32_ARRAY_(pDatabus_, pVar_)  \
-  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(pVar_), eVAR_DATA_TYPE_PRIMITIVE, eVAR_DATA_TYPE_PRIMITIVE_UINT32, eFO_TYPE_VAR)
+  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(pVar_), VAR_DATA_TYPE_PRIMITIVE, VAR_DATA_TYPE_PRIMITIVE_UINT32, FO_TYPE_VAR)
 
 #define FARAABIN_DataBus_AttachVariable_I32_(pDatabus_, pVar_)  \
-  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(*pVar_), eVAR_DATA_TYPE_PRIMITIVE, eVAR_DATA_TYPE_PRIMITIVE_INT32, eFO_TYPE_VAR)
+  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(*pVar_), VAR_DATA_TYPE_PRIMITIVE, VAR_DATA_TYPE_PRIMITIVE_INT32, FO_TYPE_VAR)
 
 #define FARAABIN_DataBus_AttachVariable_I32_ARRAY_(pDatabus_, pVar_)  \
-  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(pVar_), eVAR_DATA_TYPE_PRIMITIVE, eVAR_DATA_TYPE_PRIMITIVE_INT32, eFO_TYPE_VAR)
+  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(pVar_), VAR_DATA_TYPE_PRIMITIVE, VAR_DATA_TYPE_PRIMITIVE_INT32, FO_TYPE_VAR)
 
 #define FARAABIN_DataBus_AttachVariable_U64_(pDatabus_, pVar_)  \
-  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(*pVar_), eVAR_DATA_TYPE_PRIMITIVE, eVAR_DATA_TYPE_PRIMITIVE_UINT64, eFO_TYPE_VAR)
+  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(*pVar_), VAR_DATA_TYPE_PRIMITIVE, VAR_DATA_TYPE_PRIMITIVE_UINT64, FO_TYPE_VAR)
 
 #define FARAABIN_DataBus_AttachVariable_U64_ARRAY_(pDatabus_, pVar_)  \
-  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(pVar_), eVAR_DATA_TYPE_PRIMITIVE, eVAR_DATA_TYPE_PRIMITIVE_UINT64, eFO_TYPE_VAR)
+  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(pVar_), VAR_DATA_TYPE_PRIMITIVE, VAR_DATA_TYPE_PRIMITIVE_UINT64, FO_TYPE_VAR)
 
 #define FARAABIN_DataBus_AttachVariable_I64_(pDatabus_, pVar_)  \
-  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(*pVar_), eVAR_DATA_TYPE_PRIMITIVE, eVAR_DATA_TYPE_PRIMITIVE_INT64, eFO_TYPE_VAR)
+  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(*pVar_), VAR_DATA_TYPE_PRIMITIVE, VAR_DATA_TYPE_PRIMITIVE_INT64, FO_TYPE_VAR)
 
 #define FARAABIN_DataBus_AttachVariable_I64_ARRAY_(pDatabus_, pVar_)  \
-  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(pVar_), eVAR_DATA_TYPE_PRIMITIVE, eVAR_DATA_TYPE_PRIMITIVE_INT64, eFO_TYPE_VAR)
+  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(pVar_), VAR_DATA_TYPE_PRIMITIVE, VAR_DATA_TYPE_PRIMITIVE_INT64, FO_TYPE_VAR)
 
 #define FARAABIN_DataBus_AttachVariable_F32_(pDatabus_, pVar_)  \
-  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(*pVar_), eVAR_DATA_TYPE_PRIMITIVE, eVAR_DATA_TYPE_PRIMITIVE_FLOAT32, eFO_TYPE_VAR)
+  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(*pVar_), VAR_DATA_TYPE_PRIMITIVE, VAR_DATA_TYPE_PRIMITIVE_FLOAT32, FO_TYPE_VAR)
 
 #define FARAABIN_DataBus_AttachVariable_F32_ARRAY_(pDatabus_, pVar_)  \
-  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(pVar_), eVAR_DATA_TYPE_PRIMITIVE, eVAR_DATA_TYPE_PRIMITIVE_FLOAT32, eFO_TYPE_VAR)
+  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(pVar_), VAR_DATA_TYPE_PRIMITIVE, VAR_DATA_TYPE_PRIMITIVE_FLOAT32, FO_TYPE_VAR)
 
 #define FARAABIN_DataBus_AttachVariable_F64_(pDatabus_, pVar_)  \
-  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(*pVar_), eVAR_DATA_TYPE_PRIMITIVE, eVAR_DATA_TYPE_PRIMITIVE_FLOAT64, eFO_TYPE_VAR)
+  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(*pVar_), VAR_DATA_TYPE_PRIMITIVE, VAR_DATA_TYPE_PRIMITIVE_FLOAT64, FO_TYPE_VAR)
 
 #define FARAABIN_DataBus_AttachVariable_F64_ARRAY_(pDatabus_, pVar_)  \
-  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(pVar_), eVAR_DATA_TYPE_PRIMITIVE, eVAR_DATA_TYPE_PRIMITIVE_FLOAT64, eFO_TYPE_VAR)
+  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(pVar_), VAR_DATA_TYPE_PRIMITIVE, VAR_DATA_TYPE_PRIMITIVE_FLOAT64, FO_TYPE_VAR)
 
 #define FARAABIN_DataBus_AttachVariable_UserDefined_Enum_(pDatabus_, pVar_) \
-  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(*pVar_), eVAR_DATA_TYPE_USER_DEFINED_ENUM, 0, eFO_TYPE_VAR)
+  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(*pVar_), VAR_DATA_TYPE_USER_DEFINED_ENUM, 0, FO_TYPE_VAR)
 
 #define FARAABIN_DataBus_AttachVariable_UserDefined_Enum_ARRAY_(pDatabus_, pVar_) \
-  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(pVar_), eVAR_DATA_TYPE_USER_DEFINED_ENUM, 0, eFO_TYPE_VAR)
+  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(pVar_), VAR_DATA_TYPE_USER_DEFINED_ENUM, 0, FO_TYPE_VAR)
 
 #define FARAABIN_DataBus_AttachVariable_UserDefined_Struct_(pDatabus_, pVar_) \
-  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(*pVar_), eVAR_DATA_TYPE_USER_DEFINED_ENUM, 0, eFO_TYPE_VAR)
+  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(*pVar_), VAR_DATA_TYPE_USER_DEFINED_ENUM, 0, FO_TYPE_VAR)
 
 #define FARAABIN_DataBus_AttachVariable_UserDefined_Struct_ARRAY_(pDatabus_, pVar_) \
-  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(pVar_), eVAR_DATA_TYPE_USER_DEFINED_ENUM, 0, eFO_TYPE_VAR)
+  fFaraabinFobjectDataBus_AttachVariable(pDatabus_, (uint32_t)pVar_, sizeof(pVar_), VAR_DATA_TYPE_USER_DEFINED_ENUM, 0, FO_TYPE_VAR)
 
 /**
  * @brief Attaches a codeblock to the first free channel of the databus.

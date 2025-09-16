@@ -5,7 +5,7 @@
  ******************************************************************************
  * @attention
  *
- * Copyright (c) 2024 FaraabinCo.
+ * Copyright (c) 2012-2025 FaraabinCo.
  * All rights reserved.
  *
  * This software is licensed under terms that can be found in the LICENSE file
@@ -29,95 +29,71 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "faraabin_type.h"
-
-#include "chrono.h"
+#include "faraabin_dependency.h"
 
 /* Exported defines ----------------------------------------------------------*/
-/** @defgroup FARAABIN_DB_RET State machine return group
+/* Exported macro ------------------------------------------------------------*/
+/* Exported types ------------------------------------------------------------*/
+/** @defgroup DATABUS_EVENT Faraabin databus fobject system event group
  *  @{
  */
 
-#define FARAABIN_DB_OK                              (uint8_t)(0U) /*!< No error in databus. */
-#define FARAABIN_DB_CHANNEL_INDEX_GREATER_THAN_MAX  (uint8_t)(1U) /*!< Databus channel index overflowed. */
-#define FARAABIN_DB_IS_FULL                         (uint8_t)(2U) /*!< Databus channels are full. */
-#define FARAABIN_DB_ACTION_WITH_NULL_REFERENCE      (uint8_t)(3U) /*!< Databus null reference error. */
-#define FARAABIN_DB_OBJECT_NOT_FOUND                (uint8_t)(4U) /*!< Databus object can't be found. */
-#define FARAABIN_DB_CODEBLOCK_CALLBACK_NOT_EMPTY    (uint8_t)(5U) /*!< Codeblock attached to databus has no callback. */
-#define FARAABIN_DB_NOT_INIT                        (uint8_t)(5U) /*!< Databus not initialized error. */
-#define FARAABIN_DB_QUEUE_EMPTY                     (uint8_t)(6U) /*!< Databus queue is empty. */
+#define DATABUS_EVENT_INFO_USER_DATA_RECEIVED             ((uint8_t)0x00U)
 
-/** @} */ //End of FARAABIN_DB_RET
+#define DATABUS_EVENT_INFO_ATTACH                         ((uint8_t)0x01U)
+#define DATABUS_EVENT_INFO_DETACH                         ((uint8_t)0x02U)
 
-/* Exported macro ------------------------------------------------------------*/
-/* Exported types ------------------------------------------------------------*/
-/**
- * @brief Databus fobject system events.
- * 
+#define DATABUS_EVENT_INFO_STATE_CHANGE                   ((uint8_t)0x03U)
+
+#define DATABUS_EVENT_INFO_CAPTURE_END                    ((uint8_t)0x04U)
+
+#define DATABUS_EVENT_INFO_MANUAL_TRIG                    ((uint8_t)0x05U)
+
+#define DATABUS_EVENT_ERROR_UNSUPPORTED_FOBJECT_PROPERTY  ((uint8_t)0x06U)
+#define DATABUS_EVENT_ERROR_NOT_FREE_LOCATION_FOR_ATTACH  ((uint8_t)0x07U)
+#define DATABUS_EVENT_ERROR_NO_CAPTURE_DATA_FOR_SEND      ((uint8_t)0x08U)
+#define DATABUS_EVENT_ERROR_NO_FIND_FOBJECT               ((uint8_t)0x09U)
+#define DATABUS_EVENT_ERROR_CAPTURE_QUEUE                 ((uint8_t)0x0AU)
+#define DATABUS_EVENT_ERROR_CODE_BLOCK_NOT_EMPTY          ((uint8_t)0x0BU)
+#define DATABUS_EVENT_ERROR_PARAM                         ((uint8_t)0x0CU)
+#define DATABUS_EVENT_ERROR_DETACH                        ((uint8_t)0x0DU)
+#define DATABUS_EVENT_ERROR_ATTACH                        ((uint8_t)0x0EU)
+
+/** @} */ //End of DATABUS_EVENT
+
+/** @defgroup DATABUS_TRIG_SOURCE Faraabin databus fobject trigger source group
+ *  @{
  */
-typedef enum {
-  
-	eDATABUS_EVENT_INFO_USER_DATA_RECEIVED = 0,
-	
-  eDATABUS_EVENT_INFO_ATTACH,
-  eDATABUS_EVENT_INFO_DETACH,
-  
-  eDATABUS_EVENT_INFO_STATE_CHANGE,
-  
-  eDATABUS_EVENT_INFO_CAPTURE_END,
-  
-  eDATABUS_EVENT_INFO_MANUAL_TRIG,
-  
-  eDATABUS_EVENT_ERROR_UNSUPPORTED_FOBJECT_PROPERTY,
-  eDATABUS_EVENT_ERROR_NOT_FREE_LOCATION_FOR_ATTACH,
-  eDATABUS_EVENT_ERROR_NO_CAPTURE_DATA_FOR_SEND,
-  eDATABUS_EVENT_ERROR_NO_FIND_FOBJECT,
-  eDATABUS_EVENT_ERROR_CAPTURE_QUEUE,
-  eDATABUS_EVENT_ERROR_CODE_BLOCK_NOT_EMPTY,
-  eDATABUS_EVENT_ERROR_PARAM,
-  eDATABUS_EVENT_ERROR_DETACH,
-  eDATABUS_EVENT_ERROR_ATTACH,
-  
-}eFaraabinFobjectDataBus_SystemEventId;
 
-/**
- * @brief Databus trigger source.
- * 
- */
-typedef enum {
-  
-  eDATABUS_TRIG_SOURCE_NONE = 0,
-  eDATABUS_TRIG_SOURCE_API,
-	eDATABUS_TRIG_SOURCE_MANUAL,
-  eDATABUS_TRIG_SOURCE_CHANNEL
-  
-}eFaraabinFobjectDataBus_TrigSource;
+#define DATABUS_TRIG_SOURCE_NONE    ((uint8_t)0x00U)
+#define DATABUS_TRIG_SOURCE_API     ((uint8_t)0x01U)
+#define DATABUS_TRIG_SOURCE_MANUAL  ((uint8_t)0x02U)
+#define DATABUS_TRIG_SOURCE_CHANNEL ((uint8_t)0x03U)
 
-/**
- * @brief Databus states.
- * 
- */
-typedef enum {
-  
-  eDATABUS_STATE_OFF = 0,
-  eDATABUS_STATE_STREAM,
-  eDATABUS_STATE_TIMER,
-  eDATABUS_STATE_TRIG_WAIT,
-  eDATABUS_STATE_TRIG_WINDOW,
-  eDATABUS_STATE_CAPTURE_SEND,
-  
-}eFaraabinFobjectDataBus_State;
+/** @} */ //End of DATABUS_TRIG_SOURCE
 
-/**
- * @brief Databus trigger type.
- * 
+/** @defgroup DATABUS_STATE Faraabin databus fobject state group
+ *  @{
  */
-typedef enum {
-  
-  eDATABUS_CH_TRIG_CHANGE = 0,
-  eDATABUS_CH_TRIG_RISING,
-  eDATABUS_CH_TRIG_FALLING,
-  
-}eFaraabinFobjectDataBus_ChTrigType;
+
+#define DATABUS_STATE_OFF           ((uint8_t)0x00U)
+#define DATABUS_STATE_STREAM        ((uint8_t)0x01U)
+#define DATABUS_STATE_TIMER         ((uint8_t)0x02U)
+#define DATABUS_STATE_TRIG_WAIT     ((uint8_t)0x03U)
+#define DATABUS_STATE_TRIG_WINDOW   ((uint8_t)0x04U)
+#define DATABUS_STATE_CAPTURE_SEND  ((uint8_t)0x05U)
+
+/** @} */ //End of DATABUS_STATE
+
+/** @defgroup DATABUS_CH_TRIG Faraabin databus fobject channel trigger type group
+ *  @{
+ */
+
+#define DATABUS_CH_TRIG_CHANGE  ((uint8_t)0x00U)
+#define DATABUS_CH_TRIG_RISING  ((uint8_t)0x01U)
+#define DATABUS_CH_TRIG_FALLING ((uint8_t)0x02U)
+
+/** @} */ //End of DATABUS_CH_TRIG
 
 /**
  * @brief Databus channel object.
@@ -164,22 +140,20 @@ typedef struct {
   uint8_t _type;                                                            /*!< Type identifier of the fobject. */
   
   bool _init;                                                               /*!< Init status of the fobject. */
-	
-	bool Enable;                                                              /*!< Enable status of the fobject. */
   
-  const char *Name;                                                         /*!< Name string given to the fobject. */
+  bool Enable;                                                              /*!< Enable status of the fobject. */
   
-  const char *Path;                                                         /*!< Path string given to the fobject. */
+  char *Name;                                                               /*!< Name string given to the fobject. */
   
-  const char *Filename;                                                     /*!< Filename of the fobject. */
+  char *Path;                                                               /*!< Path string given to the fobject. */
+  
+  char *FileName;                                                           /*!< FileName of the fobject. */
   
   uint8_t Seq;                                                              /*!< Sequence counter. */
   
   uint16_t ChannelQty;                                                      /*!< Number of channels dedicated to the databus. */
 
-  sFaraabinFobjectDataBus_Channel *_pBufferChannels;                        /*!< Pointer to the channels of the databus. */
-  
-  bool _isBufferChannelsStatic;                                             /*!< Memory allocation status of the channels. */
+  sFaraabinFobjectDataBus_Channel *pBufferChannels;                         /*!< Pointer to the channels of the databus. */
   
   uint16_t AttachedItemsQty;                                                /*!< Number of attached items to databus. */
   
@@ -189,9 +163,7 @@ typedef struct {
   
   uint16_t _streamDivbyCnt;                                                 /*!< Internal counter for stream prescaler. */
   
-  sFaraabinFobjectDataBus_CaptureValue *_pBufferCapture;                    /*!< Pointer to the capture buffer. */
-
-  bool _isBufferCaptureStatic;                                              /*!< Memory allocation status of the capture buffer. */
+  sFaraabinFobjectDataBus_CaptureValue *pBufferCapture;                     /*!< Pointer to the capture buffer. */
 
   uint32_t BufferCaptureSize;                                              /*!< Allocated size to the capture buffer. */
   
@@ -217,7 +189,7 @@ typedef struct {
   
   uint32_t _trigTimeStamp;                                                  /*!< Timestamp of the triggered instance . */
   
-  eFaraabinFobjectDataBus_State CurrentState;                               /*!< Current state of the databus state machine. */
+  uint8_t CurrentState;                                                     /*!< Current state of the databus state machine. Could be one of DATABUS_STATE values. */
   
   void(*fpUserTerminalCallback)(uint8_t *userData, uint16_t userDataSize);  /*!< User callback in the terminal for databus. */
   
@@ -225,7 +197,7 @@ typedef struct {
   
   bool _isTriggered;                                                        /*!< Flag that indicates if databus is triggered or not. */
   
-  eFaraabinFobjectDataBus_TrigSource LastTrigSource;                        /*!< Last source of databus trigger. */
+  uint8_t LastTrigSource;                                                   /*!< Last source of databus trigger. Could be one of DATABUS_TRIG_SOURCE values. */
   
   sChrono _chronoCycle;                                                     /*!< Internal chrono for running databus cycles. */
   
@@ -277,7 +249,7 @@ uint8_t fFaraabinFobjectDataBus_AdvFeat_DeInit(sFaraabinFobjectDataBus *me);
 void fFaraabinFobjectDataBus_Run(sFaraabinFobjectDataBus *me);
 
 /**
- * @brief Sends captured data if databus is in eDATABUS_STATE_CAPTURE_SEND state.
+ * @brief Sends captured data if databus is in DATABUS_STATE_CAPTURE_SEND state.
  * 
  * @param me Pointer to the databus fobject.
  */

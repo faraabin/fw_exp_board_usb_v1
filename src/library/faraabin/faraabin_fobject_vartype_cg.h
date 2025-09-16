@@ -6,7 +6,7 @@
  ******************************************************************************
  * @attention
  *
- * Copyright (c) 2024 FaraabinCo.
+ * Copyright (c) 2012-2025 FaraabinCo.
  * All rights reserved.
  *
  * This software is licensed under terms that can be found in the LICENSE file
@@ -47,7 +47,7 @@ extern "C"{
 #if defined(TYPE_DICT)
 
     #define typedef_struct_(typeName_)                          FARAABIN_VAR_TYPE_DEF_(typeName_);\
-                                                                static FARAABIN_VAR_TYPE_STRUCT_FUNC_(typeName_) {\
+                                                                FARAABIN_VAR_TYPE_STRUCT_FUNC_(typeName_) {\
                                                                 FARAABIN_VAR_TYPE_STRUCT_FUNC_START_(typeName_);
                                                                   
     #define sm_(memberTypeName_, memberName_)                   FARAABIN_VAR_TYPE_STRUCT_MEMBER_(memberTypeName_, memberName_, 1)
@@ -55,7 +55,7 @@ extern "C"{
     #define typedef_struct_end_(typeName_)                      FARAABIN_VAR_TYPE_STRUCT_FUNC_END_(typeName_);}
 
     #define typedef_enum_(typeName_)                            FARAABIN_VAR_TYPE_DEF_(typeName_);\
-                                                                static FARAABIN_VAR_TYPE_ENUM_FUNC_(typeName_) {\
+                                                                FARAABIN_VAR_TYPE_ENUM_FUNC_(typeName_) {\
                                                                 FARAABIN_VAR_TYPE_ENUM_FUNC_START_(typeName_);
                                                                   
     #define em_(memberName_)                                    FARAABIN_VAR_TYPE_ENUM_MEMBER_(memberName_);

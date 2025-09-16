@@ -1,11 +1,11 @@
 /**
  ******************************************************************************
- * @file           : faraabin_fobject_var.h
- * @brief          : Variable fobject header file.
+ * @file           : faraabin_addon_cpu_profiler.h
+ * @brief          :
  ******************************************************************************
  * @attention
  *
- * Copyright (c) 2012-2025 FaraabinCo.
+ * Copyright (c) 2024 FaraabinCo.
  * All rights reserved.
  *
  * This software is licensed under terms that can be found in the LICENSE file
@@ -15,39 +15,52 @@
  * https://github.com/FaraabinCo
  *
  ******************************************************************************
- * @verbatim
+ * @verbatim 
  * @endverbatim
  */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef FARAABIN_FOBJECT_VAR_H
-#define FARAABIN_FOBJECT_VAR_H
+#ifndef FARAABIN_ADDON_CPU_PROFILER_H
+#define FARAABIN_ADDON_CPU_PROFILER_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "faraabin_type.h"
+#include "../../faraabin_dependency.h"
 
 /* Exported defines ----------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 /* Exported types ------------------------------------------------------------*/
-
 /**
- * @brief Type of function pointer for user callbacks whenever a new access is occured to the variable via Faraabin commands.
+ * @brief CPU profiler system event identifiers.
  * 
  */
-typedef uint8_t(*FaraabinVarAccessCallback)(bool isWrite, uint32_t varPtr, uint8_t *data, uint16_t size);
+typedef enum {
+  
+	eCB_EVENT_INFO_USER_DATA_RECEIVED = 0,
+	
+  eCB_EVENT_INFO_RUN,
+  eCB_EVENT_INFO_RESET,
+  
+  eCB_EVENT_ERROR_UNSUPPORTED_FOBJECT_PROPERTY,
+  eCB_EVENT_ERROR_MCU_PARAM,
+  
+}eFaraabinCpuProfiler_SystemEventId;
 
 /* Exported constants --------------------------------------------------------*/
 /* Exported functions prototypes ---------------------------------------------*/
+void fFaraabinAddOn_CpuProfiler_SendingEnable(void);
+void fFaraabinAddOn_CpuProfiler_SendingDisable(void);
+bool fFaraabinAddOn_CpuProfiler_IsSending(void);
+
 /* Exported variables --------------------------------------------------------*/
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* FARAABIN_FOBJECT_VAR_H */
+#endif /* FARAABIN_ADDON_CPU_PROFILER_H */
 
 /************************ © COPYRIGHT FaraabinCo *****END OF FILE****/

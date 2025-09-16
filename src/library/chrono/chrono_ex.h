@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
-  * @file           : runtime_scaler.h
-  * @brief          : Runtime scaler module.
+  * @file           : chrono_ex.h
+  * @brief          : Chrono extension macros for runtime scaler, wait and etc.
   ******************************************************************************
   * @attention
   *
@@ -134,8 +134,8 @@
   */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef RUNTIME_SCALER_H
-#define RUNTIME_SCALER_H
+#ifndef CHRONO_EX_H
+#define CHRONO_EX_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -262,7 +262,7 @@ extern "C" {
  * 
  */
 #define RUN_EVERY_US_(name_, intervalUs_) \
-    static sChrono __run_every_us_##name_##__ = {FALSE, 0, 0};\
+    static sChrono __run_every_us_##name_##__ = {FALSE, 0, 0, 0, FALSE};\
     RUN_EVERY_US_OBJ_(name_, &__run_every_us_##name_##__, intervalUs_)
 
 /**
@@ -278,7 +278,7 @@ extern "C" {
  * 
  */
 #define RUN_EVERY_US_FORCE_(name_, intervalUs_) \
-    static sChrono __run_every_us_##name_##__ = {FALSE, 0, 0};\
+    static sChrono __run_every_us_##name_##__ = {FALSE, 0, 0, 0, FALSE};\
     RUN_EVERY_US_OBJ_FORCE_(name_, &__run_every_us_##name_##__, intervalUs_)
 
 /** @} */ //End of RUN_EVERY_US
@@ -339,7 +339,7 @@ extern "C" {
  * 
  */
 #define RUN_EVERY_MS_(name_, intervalMs_) \
-    static sChrono __run_every_ms_##name_##__ = {FALSE, 0, 0};\
+    static sChrono __run_every_ms_##name_##__ = {FALSE, 0, 0, 0, FALSE};\
     RUN_EVERY_MS_OBJ_(name_, &__run_every_ms_##name_##__, intervalMs_)
 
 /**
@@ -355,7 +355,7 @@ extern "C" {
  * 
  */
 #define RUN_EVERY_MS_FORCE_(name_, intervalMs_) \
-    static sChrono __run_every_ms_##name_##__ = {FALSE, 0, 0};\
+    static sChrono __run_every_ms_##name_##__ = {FALSE, 0, 0, 0, FALSE};\
     RUN_EVERY_MS_OBJ_FORCE_(name_, &__run_every_ms_##name_##__, intervalMs_)
 
 /** @} */ //End of RUN_EVERY_MS
@@ -416,7 +416,7 @@ extern "C" {
  * 
  */
 #define RUN_EVERY_S_(name_, intervalS_) \
-    static sChrono __run_every_s_##name_##__ = {FALSE, 0, 0};\
+    static sChrono __run_every_s_##name_##__ = {FALSE, 0, 0, 0, FALSE};\
     RUN_EVERY_S_OBJ_(name_, &__run_every_s_##name_##__, intervalS_)
 
 /**
@@ -432,7 +432,7 @@ extern "C" {
  * 
  */
 #define RUN_EVERY_S_FORCE_(name_, intervalS_) \
-    static sChrono __run_every_s_##name_##__ = {FALSE, 0, 0};\
+    static sChrono __run_every_s_##name_##__ = {FALSE, 0, 0, 0, FALSE};\
     RUN_EVERY_S_OBJ_FORCE_(name_, &__run_every_s_##name_##__, intervalS_)
 
 /** @} */ //End of RUN_EVERY_S
@@ -526,8 +526,117 @@ extern "C" {
 
 /** @} */ //End of RUN_EVERY
 
+/**
+ * @brief Static RUN_AFTER_QTY macro. Marks the start of the code block.
+ * 
+ * @note Use this macro when you don't want to run code first n run.
+ * 
+ * @note It is essential to mark the end of the code block using the RUN_END_ macro.
+ * 
+ * @param name_ The name of the code block.
+ * @param qty_ The value that specifies how many times the code block will be neglected.
+ */
+#define RUN_AFTER_QTY_(name_, qty_) \
+  static uint32_t __run_after_qty_##name_##__ = 0;\
+  static bool _is_run_after_qty_##name_##__ = FALSE;\
+  if(!_is_run_after_qty_##name_##__) {\
+    __run_after_qty_##name_##__++;\
+    if(__run_after_qty_##name_##__++ >= (qty_)) {\
+      __run_after_qty_##name_##__ = 0;\
+      _is_run_after_qty_##name_##__ = TRUE;\
+    }\
+  } else {
+
+#define RUN_AFTER_QTY_RESET_(name_) \
+  _is_run_after_qty_##name_##__ = FALSE
+
 #define RUN_END_ }
-    
+
+/**
+ * @brief This macro wait code for a condition.
+ *
+ * @note Use this macro when you want to wait for condition, but should 
+ *       have a timeout for prevent lock in while loop.
+ */
+#define WAIT_FOR_WITH_TIMEOUT_US_(name_, condition_, timeoutUs_, isTimeout_) \
+  (isTimeout_) = FALSE; \
+  static sChrono __wait_for_us_##name_##__ = {FALSE, 0, 0, 0, FALSE}; \
+  fChrono_StartTimeoutUs(&(__wait_for_us_##name_##__), timeoutUs_); \
+  while(!(condition_)) { \
+    if(fChrono_IsTimeout(&(__wait_for_us_##name_##__))) { \
+      (isTimeout_) = TRUE; \
+      break; \
+    } \
+  }
+
+/**
+ * @brief This macro wait code for a condition.
+ *
+ * @note Use this macro when you want to wait for condition, but should 
+ *       have a timeout for prevent lock in while loop.
+ */
+#define WAIT_FOR_WITH_TIMEOUT_MS_(name_, condition_, timeoutMs_, isTimeout_) \
+  (isTimeout_) = FALSE; \
+  static sChrono __wait_for_ms_##name_##__ = {FALSE, 0, 0, 0, FALSE}; \
+  fChrono_StartTimeoutMs(&(__wait_for_ms_##name_##__), timeoutMs_); \
+  while(!(condition_)) { \
+    if(fChrono_IsTimeout(&(__wait_for_ms_##name_##__))) { \
+      (isTimeout_) = TRUE; \
+      break; \
+    } \
+  }
+
+/**
+ * @brief This macro wait code for a condition.
+ *
+ * @note Use this macro when you want to wait for condition, but should 
+ *       have a timeout for prevent lock in while loop.
+ */
+#define WAIT_FOR_WITH_TIMEOUT_S_(name_, condition_, timeoutS_, isTimeout_) \
+  (isTimeout_) = FALSE; \
+  static sChrono __wait_for_s_##name_##__ = {FALSE, 0, 0, 0, FALSE}; \
+  fChrono_StartTimeoutS(&(__wait_for_s_##name_##__), timeoutS_); \
+  while(!(condition_)) { \
+    if(fChrono_IsTimeout(&(__wait_for_s_##name_##__))) { \
+      (isTimeout_) = TRUE; \
+      break; \
+    } \
+  }
+
+/**
+ * @brief These macros set the outPulse_ for a predefined duration_, if a rising edge
+ *        is detected on the condition_ value.
+ * 
+ * @note To reset the pulser, condition_ must be FALSE for at least one execution period of the 
+ *       PULSE_ONCE_FOR_XS_ macro.
+ *
+ */
+#define PULSE_ONCE_FOR_BASE_(name_, condition_, duration_, outPulse_, ts_)  \
+  static bool_t pulse_latch_##name_##__ = FALSE;\
+  static sChrono pulse_timer_##name_##__ = {FALSE, 0, 0, 0, FALSE};\
+  if(!(pulse_latch_##name_##__) && ((condition_) == TRUE)) {\
+    pulse_latch_##name_##__ = TRUE;\
+    fChrono_StartTimeout##ts_(&(pulse_timer_##name_##__), duration_);\
+    outPulse_ = 1;\
+  }\
+  if(pulse_latch_##name_##__) {\
+    if(fChrono_IsTimeout(&(pulse_timer_##name_##__))) {\
+      outPulse_ = 0;\
+      fChrono_Stop(&(pulse_timer_##name_##__));\
+    } else {\
+      if((condition_) == FALSE) {\
+        pulse_latch_##name_##__ = FALSE;\
+      }\
+    }\
+  }
+
+/**
+ * @brief Define PULSE_ONCE_FOR_BASE_ macro for Us, Ms & S
+ */
+#define PULSE_ONCE_FOR_US_(name_, condition_, duration_, outPulse_)  PULSE_ONCE_FOR_BASE_(name_, condition_, duration_, outPulse_, Us)
+#define PULSE_ONCE_FOR_MS_(name_, condition_, duration_, outPulse_)  PULSE_ONCE_FOR_BASE_(name_, condition_, duration_, outPulse_, Ms)
+#define PULSE_ONCE_FOR_S_(name_, condition_, duration_, outPulse_)  PULSE_ONCE_FOR_BASE_(name_, condition_, duration_, outPulse_, S)
+
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 /* Exported functions prototypes ---------------------------------------------*/
@@ -537,6 +646,6 @@ extern "C" {
 }
 #endif
 
-#endif /* RUNTIME_SCALER_H */
+#endif /* CHRONO_EX_H */
 
 /************************ © COPYRIGHT FaraabinCo *****END OF FILE****/

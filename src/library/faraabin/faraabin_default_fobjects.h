@@ -5,7 +5,7 @@
  ******************************************************************************
  * @attention
  *
- * Copyright (c) 2024 FaraabinCo.
+ * Copyright (c) 2012-2025 FaraabinCo.
  * All rights reserved.
  *
  * This software is licensed under terms that can be found in the LICENSE file
@@ -35,21 +35,6 @@ extern "C" {
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 /* Exported functions prototypes ---------------------------------------------*/
-/**
- * @brief Initializes default fobjects.
- * 
- * @note This function is called internally and user does not need to call it manually.
- * 
- * @return result Returns '0' if successful, otherwise '1'. 
- */
-uint8_t fFaraabinDefaultFobjects_Init(void);
-
-/**
- * @brief Runs default databus.
- * 
- */
-void fFaraabinDefaultFobjects_Run(void);
-
 /* Exported variables --------------------------------------------------------*/
 #if defined(FB_FEATURE_FLAG_DEFAULT_DATABUS) && defined(FARAABIN_ENABLE)
 FARAABIN_DATABUS_DEF_EXTERN_(DefaultDatabus);
@@ -58,6 +43,8 @@ FARAABIN_DATABUS_DEF_EXTERN_(DefaultDatabus);
 #if defined(FB_FEATURE_FLAG_DEFAULT_EVENT_GROUP) && defined(FARAABIN_ENABLE)
 FARAABIN_EVENT_GROUP_DEF_EXTERN_(DefaultEventGroup);
 #endif
+
+FARAABIN_EVENT_GROUP_DEF_EXTERN_(NotificationEventGroup);
 
 #ifdef __cplusplus
 }

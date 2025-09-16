@@ -5,7 +5,7 @@
  ******************************************************************************
  * @attention
  *
- * Copyright (c) 2024 FaraabinCo.
+ * Copyright (c) 2012-2025 FaraabinCo.
  * All rights reserved.
  *
  * This software is licensed under terms that can be found in the LICENSE file
@@ -28,54 +28,50 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "faraabin_type.h"
+#include "faraabin_dependency.h"
 
-#include "chrono.h"
+#include "faraabin_type.h"
 
 /* Exported defines ----------------------------------------------------------*/
 /** @defgroup FUNCTION_FOBJECT_END_STATUS group.
  *  @{
  */
 
-#define FUNCTION_CONTINUE         (255U)  /*!< Function is in the loop. */
-#define FUNCTION_TERMINATE_OK     (200U)  /*!< Function executed and returned. */
-#define FUNCTION_ERROR_PARAM_QTY  (201U)  /*!< Function error in the parameter quantity. */
+#define FUNCTION_CONTINUE         ((uint8_t)255U)  /*!< Function is in the loop. */
+#define FUNCTION_TERMINATE_OK     ((uint8_t)200U)  /*!< Function executed and returned. */
+#define FUNCTION_ERROR_PARAM_QTY  ((uint8_t)201U)  /*!< Function error in the parameter quantity. */
 
 /** @} */ //End of FUNCTION_FOBJECT_END_STATUS
 
 /* Exported macro ------------------------------------------------------------*/
 /* Exported types ------------------------------------------------------------*/
-/**
- * @brief Function status.
- * 
+/** @defgroup FN_STATUS Function status group.
+ *  @{
  */
-typedef enum {
-  
-  eFN_STATUS_STOP = 0,
-  eFN_STATUS_RUN,
-  eFN_STATUS_PAUSE,
-  
-}eFaraabinFobjectFunction_StatusId;
 
-/**
- * @brief Function fobject system events.
- * 
+#define FN_STATUS_STOP  ((uint8_t)0x00U)
+#define FN_STATUS_RUN   ((uint8_t)0x01U)
+#define FN_STATUS_PAUSE ((uint8_t)0x02U)
+
+/** @} */ //End of FN_STATUS
+
+/** @defgroup FN_EVENT Function fobject system events group.
+ *  @{
  */
-typedef enum {
-  
-	eFN_EVENT_INFO_USER_DATA_RECEIVED = 0,
-	
-  eFN_EVENT_INFO_RUN,
-  eFN_EVENT_INFO_STOP,
-  eFN_EVENT_INFO_PAUSE,
-  eFN_EVENT_INFO_RESUME,
-  
-  eFN_EVENT_ERROR_UNSUPPORTED_FOBJECT_PROPERTY,
-  eFN_EVENT_ERROR_CMD_IS_RUNNING_NOW,
-  eFN_EVENT_ERROR_MAX_CONCURRENT_CMD_REACHED,
-  eFN_EVENT_ERROR_CMD_NOT_FOUND,
-  
-}eFaraabinFobjectFunction_SystemEventId;
+
+#define FN_EVENT_INFO_USER_DATA_RECEIVED            ((uint8_t)0x00U)
+
+#define FN_EVENT_INFO_RUN                           ((uint8_t)0x01U)
+#define FN_EVENT_INFO_STOP                          ((uint8_t)0x02U)
+#define FN_EVENT_INFO_PAUSE                         ((uint8_t)0x03U)
+#define FN_EVENT_INFO_RESUME                        ((uint8_t)0x04U)
+
+#define FN_EVENT_ERROR_UNSUPPORTED_FOBJECT_PROPERTY ((uint8_t)0x05U)
+#define FN_EVENT_ERROR_CMD_IS_RUNNING_NOW           ((uint8_t)0x06U)
+#define FN_EVENT_ERROR_MAX_CONCURRENT_CMD_REACHED   ((uint8_t)0x07U)
+#define FN_EVENT_ERROR_CMD_NOT_FOUND                ((uint8_t)0x08U)
+
+/** @} */ //End of eFN_EVENT
 
 /**
  * @brief Faraabin function fobject handler function pointer type.
@@ -93,18 +89,19 @@ typedef struct {
   
   bool _init;                                               /*!< Init status of the fobject. */
   
-  const char *Name;                                         /*!< Name given to the fobject. */
+  char *Name;                                               /*!< Name given to the fobject. */
+
+  char *Path;
   
-  const char *Filename;                                     /*!< Filename of the fobject. */
+  char *FileName;                                           /*!< FileName of the fobject. */
   
   uint8_t Seq;                                              /*!< Sequence counter. */
   
   void(*fpSendMember)(uint32_t fobjectPtr, uint8_t reqSeq); /*!< Function pointer used for sending the functions in a function group. */
   
-  const char *Help;                                         /*!< Help written by user to be shown in PC application for the function group. */
+  char *Help;                                               /*!< Help written by user to be shown in PC application for the function group. */
 
 }sFaraabinFobjectFunctionGroupType;
-
 
 /**
  * @brief Function fobject definitions.
@@ -114,9 +111,9 @@ typedef struct {
 
   uint8_t _type;                                    /*!< Type of the fobject. */
   
-  const char *Name;                                 /*!< Name given to the fobject. */
+  char *Name;                                       /*!< Name given to the fobject. */
   
-  const char *Help;                                 /*!< Help written by user to be shown in PC application for the function. */
+  char *Help;                                       /*!< Help written by user to be shown in PC application for the function. */
   
   uint8_t Seq;                                      /*!< Sequence counter. */
   

@@ -5,7 +5,7 @@
  ******************************************************************************
  * @attention
  *
- * Copyright (c) 2024 FaraabinCo.
+ * Copyright (c) 2012-2025 FaraabinCo.
  * All rights reserved.
  *
  * This software is licensed under terms that can be found in the LICENSE file
@@ -33,17 +33,13 @@ extern "C" {
 /* Exported defines ----------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 /* Exported types ------------------------------------------------------------*/
-/**
- * @brief Event group system events.
- * 
+/** @defgroup eEG_EVENT Faraabin eventgroup fobject system events group
+ *  @{
  */
-typedef enum {
-  
-  eEG_EVENT_INFO_USER_DATA_RECEIVED = 0,
-  
-  eEG_EVENT_ERROR_UNSUPPORTED_FOBJECT_PROPERTY,
-  
-}eFaraabinFobjectEventGroup_SystemEventId;
+#define EG_EVENT_INFO_USER_DATA_RECEIVED            ((uint8_t)0x00U)
+#define EG_EVENT_ERROR_UNSUPPORTED_FOBJECT_PROPERTY ((uint8_t)0x01U)
+
+/** @} */ //End of eEG_EVENT
 
 /**
  * @brief Faraabin event group fobject definition.
@@ -57,11 +53,11 @@ typedef struct {
 	
 	bool Enable;                                                              /*!< Enable of the fobject. */
   
-  const char *Name;                                                         /*!< Name given to the fobject. */
+  char *Name;                                                               /*!< Name given to the fobject. */
   
-  const char *Path;                                                         /*!< Path given to the fobject. */
+  char *Path;                                                               /*!< Path given to the fobject. */
   
-  const char *Filename;                                                     /*!< Filename of the fobject. */
+  char *FileName;                                                           /*!< FileName of the fobject. */
   
   uint8_t Seq;                                                              /*!< Sequence counter. */
   
