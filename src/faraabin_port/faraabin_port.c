@@ -86,6 +86,11 @@ static void FaraabinReceiveFrameHandler(uint8_t *data, uint16_t size);
                 ##### faraabin_port.c Exported Functions #####
 ===============================================================================*/
 
+/**
+ * @brief 
+ * 
+ * @return uint8_t 
+ */
 uint8_t fFaraabin_PortInit(void) {
   /* Register USB receive callback to a function that handles Faraabin frames. */
   fBsp_VCP_RegisterFrameReceivedCallback(FaraabinReceiveFrameHandler);
@@ -93,6 +98,10 @@ uint8_t fFaraabin_PortInit(void) {
   return 0;
 }
 
+/**
+ * @brief 
+ * 
+ */
 void fFaraabin_PortRun(void) {
   /*  ______                 _          */
   /* |  ____|               | |         */
